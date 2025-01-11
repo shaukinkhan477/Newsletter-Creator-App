@@ -1,0 +1,49 @@
+<div class="content-header">
+  <h1 class="text-2xl font-bold">Create New Post</h1>
+  <div class="action-buttons">
+    <button class="btn btn-secondary" (click)="saveAsDraft()">Save as Draft</button>
+    <button class="btn btn-primary" (click)="openScheduleModal()">Schedule</button>
+  </div>
+</div>
+
+<!-- Editor Section -->
+<div class="editor-container card">
+  <div class="mb-4">
+    <input
+      type="text"
+      class="title-input"
+      [(ngModel)]="newsletter.title"
+      name="title"
+      placeholder="Post title"
+      required
+    >
+  </div>
+
+  <div class="mb-4">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="newsletter.subject"
+      name="subject"
+      placeholder="Email subject line"
+      required
+    >
+  </div>
+
+  <div class="mb-4">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="newsletter.preheader"
+      name="preheader"
+      placeholder="Preview text (appears in email clients)"
+      required
+    >
+  </div>
+
+  <editor
+    [(ngModel)]="newsletter.content"
+    apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
+    [init]="editorConfig"
+  ></editor>
+</div>

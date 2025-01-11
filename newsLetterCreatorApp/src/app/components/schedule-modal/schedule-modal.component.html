@@ -1,0 +1,14 @@
+<div class="modal">
+  <div class="modal-content card">
+    <h3 class="text-xl font-semibold mb-4">Schedule Post</h3>
+    <input
+      type="datetime-local"
+      class="form-control mb-4"
+      [(ngModel)]="newsletter.schedule"
+    >
+    <div class="flex justify-end gap-2">
+      <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+      <button class="btn btn-primary" (click)="schedule()">Schedule</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.sidebar {
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  padding: 1.5rem;
+}
+
+.nav-menu {
+  margin-top: 2rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background: #f3f4f6;
+}
+
+.nav-item.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.icon {
+  margin-right: 0.75rem;
+}

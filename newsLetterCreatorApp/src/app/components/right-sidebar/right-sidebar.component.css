@@ -6,6 +6,12 @@
   margin-bottom: 1rem;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 6px;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

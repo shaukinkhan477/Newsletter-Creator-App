@@ -5,14 +5,21 @@
   <!-- Main and Right Sidebar -->
   <main class="main-content">
     <!-- Main Content -->
-    <app-main-content
+    <!-- <app-main-content
       [newsletter]="newsletter"
       (onSaveDraft)="saveAsDraft()"
       (onOpenSchedule)="showScheduleModal = true"
-    ></app-main-content>
+       [segments]="segments"
+  [expectedOpenRate]="expectedOpenRate"
+  [expectedClickRate]="expectedClickRate"
+  [chartData]="chartData"
+  [chartOptions]="chartOptions"
+  [seoScore]="seoScore"
+  [seoTips]="seoTips"
+    ></app-main-content> -->
 
     <!-- Right Sidebar -->
-    <app-right-sidebar
+    <!-- <app-right-sidebar
       [newsletter]="newsletter"
       [segments]="segments"
       [expectedOpenRate]="expectedOpenRate"
@@ -23,7 +30,8 @@
       [seoTips]="seoTips"
       [getSEOScoreColor]="getSEOScoreColor.bind(this)"
       [getTotalSubscribers]="getTotalSubscribers.bind(this)"
-    ></app-right-sidebar>
+    ></app-right-sidebar> -->
+    <router-outlet />
   </main>
 
   <!-- Schedule Modal -->
@@ -35,5 +43,5 @@
   ></app-schedule-modal>
 </div>
 
-<router-outlet />
+
 

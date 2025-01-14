@@ -1,19 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { EditorModule } from '@tinymce/tinymce-angular';
-// import { NgChartsModule } from 'ng2-charts';
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
 
 import { Newsletter } from './models/newsletter.model';
 import { Segment } from './models/segment.model';
-
-// Import child components
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MainContentComponent } from './components/main-content/main-content.component';
-import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
-import { ScheduleModalComponent } from './components/schedule-modal/schedule-modal.component';
-import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { ScheduleModalComponent } from "./components/schedule-modal/schedule-modal.component";
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { SharedDataService } from './services/shared-data.service';
 
 
 @Component({
@@ -21,13 +14,9 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterModule,
     CommonModule,
-    FormsModule,
-    EditorModule,
-
     SidebarComponent,
-    MainContentComponent,
-    RightSidebarComponent,
     ScheduleModalComponent,
   ],
   templateUrl: './app.component.html',
@@ -35,6 +24,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'newsLetterCreatorApp';
+
+  constructor(private sharedDataService: SharedDataService) {}
 
   newsletter: Newsletter = {
     title: '',
@@ -87,7 +78,18 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit() {
-    // Initialize any necessary data
+    // Initialize and share data
+    this.sharedDataService.updateNewsletter(this.newsletter);
+    this.sharedDataService.updateSegments(this.segments);
+    this.sharedDataService.updateExpectedOpenRate(this.expectedOpenRate);
+    this.sharedDataService.updateExpectedClickRate(this.expectedClickRate);
+    this.sharedDataService.updateSeoScore(this.seoScore);
+    this.sharedDataService.updateSeoTips(this.seoTips);
+    this.sharedDataService.updateChartData(this.chartData);
+    this.sharedDataService.updateChartOptions(this.chartOptions);
+    this.sharedDataService.currentShowScheduleModal.subscribe((show) => {
+      this.showScheduleModal = show;
+    });
   }
 
   getTotalSubscribers(): number {
@@ -103,14 +105,10 @@ export class AppComponent implements OnInit {
     return '#ef4444';
   }
 
-  saveAsDraft() {
-    alert('Post saved as draft!');
-  }
-
   scheduleNewsletter(dateTime: Date | null) {
     if (!dateTime) return;
     this.newsletter.schedule = dateTime;
     alert(`Newsletter scheduled for ${this.newsletter.schedule}`);
-    this.showScheduleModal = false;
+    this.sharedDataService.updateShowScheduleModal(false); // Close the modal
   }
 }

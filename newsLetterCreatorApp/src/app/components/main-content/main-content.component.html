@@ -1,49 +1,113 @@
-<div class="content-header">
-  <h1 class="text-2xl font-bold">Create New Post</h1>
-  <div class="action-buttons">
-    <button class="btn btn-secondary" (click)="saveAsDraft()">Save as Draft</button>
-    <button class="btn btn-primary" (click)="openScheduleModal()">Schedule</button>
-  </div>
-</div>
+<div class="main-content-layout">
+  <div class="editor-section">
+    <div class="content-header">
+      <h1 class="text-2xl font-bold">Create New Post</h1>
+      <div class="action-buttons">
+        <button class="btn btn-secondary" (click)="saveAsDraft()">
+          Save as Draft
+        </button>
+        <button class="btn btn-secondary" (click)="openScheduleModal()">
+          Schedule
+        </button>
+        <button class="btn btn-primary">Send Now</button>
+      </div>
+    </div>
 
-<!-- Editor Section -->
-<div class="editor-container card">
-  <div class="mb-4">
-    <input
-      type="text"
-      class="title-input"
-      [(ngModel)]="newsletter.title"
-      name="title"
-      placeholder="Post title"
-      required
-    >
+    <div class="editor-container card">
+      <div class="mb-4">
+        <input
+          type="text"
+          class="title-input"
+          [(ngModel)]="newsletter.title"
+          name="title"
+          placeholder="Post title"
+          required
+        />
+      </div>
+
+      <div class="mb-4">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="newsletter.subject"
+          name="subject"
+          placeholder="Email subject line"
+          required
+        />
+      </div>
+
+      <div class="mb-4">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="newsletter.preheader"
+          name="preheader"
+          placeholder="Preview text (appears in email clients)"
+          required
+        />
+      </div>
+
+      <editor
+        [(ngModel)]="newsletter.content"
+        apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
+        [init]="editorConfig"
+      ></editor>
+    </div>
   </div>
 
-  <div class="mb-4">
-    <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="newsletter.subject"
-      name="subject"
-      placeholder="Email subject line"
-      required
-    >
-  </div>
+  <aside class="right-sidebar">
+    <!-- Audience Targeting -->
+    <div class="card mb-4">
+      <h3 class="text-lg font-semibold mb-3">Audience</h3>
+      <select
+        class="form-control"
+        [(ngModel)]="newsletter.segmentId"
+      >
+        <option value="">
+          All Subscribers ({{ getTotalSubscribers() }})
+        </option>
+        <option *ngFor="let segment of segments" [value]="segment.id">
+          {{ segment.name }} ({{ segment.subscriberCount }})
+        </option>
+      </select>
+    </div>
 
-  <div class="mb-4">
-    <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="newsletter.preheader"
-      name="preheader"
-      placeholder="Preview text (appears in email clients)"
-      required
-    >
-  </div>
+    <!-- Analytics Preview -->
+    <div class="card mb-4">
+      <h3 class="text-lg font-semibold mb-3">Expected Performance</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">{{ expectedOpenRate }}%</div>
+          <div class="stat-label">Open Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">{{ expectedClickRate }}%</div>
+          <div class="stat-label">Click Rate</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas *ngIf="isBrowser" baseChart
+                [data]="chartData"
+                [options]="chartOptions"
+                [type]="'line'">
+        </canvas>
+      </div>
+    </div>
 
-  <editor
-    [(ngModel)]="newsletter.content"
-    apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
-    [init]="editorConfig"
-  ></editor>
+    <!-- SEO Optimization -->
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-3">SEO Score</h3>
+      <div class="seo-score">
+        <div class="score-circle" [style.background]="getSEOScoreColor()">
+          {{ seoScore }}
+        </div>
+      </div>
+      <ul class="seo-tips">
+        <li *ngFor="let tip of seoTips" class="tip-item">
+          <span class="icon" [class.success]="tip.done">✓</span>
+          {{ tip.text }}
+        </li>
+      </ul>
+    </div>
+  </aside>
 </div>

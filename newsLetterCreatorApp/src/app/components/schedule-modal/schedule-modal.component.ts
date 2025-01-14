@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { Newsletter } from '../../models/newsletter.model';
+import { SharedDataService } from '../../services/shared-data.service';
 
 @Component({
   selector: 'app-schedule-modal',
@@ -16,8 +17,10 @@ export class ScheduleModalComponent {
   @Output() onClose = new EventEmitter<void>();
   @Output() onSchedule = new EventEmitter<Date | null>();
 
+  constructor(private sharedDataService: SharedDataService) {}
+
   closeModal() {
-    this.onClose.emit();
+    this.sharedDataService.updateShowScheduleModal(false);
   }
 
   schedule() {

@@ -1,0 +1,10 @@
+# Node.js related
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+.env
+
+# Editors / OS
+.DS_Store
+Thumbs.db

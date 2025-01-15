@@ -1,36 +1,11 @@
 <div class="app-container">
   <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+  <aside class="sidebar-container">
+    <app-sidebar></app-sidebar>
+  </aside>
 
-  <!-- Main and Right Sidebar -->
-  <main class="main-content">
-    <!-- Main Content -->
-    <!-- <app-main-content
-      [newsletter]="newsletter"
-      (onSaveDraft)="saveAsDraft()"
-      (onOpenSchedule)="showScheduleModal = true"
-       [segments]="segments"
-  [expectedOpenRate]="expectedOpenRate"
-  [expectedClickRate]="expectedClickRate"
-  [chartData]="chartData"
-  [chartOptions]="chartOptions"
-  [seoScore]="seoScore"
-  [seoTips]="seoTips"
-    ></app-main-content> -->
-
-    <!-- Right Sidebar -->
-    <!-- <app-right-sidebar
-      [newsletter]="newsletter"
-      [segments]="segments"
-      [expectedOpenRate]="expectedOpenRate"
-      [expectedClickRate]="expectedClickRate"
-      [chartData]="chartData"
-      [chartOptions]="chartOptions"
-      [seoScore]="seoScore"
-      [seoTips]="seoTips"
-      [getSEOScoreColor]="getSEOScoreColor.bind(this)"
-      [getTotalSubscribers]="getTotalSubscribers.bind(this)"
-    ></app-right-sidebar> -->
+  <!-- Main Content -->
+  <main class="main-content-container">
     <router-outlet />
   </main>
 
@@ -42,6 +17,3 @@
     (onSchedule)="scheduleNewsletter($event)"
   ></app-schedule-modal>
 </div>
-
-
-

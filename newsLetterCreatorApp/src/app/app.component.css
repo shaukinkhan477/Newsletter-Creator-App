@@ -2,12 +2,19 @@
   display: grid;
   grid-template-columns: 240px 1fr;
   min-height: 100vh;
+  overflow: hidden;
 }
 
-/* .main-content {
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 2rem;
+/* Sidebar Container */
+.sidebar-container {
+  height: 100vh;
+  overflow-y: auto;
   background: #f9fafb;
-} */
+  border-right: 1px solid #e5e7eb;
+}
+
+/* Main Content Container */
+.main-content-container {
+  height: 100vh;
+  overflow-y: auto; 
+}

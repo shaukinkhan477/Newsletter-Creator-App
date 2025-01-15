@@ -1,0 +1,92 @@
+<div class="subscribers-container">
+  <h2>Subscribers</h2>
+
+  <!-- Add new subscriber form -->
+  <div class="add-form card">
+    <h3>Add Subscriber</h3>
+    <form (ngSubmit)="addSubscriber()" #subscriberForm="ngForm">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        class="form-control"
+        [(ngModel)]="newSubscriber.email"
+        required
+      />
+
+      <label for="name">Name (optional)</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        class="form-control"
+        [(ngModel)]="newSubscriber.name"
+      />
+
+      <label for="status">Status</label>
+      <select
+        id="status"
+        name="status"
+        class="form-control"
+        [(ngModel)]="newSubscriber.status"
+      >
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="need-approval">Need Approval</option>
+        <option value="pending">Pending</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
+
+  <!-- List of subscribers -->
+  <div class="subscribers-list card">
+ <div class="filter-panel card">
+  <div class="filter-header">
+    <h3>Subscribers</h3>
+    <select class="form-control filter" [(ngModel)]="filterStatus">
+      <option value="all">All Subscribers</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+      <option value="need-approval">Need Approval</option>
+      <option value="pending">Pending</option>
+    </select>
+  </div>
+</div>
+
+    <!-- "No subscribers found" message -->
+    <div class="empty-message" *ngIf="filteredSubscribers.length === 0">
+      No subscriber found
+    </div>
+
+    <table class="table" *ngIf="filteredSubscribers.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th style="text-align:center;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subscriber of filteredSubscribers">
+          <td>{{ subscriber.id }}</td>
+          <td>{{ subscriber.email }}</td>
+          <td>{{ subscriber.name || 'N/A' }}</td>
+          <td>{{ subscriber.status }}</td>
+          <td style="text-align:center;">
+            <button
+              class="btn btn-secondary"
+              (click)="removeSubscriber(subscriber.id)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

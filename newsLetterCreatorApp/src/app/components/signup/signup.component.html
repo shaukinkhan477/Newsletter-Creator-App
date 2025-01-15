@@ -1,0 +1,80 @@
+<div class="auth-container">
+  <!-- Left side (Sign-Up Form) -->
+  <div class="form-section">
+    <div class="logo-area">
+      <!-- Replace with your own logo image or text -->
+      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" />
+    </div>
+    <h2 class="title">Get Started</h2>
+    <p class="subtitle">Welcome to Newsletter Hub – Let’s get you signed up!</p>
+
+    <!-- Error/Success Messages -->
+    <div *ngIf="errorMsg" class="error-message">
+      {{ errorMsg }}
+    </div>
+    <div *ngIf="successMsg" class="success-message">
+      {{ successMsg }}
+    </div>
+
+    <!-- Sign Up Form -->
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="name"
+          name="name"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn-primary">Sign Up</button>
+      <span class="login-prompt" >Already have an account? <a (click)="navigateToLogin()">Login here</a></span>
+    </form>
+  </div>
+
+  <!-- Right side (Marketing/Promo) -->
+  <div class="promo-section">
+    <h1 class="headline">Enter the Future of Newsletters, Today</h1>
+    <p class="description">
+      Stay informed and never miss out on the news that matters most. <br />
+      With <strong>Newsletter Hub</strong>, you get curated, high-quality articles
+      right in your inbox. Join us and be part of the future of content delivery!
+    </p>
+    <!-- Example mock card or graphic -->
+    <div class="mock-card">
+      <span class="mock-card-header">Newsletter Hub</span>
+      <div class="mock-card-body">
+        <p>New Articles This Week</p>
+        <h2 class="mock-stat">28</h2>
+      </div>
+      <div class="mock-card-footer">View All</div>
+    </div>
+  </div>
+</div>

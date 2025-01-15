@@ -1,0 +1,67 @@
+<div class="auth-container">
+  <!-- Left side (Login Form) -->
+  <div class="form-section">
+    <div class="logo-area">
+      <!-- Replace with your own logo image or text -->
+      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" />
+    </div>
+    <h2 class="title">Welcome Back</h2>
+    <p class="subtitle">
+      Good to see you again! Please log in to access <strong>Newsletter Hub</strong>.
+    </p>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMsg" class="error-message">
+      {{ errorMsg }}
+    </div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn-primary">Login</button>
+      <span class="login-prompt">Don’t have an account yet? <a (click)="navigateToSignup()">Sign up here</a>.</span>
+    </form>
+  </div>
+
+  <!-- Right side (Marketing/Promo) -->
+  <div class="promo-section">
+    <h1 class="headline">Stay in the Loop</h1>
+    <p class="description">
+      Ready for your next batch of fresh stories and insights? <br />
+      Keep exploring. Keep learning. Keep being inspired with
+      <strong>Newsletter Hub</strong>.
+    </p>
+    <!-- Example mock card or graphic -->
+    <div class="mock-card">
+      <span class="mock-card-header">Latest Newsletter</span>
+      <div class="mock-card-body">
+        <p>Highlights</p>
+        <h2 class="mock-stat">Top 5 Articles</h2>
+      </div>
+      <div class="mock-card-footer">Explore Now</div>
+    </div>
+  </div>
+</div>

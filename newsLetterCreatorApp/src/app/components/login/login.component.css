@@ -1,0 +1,149 @@
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  padding: 2rem;
+}
+
+/* Left side - Form */
+.form-section {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  margin-right: 15px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo-area {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.app-logo {
+  width: 120px;
+  height: auto;
+  border-radius: 100px;
+}
+
+/* Titles and subtitles */
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #777;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+   border-radius: 30px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  padding: 0.75rem 2rem;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+
+.login-prompt {
+  font-size: 0.9rem;
+  margin-left: 8px;
+}
+
+/* Right side - Promo Section */
+.promo-section {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.headline {
+  margin-top: 0;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #777;
+}
+
+.mock-card {
+  background-color: rgba(141, 131, 131, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 300px;
+}
+
+.mock-card-header {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.mock-card-body {
+  margin: 1rem 0;
+}
+
+.mock-stat {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0;
+}
+
+.mock-card-footer {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Error/Success Messages */
+.error-message {
+  background-color: #f87171;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  background-color: #34d399;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}

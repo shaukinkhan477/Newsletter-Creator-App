@@ -1,10 +1,4 @@
 # Node.js related
-node_modules/
-npm-debug.log
-yarn-error.log
-dist/
+node_modules
+dist
 .env
-
-# Editors / OS
-.DS_Store
-Thumbs.db

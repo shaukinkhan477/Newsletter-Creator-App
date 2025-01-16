@@ -42,6 +42,11 @@ export class LoginComponent {
       });
   }
 
+  // Navigate to Forgot Password
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
   navigateToSignup() {
     this.router.navigate(['/signup']);
   }

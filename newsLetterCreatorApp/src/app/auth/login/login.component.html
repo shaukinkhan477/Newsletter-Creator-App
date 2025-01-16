@@ -39,8 +39,15 @@
           class="form-control"
           required
         />
+        <!-- Forgot Password Link -->
+      <button
+        type="button"
+        class="btn-link forgot-password-link"
+        (click)="navigateToForgotPassword()"
+      >
+        Forgot Password?
+      </button>
       </div>
-
       <button type="submit" class="btn-primary">Login</button>
       <span class="login-prompt">Don’t have an account yet? <a (click)="navigateToSignup()">Sign up here</a>.</span>
     </form>

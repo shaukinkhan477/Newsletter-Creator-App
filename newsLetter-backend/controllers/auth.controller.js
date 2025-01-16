@@ -111,11 +111,14 @@ exports.forgotPassword = async (req, res) => {
     // Create a reset token
     const resetToken = crypto.randomBytes(20).toString('hex');
     user.passwordResetToken = resetToken;
-    user.passwordResetExpires = Date.now() + (process.env.RESET_TOKEN_EXPIRES || 3600000); // default 1 hour
+    user.passwordResetExpires =
+      Date.now() + Date.now() + +process.env.RESET_TOKEN_EXPIRES;  // default 1 hour
     await user.save();
 
     // Construct reset URL or route
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+    // const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetUrl = `http://localhost:4200/reset-password/${resetToken}`;
+
 
     // Send email
     await transporter.sendMail({

@@ -1,0 +1,24 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-area .app-logo {
+  height: 40px; /* adjust as needed */
+  border-radius: 100px;
+}
+
+.profile-area {
+  cursor: pointer;
+}
+
+.profile-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}

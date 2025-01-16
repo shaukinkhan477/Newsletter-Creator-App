@@ -1,0 +1,17 @@
+.profile-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.profile-details {
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}

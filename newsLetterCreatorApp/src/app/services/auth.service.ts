@@ -6,16 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  // Adjust baseUrl to your actual backend endpoint
   private baseUrl = 'http://localhost:3000/api/auth';
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Sign up new user
-   * Endpoint: POST /api/auth/signup
-   * Expects: { name, email, password }
-   */
+  /*=============================
+   =          SIGNUP           =
+   =============================*/
   signup(data: {
     name: string;
     email: string;
@@ -24,41 +21,58 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
 
-  /**
-   * Login existing user
-   * Endpoint: POST /api/auth/login
-   * Expects: { email, password }
-   */
+  /*=============================
+   =           LOGIN           =
+   =============================*/
   login(data: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, data);
   }
 
-  /**
-   * Store token in localStorage or sessionStorage
-   */
+  /*=============================
+   =        TOKEN STORAGE      =
+   =============================*/
   setToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  /**
-   * Retrieve token
-   */
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  /**
-   * Check if user is currently logged in
-   */
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  /**
-   * Log out user (remove token)
-   */
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('currentUser'); // remove user info as well
     // Optionally call backend logout endpoint if necessary
+  }
+
+  /*=============================
+   =       USER STORAGE        =
+   =============================*/
+  /**
+   * Store the logged-in user's info (e.g. name, email)
+   * so we can display it in the Profile component.
+   */
+  setUserInfo(user: { id: string; email: string; name: string }): void {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  /**
+   * Get user info (e.g. name, email)
+   */
+  getUserInfo(): { id: string; email: string; name: string } | null {
+    const userString = localStorage.getItem('currentUser');
+    if (!userString) {
+      return null;
+    }
+    try {
+      return JSON.parse(userString);
+    } catch (error) {
+      console.error('Error parsing user info from localStorage:', error);
+      return null;
+    }
   }
 }

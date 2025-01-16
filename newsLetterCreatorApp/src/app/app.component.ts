@@ -7,6 +7,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { ScheduleModalComponent } from "./components/schedule-modal/schedule-modal.component";
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { SharedDataService } from './services/shared-data.service';
+import { HeaderComponent } from "./components/header/header.component";
 
 
 @Component({
@@ -18,7 +19,8 @@ import { SharedDataService } from './services/shared-data.service';
     CommonModule,
     SidebarComponent,
     ScheduleModalComponent,
-  ],
+    HeaderComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

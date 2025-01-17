@@ -26,29 +26,33 @@ export class SignupComponent {
       return;
     }
 
-    this.authService
-      .signup({ name: this.name, email: this.email, password: this.password })
-      .subscribe({
-        next: (res: any) => {
-          if (res.token) {
-            // If your backend returns a token upon signup
-            this.authService.setToken(res.token);
-          }
+    this.authService.signup({ name: this.name, email: this.email, password: this.password })
+  .subscribe({
+    next: (res: any) => {
+      if (res.token) {
+        this.authService.setToken(res.token);
+        if (res.user) {
+          this.authService.setUserInfo({
+            id: res.user.id,
+            email: res.user.email,
+            name: res.user.name,
+          });
+        }
+        // Show success message
+        this.successMsg = 'Successfully signed up! Redirecting to login...';
+        this.errorMsg = ''; // Clear any previous error messages
 
-          // Show success message
-          this.successMsg = 'Successfully signed up! Redirecting to login...';
-          this.errorMsg = ''; // Clear any previous error messages
+        // Redirect to login after 3 seconds
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 3000);
+      }
 
-          // Redirect to login after 3 seconds
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
-        },
-        error: (err) => {
-          this.errorMsg = err.error?.message || 'Signup failed.';
-          this.successMsg = ''; // Clear any previous success messages
-        },
-      });
+    },
+    error: (err) => {
+      this.errorMsg = err.error?.message || 'Signup failed.';
+    }
+  });
   }
 
   navigateToLogin() {

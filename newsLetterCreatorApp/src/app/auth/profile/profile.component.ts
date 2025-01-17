@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -13,18 +14,23 @@ export class ProfileComponent implements OnInit {
   userName = '';
   userEmail = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object // Inject PLATFORM_ID
+  ) {}
 
   ngOnInit() {
-    // If your AuthService stores user info somewhere, retrieve it
-    // For example:
-    const currentUser = this.authService.getUserInfo();
-    if (currentUser) {
-      this.userName = currentUser.name;
-      this.userEmail = currentUser.email;
-    } else {
-      // If no user is logged in, redirect to login
-      this.router.navigate(['/login']);
+    // Check if the code is running in the browser
+    if (isPlatformBrowser(this.platformId)) {
+      const user = this.authService.getUserInfo();
+      if (user) {
+        this.userName = user.name;
+        this.userEmail = user.email;
+      } else {
+        // If there is no user info, possibly redirect or handle accordingly
+        this.router.navigate(['/login']);
+      }
     }
   }
 

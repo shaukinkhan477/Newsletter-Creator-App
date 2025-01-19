@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  Subscriber,
-  SubscribersService,
-} from '../../services/subscribers.service';
+import {SubscribersService} from '../../services/subscribers.service';
 
 @Component({
   selector: 'app-subscribers',
@@ -14,63 +11,67 @@ import {
   styleUrls: ['./subscribers.component.css'],
 })
 export class SubscribersComponent implements OnInit {
-  subscribers: Subscriber[] = [];
-  newSubscriber: Subscriber = {
-    id: 0,
-    email: '',
-    status: 'active',
-  };
+  subscribers: any[] = [];
+  newEmail = '';
+  newName = '';
+  errorMsg = '';
+  successMsg = '';
 
-  // Current filter setting (default is 'all')
-  filterStatus: 'all' | 'active' | 'inactive' | 'need-approval' | 'pending' =
-    'all';
+  constructor(private subsService: SubscribersService) {}
 
-  constructor(private subscribersService: SubscribersService) {}
-
-  ngOnInit() {
-    this.loadSubscribers();
+  ngOnInit(): void {
+    this.fetchSubscribers();
   }
 
-  loadSubscribers() {
-    this.subscribersService.getAllSubscribers().subscribe((data) => {
-      this.subscribers = data;
+  fetchSubscribers(): void {
+    this.subsService.getAll().subscribe({
+      next: (res: any) => {
+        this.subscribers = res.subscribers || [];
+      },
+      error: (err) => {
+        this.errorMsg = 'Error fetching subscribers.';
+      },
     });
   }
 
-  get filteredSubscribers(): Subscriber[] {
-    if (this.filterStatus === 'all') {
-      return this.subscribers;
-    } else {
-      // Return only subscribers matching the chosen status
-      return this.subscribers.filter((sub) => sub.status === this.filterStatus);
-    }
-  }
-
-  addSubscriber() {
-    if (!this.newSubscriber.email) {
-      alert('Email is required!');
+  addSubscriber(): void {
+    if (!this.newEmail) {
+      this.errorMsg = 'Email is required.';
       return;
     }
+    this.errorMsg = '';
+    this.successMsg = '';
 
-    this.subscribersService
-      .addSubscriber(this.newSubscriber)
-      .subscribe((created) => {
-        alert(`Subscriber added: ${created.email}`);
-        this.newSubscriber = { id: 0, email: '', status: 'active' };
-        this.loadSubscribers();
+    this.subsService
+      .addSubscriber({ email: this.newEmail, name: this.newName })
+      .subscribe({
+        next: (response: any) => {
+          this.successMsg = 'Subscriber added successfully!';
+          this.newEmail = '';
+          this.newName = '';
+          this.fetchSubscribers();
+        },
+        error: (err) => {
+          this.errorMsg = err.error?.message || 'Error adding subscriber.';
+        },
       });
   }
 
-  removeSubscriber(id: number) {
-    if (!confirm('Are you sure you want to remove this subscriber?')) return;
+  deleteSub(id: string): void {
+    if (!confirm('Are you sure you want to delete this subscriber?')) {
+      return;
+    }
+    this.errorMsg = '';
+    this.successMsg = '';
 
-    this.subscribersService.deleteSubscriber(id).subscribe((success) => {
-      if (success) {
-        alert('Subscriber removed successfully.');
-        this.loadSubscribers();
-      } else {
-        alert('Failed to remove subscriber.');
-      }
+    this.subsService.deleteSubscriber(id).subscribe({
+      next: () => {
+        this.successMsg = 'Subscriber deleted successfully!';
+        this.fetchSubscribers();
+      },
+      error: (err) => {
+        this.errorMsg = err.error?.message || 'Error deleting subscriber.';
+      },
     });
   }
 }

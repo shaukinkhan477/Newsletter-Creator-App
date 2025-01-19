@@ -1,0 +1,42 @@
+<div class="posts-container">
+  <h2>All Posts</h2>
+
+  <div *ngIf="posts.length === 0">
+    No posts found.
+  </div>
+
+  <div class="post-list" *ngIf="posts.length > 0">
+    <div class="post-item card" *ngFor="let p of posts">
+      <h3 class="post-title">{{ p.title }}</h3>
+      <p class="post-subject">Subject: {{ p.subject }}</p>
+      <p class="post-preheader">Preheader: {{ p.preheader }}</p>
+      <div class="post-status" [ngClass]="p.status">
+        Status: {{ p.status }}
+      </div>
+
+      <!-- If scheduled, show the date/time -->
+      <div *ngIf="p.status === 'scheduled'">
+        Scheduled At: {{ p.scheduledAt | date:'short' }}
+      </div>
+
+      <!-- If sent, show the sentAt date/time -->
+      <div *ngIf="p.status === 'sent'">
+        Sent At: {{ p.sentAt | date:'short' }}
+      </div>
+
+      <div class="post-actions">
+        <!-- Edit button -->
+        <button class="btn-edit" (click)="editPost(p._id)">Edit</button>
+
+        <!-- Send Now button only if not sent -->
+        <button
+          class="btn-send"
+          (click)="sendNow(p._id)"
+          *ngIf="p.status !== 'sent'"
+        >
+          Send Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

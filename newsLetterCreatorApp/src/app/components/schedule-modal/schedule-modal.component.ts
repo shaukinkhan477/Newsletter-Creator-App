@@ -2,9 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { Newsletter } from '../../models/newsletter.model';
-import { SharedDataService } from '../../services/shared-data.service';
-
 @Component({
   selector: 'app-schedule-modal',
   standalone: true,
@@ -13,17 +10,21 @@ import { SharedDataService } from '../../services/shared-data.service';
   styleUrls: ['./schedule-modal.component.css'],
 })
 export class ScheduleModalComponent {
-  @Input() newsletter!: Newsletter;
+  @Input() newsletter: any; // or a proper interface
   @Output() onClose = new EventEmitter<void>();
-  @Output() onSchedule = new EventEmitter<Date | null>();
-
-  constructor(private sharedDataService: SharedDataService) {}
+  @Output() onSchedule = new EventEmitter<Date>();
 
   closeModal() {
-    this.sharedDataService.updateShowScheduleModal(false);
+    this.onClose.emit();
   }
 
   schedule() {
+    if (!this.newsletter.schedule) {
+      // Basic validation
+      alert('Please choose a date/time for scheduling.');
+      return;
+    }
+    // Emit the chosen date/time to the parent
     this.onSchedule.emit(this.newsletter.schedule);
   }
 }

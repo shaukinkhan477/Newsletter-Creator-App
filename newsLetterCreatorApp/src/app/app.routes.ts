@@ -7,7 +7,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ProfileComponent } from './auth/profile/profile.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './AuthGuards/auth.guard';
+import { PostsComponent } from './components/posts/posts.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -25,6 +26,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'home', component: MainContentComponent, canActivate: [AuthGuard] },
+  { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'edit-post/:id',
+    component: MainContentComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'analytics',
     component: AnalyticsComponent,

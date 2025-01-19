@@ -1,14 +1,23 @@
 require("dotenv").config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
+const startCronJob = require("./cron");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth.routes");
-const cors = require("cors");
+const postRoutes = require("./routes/post.routes");
+const subscriberRoutes = require("./routes/subscriber.routes");
+
 
 const app = express();
 
 // Connect MongoDB
 connectDB();
+
+// Start the cron job
+startCronJob();
+
 
 // Middleware
 app.use(cookieParser());
@@ -18,6 +27,12 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
+
+// Post routes (newsletter)
+app.use('/api/posts', postRoutes);
+
+// Subscriber routes
+app.use('/api/subscribers', subscriberRoutes);
 
 // Basic route
 app.get("/", (req, res) => {

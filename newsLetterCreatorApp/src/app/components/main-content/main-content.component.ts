@@ -1,111 +1,217 @@
 import {
   Component,
-  EventEmitter,
   Inject,
-  Input,
-  Output,
+  OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { BaseChartDirective } from 'ng2-charts';
-
-import { Newsletter } from '../../models/newsletter.model';
-import { Segment } from '../../models/segment.model';
-import { SharedDataService } from '../../services/shared-data.service';
+import { PostsService } from '../../services/posts.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ScheduleModalComponent } from "../schedule-modal/schedule-modal.component";
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
-  imports: [CommonModule, FormsModule, EditorModule, BaseChartDirective],
+  imports: [CommonModule, FormsModule, EditorModule, ScheduleModalComponent],
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css'],
 })
-export class MainContentComponent {
-  @Input() newsletter!: Newsletter;
-  @Input() segments!: Segment[];
-  @Input() expectedOpenRate!: number;
-  @Input() expectedClickRate!: number;
-  @Input() chartData: any;
-  @Input() chartOptions: any;
-  @Input() seoScore!: number;
-  @Input() seoTips!: { text: string; done: boolean }[];
-
-  @Output() onSaveDraft = new EventEmitter<void>();
-  @Output() onOpenSchedule = new EventEmitter<void>();
-
-  public isBrowser: boolean;
-
-  editorConfig = {
-    height: 500,
-    menubar: true,
-    plugins: [
-      'advlist',
-      'autolink',
-      'lists',
-      'link',
-      'image',
-      'uploadimage',
-      'charmap',
-      'preview',
-      'anchor',
-      'searchreplace',
-      'visualblocks',
-      'code',
-      'fullscreen',
-      'insertdatetime',
-      'media',
-      'table',
-      'code',
-      'help',
-      'wordcount',
-      'colorpicker',
-    ],
-    toolbar:
-      'undo redo | blocks preview | bold italic forecolor backcolor | alignleft aligncenter alignright | ' +
-      'bullist numlist outdent indent | link image | code ',
+export class MainContentComponent implements OnInit {
+  newsletter = {
+    title: '',
+    subject: '',
+    preheader: '',
+    content: '',
+    schedule: null,
   };
 
+  editMode = false;
+  errorMsg = '';
+  editorConfig: any; // TinyMCE config
+  showScheduleModal = false;
+  sharedDataService: any;
+  postId: string | null = null;
+
   constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    private sharedDataService: SharedDataService
+    private route: ActivatedRoute,
+    private router: Router,
+    private postsService: PostsService
   ) {
-    this.isBrowser = isPlatformBrowser(platformId);
+    // Editor config initialization
+    this.editorConfig = {
+      height: 500,
+      menubar: false,
+      plugins: [
+        'advlist',
+        'autolink',
+        'lists',
+        'link',
+        'image',
+        'charmap',
+        'preview',
+        'anchor',
+        'searchreplace',
+        'visualblocks',
+        'code',
+        'fullscreen',
+        'insertdatetime',
+        'media',
+        'table',
+        'code',
+        'help',
+        'wordcount',
+        'colorpicker',
+      ],
+      toolbar:
+        'undo redo | blocks | preview bold italic forecolor backcolor | ' +
+        'alignleft aligncenter alignright | ' +
+        'bullist numlist outdent indent code | link image',
+    };
   }
-
-  saveAsDraft() {
-     alert('Post saved as draft!');
-  }
-
-  openScheduleModal() {
-    this.sharedDataService.updateShowScheduleModal(true);
-  }
-
-  getSEOScoreColor(): string {
-    if (this.seoScore >= 80) return '#10b981';
-    if (this.seoScore >= 60) return '#f59e0b';
-    return '#ef4444';
-  }
-
-  getTotalSubscribers(): number {
-    return (
-      this.segments?.reduce(
-        (total, segment) => total + segment.subscriberCount,
-        0
-      ) || 0
-    );
-  }
-
 
   ngOnInit() {
-    this.sharedDataService.currentNewsletter.subscribe((data) => (this.newsletter = data));
-    this.sharedDataService.currentSegments.subscribe((data) => (this.segments = data));
-    this.sharedDataService.currentExpectedOpenRate.subscribe((rate) => (this.expectedOpenRate = rate));
-    this.sharedDataService.currentExpectedClickRate.subscribe((rate) => (this.expectedClickRate = rate));
-    this.sharedDataService.currentSeoScore.subscribe((score) => (this.seoScore = score));
-    this.sharedDataService.currentSeoTips.subscribe((tips) => (this.seoTips = tips));
-    this.sharedDataService.currentChartData.subscribe((data) => (this.chartData = data));
-    this.sharedDataService.currentChartOptions.subscribe((options) => (this.chartOptions = options));
+    // Check if there's an :id in the route
+    this.postId = this.route.snapshot.paramMap.get('id');
+    if (this.postId) {
+      // We are editing an existing post
+      this.editMode = true;
+      this.loadPost(this.postId);
+    }
+  }
+
+  loadPost(id: string) {
+    this.postsService.getPostById(id).subscribe({
+      next: (res: any) => {
+        const post = res.post;
+        this.newsletter = {
+          title: post.title,
+          subject: post.subject,
+          preheader: post.preheader,
+          content: post.content,
+          schedule: post.schedule || null,
+        };
+      },
+      error: () => {
+        alert('Error loading post');
+        this.router.navigate(['/posts']); // or some fallback
+      },
+    });
+  }
+
+  /* ------------------------------
+     EDITING an Existing Post
+  --------------------------------*/
+
+  saveChanges() {
+    if (!this.postId) return;
+    const updatedData = { ...this.newsletter };
+    this.postsService.updatePost(this.postId, updatedData).subscribe({
+      next: () => {
+        alert('Post updated successfully');
+        this.router.navigate(['/posts']);
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Error updating post');
+      },
+    });
+  }
+
+  private fieldsAreValid(): boolean {
+    const { title, subject, preheader, content } = this.newsletter;
+    if (!title || !subject || !preheader || !content) {
+      this.errorMsg = 'Please fill out all required fields.';
+      return false;
+    }
+    this.errorMsg = '';
+    return true;
+  }
+
+  /* ------------------------------
+     Creating a NEW Post
+  --------------------------------*/
+
+  saveAsDraft(): void {
+    if (!this.fieldsAreValid()) {
+      return; // Show error message instead
+    }
+    const postData = {
+      ...this.newsletter,
+      status: 'draft',
+    };
+    // Call your service to save as draft
+    this.postsService.createPost(postData).subscribe({
+      next: () => {
+        alert('Saved as draft!');
+        // Optional: clear fields or navigate away
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Error saving draft');
+      },
+    });
+  }
+
+  /* ------------------------------
+     Schedule a Post
+  --------------------------------*/
+
+  openScheduleModal(): void {
+    if (!this.fieldsAreValid()) {
+      return;
+    }
+    this.showScheduleModal = true;
+  }
+
+  schedulePost(dateTime: Date): void {
+    const postData = {
+      ...this.newsletter,
+      status: 'scheduled',
+      scheduledAt: dateTime,
+    };
+    this.postsService.createPost(postData).subscribe({
+      next: () => {
+        alert(`Post scheduled for ${dateTime}`);
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Error scheduling post');
+      },
+    });
+    this.showScheduleModal = false;
+  }
+
+  closeModal(): void {
+    this.showScheduleModal = false;
+  }
+
+  sendNow(): void {
+    if (!this.fieldsAreValid()) {
+      return;
+    }
+    // Create the post, then call "send now"
+    const postData = {
+      ...this.newsletter,
+      status: 'draft',
+    };
+    this.postsService.createPost(postData).subscribe({
+      next: (res: any) => {
+        const postId = res.post?._id;
+        if (!postId) {
+          alert('No post ID returned. Cannot send now.');
+          return;
+        }
+        this.postsService.sendNow(postId).subscribe({
+          next: () => {
+            alert('Newsletter sent!');
+          },
+          error: (err) => {
+            alert(err.error?.message || 'Error sending newsletter');
+          },
+        });
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Error creating post');
+      },
+    });
   }
 }

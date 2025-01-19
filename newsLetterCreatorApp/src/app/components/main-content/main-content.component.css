@@ -16,6 +16,14 @@
   margin-bottom: 2rem;
 }
 
+.error-box {
+  background-color: #fde2e2;
+  color: #b91c1c;
+  margin-bottom: 4px;
+  padding: 0.75rem;
+  border-radius: 10px;
+}
+
 .action-buttons {
   display: flex;
   gap: 1rem;
@@ -23,7 +31,6 @@
 
 .editor-container {
   padding: 2rem;
-  border-radius: 20px;
 }
 
 .title-input {

@@ -25,8 +25,8 @@
       </div>
 
       <div class="post-actions">
-        <!-- Edit button -->
-        <button class="btn-edit" (click)="editPost(p._id)">Edit</button>
+        <!-- Edit button only if not sent -->
+        <button *ngIf="p.status !== 'sent'" class="btn-edit" (click)="editPost(p._id)">Edit</button>
 
         <!-- Send Now button only if not sent -->
         <button

@@ -1,22 +1,14 @@
   <!-- Header -->
-   <div><app-header></app-header></div>
-<div class="app-container">
+<div><app-header></app-header></div>
+<div class="app-container" [class.collapsed]="isSidebarCollapsed">
 
   <!-- Sidebar -->
-  <aside class="sidebar-container">
-    <app-sidebar></app-sidebar>
+  <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed">
+    <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
   </aside>
 
   <!-- Main Content -->
   <main class="main-content-container">
     <router-outlet />
   </main>
-
-  <!-- Schedule Modal -->
-  <app-schedule-modal
-    *ngIf="showScheduleModal"
-    [newsletter]="newsletter"
-    (onClose)="showScheduleModal = false"
-    (onSchedule)="scheduleNewsletter($event)"
-  ></app-schedule-modal>
 </div>

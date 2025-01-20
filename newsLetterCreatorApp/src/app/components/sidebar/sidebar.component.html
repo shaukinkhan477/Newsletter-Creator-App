@@ -1,6 +1,12 @@
-<aside class="sidebar">
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+  <button class="toggle-button" (click)="toggle()">
+      {{ isCollapsed ? '▶️' : '◀️' }}
+    </button>
   <div class="logo-container">
-    <h2 class="text-xl font-bold">Newsletter Hub</h2>
+    <h2 class="text-xl font-bold" *ngIf="!isCollapsed">Newsletter Hub</h2>
+    <!-- <button class="toggle-button" (click)="toggle()">
+      {{ isCollapsed ? '▶️' : '◀️' }}
+    </button> -->
   </div>
   <nav class="nav-menu">
     <a
@@ -9,32 +15,32 @@
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
     >
-      <span class="icon">📝</span>
-      New Post
+      <span class="icon" [title]="'New Post'">📝</span>
+      <span *ngIf="!isCollapsed">New Post</span>
     </a>
-       <a
+    <a
       class="nav-item"
       [routerLink]="['/posts']"
       routerLinkActive="active"
     >
-      <span class="icon">📬</span>
-      Posts
+      <span class="icon" [title]="'Posts'">📬</span>
+      <span *ngIf="!isCollapsed">Posts</span>
     </a>
     <a
       class="nav-item"
       [routerLink]="['/analytics']"
       routerLinkActive="active"
     >
-      <span class="icon">📊</span>
-      Analytics
+      <span class="icon" [title]="'Analytics'">📊</span>
+      <span *ngIf="!isCollapsed">Analytics</span>
     </a>
     <a class="nav-item" [routerLink]="['/subscribers']" routerLinkActive="active">
-      <span class="icon">👪</span>
-      Subscribers
+      <span class="icon" [title]="'Subscribers'">👪</span>
+      <span *ngIf="!isCollapsed">Subscribers</span>
     </a>
     <a class="nav-item" [routerLink]="['/settings']" routerLinkActive="active">
-      <span class="icon">⚙️</span>
-      Settings
+      <span class="icon" [title]="'Settings'">⚙️</span>
+      <span *ngIf="!isCollapsed">Settings</span>
     </a>
   </nav>
 </aside>

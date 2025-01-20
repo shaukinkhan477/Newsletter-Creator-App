@@ -20,9 +20,9 @@ const startCronJob = () => {
   cron.schedule("* * * * *", async () => {
     try {
       const now = new Date();
-      console.log(
-        `[CRON] Checking for scheduled posts at ${now.toISOString()}...`
-      );
+      // console.log(
+      //   `[CRON] Checking for scheduled posts at ${now.toISOString()}...`
+      // );
 
       // 1) Find posts with status "scheduled" and scheduledAt <= now
       const postsToSend = await Post.find({

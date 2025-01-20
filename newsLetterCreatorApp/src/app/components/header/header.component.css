@@ -5,10 +5,12 @@
   background-color: #ffffff;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }
 
 .logo-area .app-logo {
-  height: 40px; /* adjust as needed */
+  height: 40px;
   border-radius: 100px;
 }
 

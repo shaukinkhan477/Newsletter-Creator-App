@@ -1,80 +1,68 @@
 <div class="auth-container">
   <!-- Left side (Sign-Up Form) -->
-  <div class="form-section">
+  <div class="form-section" role="form" aria-labelledby="signup-heading">
     <div class="logo-area">
       <!-- Replace with your own logo image or text -->
-      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" />
+      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
     </div>
-    <h2 class="title">Get Started</h2>
+    <h2 class="title" id="signup-heading">Get Started</h2>
     <p class="subtitle">Welcome to Newsletter Hub – Let’s get you signed up!</p>
 
     <!-- Error/Success Messages -->
-    <div *ngIf="errorMsg" class="error-message">
+    <div *ngIf="errorMsg" class="error-message" role="alert" aria-live="assertive">
       {{ errorMsg }}
     </div>
-    <div *ngIf="successMsg" class="success-message">
+    <div *ngIf="successMsg" class="success-message" role="alert" aria-live="assertive">
       {{ successMsg }}
     </div>
 
     <!-- Sign Up Form -->
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" aria-label="Sign Up Form">
       <div class="form-group">
         <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          [(ngModel)]="name"
-          name="name"
-          class="form-control"
-          required
-        />
+        <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required aria-required="true"
+          placeholder="Enter your name" />
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
-          class="form-control"
-          required
-        />
+        <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required
+          aria-required="true" placeholder="Enter your email" />
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          class="form-control"
-          required
-        />
+        <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
+          aria-required="true" placeholder="Enter your password" />
       </div>
 
-      <button type="submit" class="btn-primary">Sign Up</button>
-      <span class="login-prompt" >Already have an account? <a (click)="navigateToLogin()">Login here</a></span>
+      <button type="submit" class="btn-primary" aria-label="Sign Up">
+        Sign Up
+      </button>
+      <span class="login-prompt">
+        Already have an account?
+        <a (click)="navigateToLogin()" tabindex="0" aria-label="Login here">
+          Login here
+        </a>
+      </span>
     </form>
   </div>
 
   <!-- Right side (Marketing/Promo) -->
-  <div class="promo-section">
-    <h1 class="headline">Enter the Future of Newsletters, Today</h1>
+  <div class="promo-section" aria-labelledby="promo-heading">
+    <h1 class="headline" id="promo-heading">Enter the Future of Newsletters, Today</h1>
     <p class="description">
       Stay informed and never miss out on the news that matters most. <br />
       With <strong>Newsletter Hub</strong>, you get curated, high-quality articles
       right in your inbox. Join us and be part of the future of content delivery!
     </p>
     <!-- Example mock card or graphic -->
-    <div class="mock-card">
+    <div class="mock-card" role="region" aria-label="Newsletter Hub Statistics">
       <span class="mock-card-header">Newsletter Hub</span>
       <div class="mock-card-body">
         <p>New Articles This Week</p>
         <h2 class="mock-stat">28</h2>
       </div>
-      <!-- <div class="mock-card-footer">View All</div> -->
     </div>
   </div>
 </div>

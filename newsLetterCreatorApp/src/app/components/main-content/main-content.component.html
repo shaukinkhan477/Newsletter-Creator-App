@@ -1,82 +1,60 @@
 <div class="main-content-layout">
   <div class="editor-section">
     <div class="content-header">
-      <h1 class="text-2xl font-bold">{{ editMode ? 'Edit Post' : 'Create New Post' }}</h1>
+      <h1 class="text-2xl font-bold" id="editor-heading">
+        {{ editMode ? 'Edit Post' : 'Create New Post' }}
+      </h1>
       <div class="action-buttons">
         <!-- If NOT edit mode, show "Save as Draft", "Schedule", "Send Now" -->
         <ng-container *ngIf="!editMode; else editButtons">
-        <button class="btn btn-secondary" (click)="saveAsDraft()">
-          Save as Draft
-        </button>
-        <button class="btn btn-secondary" (click)="openScheduleModal()">
-          Schedule
-        </button>
-        <button class="btn btn-primary" (click)="sendNow()">
-          Send Now
-        </button>
+          <button class="btn btn-primary" (click)="sendNow()" aria-label="Send Now">
+            Send Now
+          </button>
+          <button class="btn btn-secondary" (click)="saveAsDraft()" aria-label="Save as Draft">
+            Save as Draft
+          </button>
+          <button class="btn btn-secondary" (click)="openScheduleModal()" aria-label="Schedule">
+            Schedule
+          </button>
         </ng-container>
         <!-- If edit mode, show "Save Changes" -->
         <ng-template #editButtons>
-          <button class="btn btn-primary" (click)="saveChanges()">
+          <button class="btn btn-primary" (click)="saveChanges()" aria-label="Save Changes">
             Save Changes
           </button>
-          <button class="btn btn-secondary" (click)="openScheduleModal()">
-          Schedule
-        </button>
+          <button class="btn btn-secondary" (click)="openScheduleModal()" aria-label="Schedule">
+            Schedule
+          </button>
         </ng-template>
       </div>
     </div>
 
     <!-- Display error message if fields are invalid -->
-    <div class="error-box" *ngIf="errorMsg">
+    <div class="error-box" *ngIf="errorMsg" role="alert" aria-live="assertive">
       {{ errorMsg }}
     </div>
 
     <div class="editor-container card">
       <div class="mb-4">
-        <input
-          type="text"
-          class="title-input"
-          [(ngModel)]="newsletter.title"
-          name="title"
-          placeholder="Post title"
-          required
-        />
+        <input type="text" class="title-input" [(ngModel)]="newsletter.title" name="title" placeholder="Post title"
+          required aria-required="true" aria-label="Post Title" />
       </div>
 
       <div class="mb-4">
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="newsletter.subject"
-          name="subject"
-          placeholder="Email subject line"
-          required
-        />
+        <input type="text" class="form-control" [(ngModel)]="newsletter.subject" name="subject"
+          placeholder="Email subject line" required aria-required="true" aria-label="Email Subject Line" />
       </div>
 
       <div class="mb-4">
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="newsletter.preheader"
-          name="preheader"
-          placeholder="Preview text (appears in email clients)"
-          required
-        />
+        <input type="text" class="form-control" [(ngModel)]="newsletter.preheader" name="preheader"
+          placeholder="Preview text (appears in email clients)" required aria-required="true"
+          aria-label="Preview Text" />
       </div>
 
-      <editor
-        [(ngModel)]="newsletter.content"
-        apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
-        [init]="editorConfig"
-      ></editor>
+      <editor [(ngModel)]="newsletter.content" apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
+        [init]="editorConfig" aria-label="Content Editor"></editor>
     </div>
   </div>
-   <app-schedule-modal
-    *ngIf="showScheduleModal"
-    [newsletter]="newsletter"
-    (onClose)="closeModal()"
-    (onSchedule)="schedulePost($event)"
-  ></app-schedule-modal>
+  <app-schedule-modal *ngIf="showScheduleModal" [newsletter]="newsletter" (onClose)="closeModal()"
+    (onSchedule)="schedulePost($event)"></app-schedule-modal>
 </div>

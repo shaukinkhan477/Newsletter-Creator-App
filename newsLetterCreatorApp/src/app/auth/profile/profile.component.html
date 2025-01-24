@@ -1,10 +1,18 @@
 <div class="profile-container">
   <h2>Profile</h2>
 
+  <!-- Profile Picture Section -->
+  <div class="profile-picture">
+    <img src="assets/profile.webp" alt="Profile Picture" class="profile-img" />
+    <!-- <button class="edit-profile-btn">Edit Picture</button> -->
+  </div>
+
+  <!-- Profile Details -->
   <div class="profile-details">
     <p><strong>Name:</strong> {{ userName }}</p>
     <p><strong>Email:</strong> {{ userEmail }}</p>
   </div>
 
+  <!-- Logout Button -->
   <button (click)="logout()" class="btn btn-primary">Logout</button>
 </div>

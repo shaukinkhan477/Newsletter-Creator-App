@@ -1,16 +1,13 @@
-<div class="header-container">
+<header class="header-container" role="banner">
   <div class="logo-area">
     <!-- Replace this with your actual logo image or text -->
-    <img src="assets/logo1.jpg" alt="App Logo" class="app-logo" />
+    <img src="assets/logo1.jpg" alt="App Logo" class="app-logo" aria-hidden="true" />
   </div>
 
   <div class="profile-area">
     <!-- On click, navigate to profile -->
-    <img
-      src="assets/profile.webp"
-      alt="Profile Icon"
-      class="profile-icon"
-      (click)="goToProfile()"
-    />
+    <button class="profile-button" (click)="goToProfile()" aria-label="Go to Profile">
+      <img src="assets/profile.webp" alt="Profile Icon" class="profile-icon" aria-hidden="true" />
+    </button>
   </div>
-</div>
+</header>

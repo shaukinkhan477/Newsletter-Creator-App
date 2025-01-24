@@ -2,11 +2,11 @@
   <!-- Left side (Sign-Up Form) -->
   <div class="form-section" role="form" aria-labelledby="signup-heading">
     <div class="logo-area">
-      <!-- Replace with your own logo image or text -->
+
       <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
     </div>
-    <h2 class="title" id="signup-heading">Get Started</h2>
-    <p class="subtitle">Welcome to Newsletter Hub – Let’s get you signed up!</p>
+    <h2 class="title" id="signup-heading">{{ 'signup.getStarted' | translate }}</h2>
+    <p class="subtitle">{{ 'signup.welcomeToNewsletterHub' | translate }}</p>
 
     <!-- Error/Success Messages -->
     <div *ngIf="errorMsg" class="error-message" role="alert" aria-live="assertive">
@@ -19,30 +19,30 @@
     <!-- Sign Up Form -->
     <form (ngSubmit)="onSubmit()" aria-label="Sign Up Form">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">{{ 'signup.name' | translate }}</label>
         <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required aria-required="true"
-          placeholder="Enter your name" />
+          [placeholder]="'signup.enterName' | translate" />
       </div>
 
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{ 'signup.email' | translate }}</label>
         <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required
-          aria-required="true" placeholder="Enter your email" />
+          aria-required="true" [placeholder]="'signup.enterEmail' | translate" />
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">{{ 'signup.password' | translate }}</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
-          aria-required="true" placeholder="Enter your password" />
+          aria-required="true" [placeholder]="'signup.enterPassword' | translate" />
       </div>
 
       <button type="submit" class="btn-primary" aria-label="Sign Up">
-        Sign Up
+        {{ 'signup.signUp' | translate }}
       </button>
       <span class="login-prompt">
-        Already have an account?
+        {{ 'signup.alreadyHaveAccount' | translate }}
         <a (click)="navigateToLogin()" tabindex="0" aria-label="Login here">
-          Login here
+          {{ 'signup.loginHere' | translate }}
         </a>
       </span>
     </form>
@@ -50,17 +50,16 @@
 
   <!-- Right side (Marketing/Promo) -->
   <div class="promo-section" aria-labelledby="promo-heading">
-    <h1 class="headline" id="promo-heading">Enter the Future of Newsletters, Today</h1>
+    <h1 class="headline" id="promo-heading">{{ 'signup.enterTheFuture' | translate }}</h1>
     <p class="description">
-      Stay informed and never miss out on the news that matters most. <br />
-      With <strong>Newsletter Hub</strong>, you get curated, high-quality articles
-      right in your inbox. Join us and be part of the future of content delivery!
+      {{ 'signup.stayInformed' | translate }} <br />
+      {{ 'signup.withNewsletterHub' | translate }}<strong>{{ 'signup.newsletterHub' | translate }}</strong>,{{ 'signup.curatedArticles' | translate }}
     </p>
     <!-- Example mock card or graphic -->
     <div class="mock-card" role="region" aria-label="Newsletter Hub Statistics">
-      <span class="mock-card-header">Newsletter Hub</span>
+      <span class="mock-card-header">{{ 'signup.newsletterHub' | translate }}</span>
       <div class="mock-card-body">
-        <p>New Articles This Week</p>
+        <p>{{ 'signup.newArticlesThisWeek' | translate }}</p>
         <h2 class="mock-stat">28</h2>
       </div>
     </div>

@@ -10,11 +10,18 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { PostsService } from '../../services/posts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleModalComponent } from "../schedule-modal/schedule-modal.component";
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
-  imports: [CommonModule, FormsModule, EditorModule, ScheduleModalComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    EditorModule,
+    ScheduleModalComponent,
+    TranslateModule,
+  ],
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css'],
 })
@@ -37,7 +44,8 @@ export class MainContentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private translate: TranslateService
   ) {
     // Editor config initialization
     this.editorConfig = {

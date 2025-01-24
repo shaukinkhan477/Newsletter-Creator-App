@@ -2,12 +2,12 @@
   <!-- Left side (Login Form) -->
   <div class="form-section" role="form" aria-labelledby="login-heading">
     <div class="logo-area">
-      <!-- Replace with your own logo image or text -->
+
       <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
     </div>
-    <h2 class="title" id="login-heading">Welcome Back</h2>
+    <h2 class="title" id="login-heading">{{ 'auth.welcomeBack' | translate }}</h2>
     <p class="subtitle">
-      Good to see you again! Please log in to access <strong>Newsletter Hub</strong>.
+      {{ 'auth.goodToSeeYou' | translate }} <strong>{{ 'auth.newsletterHub' | translate }}</strong>.
     </p>
 
     <!-- Error Message -->
@@ -18,28 +18,28 @@
     <!-- Login Form -->
     <form (ngSubmit)="onSubmit()" aria-label="Login Form">
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{ 'auth.email' | translate }}</label>
         <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required
-          aria-required="true" placeholder="Enter your email" />
+          aria-required="true" [placeholder]="'auth.enterEmail' | translate" />
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">{{ 'auth.password' | translate }}</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
-          aria-required="true" placeholder="Enter your password" />
+          aria-required="true" [placeholder]="'auth.enterPassword' | translate" />
         <!-- Forgot Password Link -->
         <button type="button" class="btn-link forgot-password-link" (click)="navigateToForgotPassword()"
           aria-label="Forgot Password">
-          Forgot Password?
+          {{ 'auth.forgotPassword' | translate }}
         </button>
       </div>
       <button type="submit" class="btn-primary" aria-label="Login">
-        Login
+        {{ 'auth.login' | translate }}
       </button>
       <span class="login-prompt">
-        Don’t have an account yet?
+        {{ 'auth.noAccount' | translate }}
         <a (click)="navigateToSignup()" tabindex="0" aria-label="Sign up here">
-          Sign up here
+          {{ 'auth.signUpHere' | translate }}
         </a>.
       </span>
     </form>
@@ -47,18 +47,18 @@
 
   <!-- Right side (Marketing/Promo) -->
   <div class="promo-section" aria-labelledby="promo-heading">
-    <h1 class="headline" id="promo-heading">Stay in the Loop</h1>
+    <h1 class="headline" id="promo-heading">{{ 'auth.stayInTheLoop' | translate }}</h1>
     <p class="description">
-      Ready for your next batch of fresh stories and insights? <br />
-      Keep exploring. Keep learning. Keep being inspired with
-      <strong>Newsletter Hub</strong>.
+      {{ 'auth.readyForStories' | translate }} <br />
+      {{ 'auth.keepExploring' | translate }}
+      <strong>{{ 'auth.newsletterHub' | translate }}</strong>.
     </p>
     <!-- Example mock card or graphic -->
     <div class="mock-card" role="region" aria-label="Latest Newsletter">
-      <span class="mock-card-header">Latest Newsletter</span>
+      <span class="mock-card-header">{{ 'auth.latestNewsletter' | translate }}</span>
       <div class="mock-card-body">
-        <p>Highlights</p>
-        <h2 class="mock-stat">Top 5 Articles</h2>
+        <p>{{ 'auth.highlights' | translate }}</p>
+        <h2 class="mock-stat">{{ 'auth.top5Articles' | translate }}</h2>
       </div>
     </div>
   </div>

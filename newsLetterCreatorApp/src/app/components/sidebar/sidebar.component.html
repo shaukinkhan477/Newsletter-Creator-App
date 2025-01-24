@@ -4,29 +4,29 @@
     {{ isCollapsed ? '▶️' : '◀️' }}
   </button>
   <div class="logo-container">
-    <h2 class="text-xl font-bold" *ngIf="!isCollapsed" id="sidebar-title">Newsletter Hub</h2>
+    <h2 class="text-xl font-bold" *ngIf="!isCollapsed" id="sidebar-title">{{ 'sidebar.title' | translate }}</h2>
   </div>
   <nav class="nav-menu" role="navigation" aria-labelledby="sidebar-title">
     <a class="nav-item" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
       aria-label="New Post" tabindex="0">
       <span class="icon" aria-hidden="true">📝</span>
-      <span *ngIf="!isCollapsed">New Post</span>
+      <span *ngIf="!isCollapsed">{{ 'sidebar.newPost' | translate }}</span>
     </a>
     <a class="nav-item" [routerLink]="['/posts']" routerLinkActive="active" aria-label="Posts" tabindex="0">
       <span class="icon" aria-hidden="true">📬</span>
-      <span *ngIf="!isCollapsed">Posts</span>
+      <span *ngIf="!isCollapsed">{{ 'sidebar.posts' | translate }}</span>
     </a>
     <a class="nav-item" [routerLink]="['/analytics']" routerLinkActive="active" aria-label="Analytics" tabindex="0">
       <span class="icon" aria-hidden="true">📊</span>
-      <span *ngIf="!isCollapsed">Analytics</span>
+      <span *ngIf="!isCollapsed">{{ 'sidebar.analytics' | translate }}</span>
     </a>
     <a class="nav-item" [routerLink]="['/subscribers']" routerLinkActive="active" aria-label="Subscribers" tabindex="0">
       <span class="icon" aria-hidden="true">👪</span>
-      <span *ngIf="!isCollapsed">Subscribers</span>
+      <span *ngIf="!isCollapsed">{{ 'sidebar.subscribers' | translate }}</span>
     </a>
     <a class="nav-item" [routerLink]="['/settings']" routerLinkActive="active" aria-label="Settings" tabindex="0">
       <span class="icon" aria-hidden="true">⚙️</span>
-      <span *ngIf="!isCollapsed">Settings</span>
+      <span *ngIf="!isCollapsed">{{ 'sidebar.settings' | translate }}</span>
     </a>
   </nav>
 </aside>

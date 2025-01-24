@@ -1,0 +1,68 @@
+{
+
+"auth": {
+    "welcomeBack": "Content de vous revoir",
+    "goodToSeeYou": "Ravi de vous revoir ! Veuillez vous connecter pour accéder à",
+    "newsletterHub": "Newsletter Hub",
+    "email": "E-mail",
+    "enterEmail": "Entrez votre e-mail",
+    "password": "Mot de passe",
+    "enterPassword": "Entrez votre mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "login": "Connexion",
+    "noAccount": "Vous n'avez pas encore de compte ?",
+    "signUpHere": "Inscrivez-vous ici",
+    "stayInTheLoop": "Restez informé",
+    "readyForStories": "Prêt pour votre prochaine série d'histoires et d'idées fraîches ?",
+    "keepExploring": "Continuez à explorer. Continuez à apprendre. Continuez à être inspiré avec",
+    "latestNewsletter": "Dernière newsletter",
+    "highlights": "Points forts",
+    "top5Articles": "Top 5 des articles"
+  },
+
+  "signup": {
+    "getStarted": "Commencer",
+    "welcomeToNewsletterHub": "Bienvenue sur Newsletter Hub – Inscrivez-vous dès maintenant !",
+    "name": "Nom",
+    "enterName": "Entrez votre nom",
+    "email": "E-mail",
+    "enterEmail": "Entrez votre e-mail",
+    "password": "Mot de passe",
+    "enterPassword": "Entrez votre mot de passe",
+    "signUp": "S'inscrire",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "loginHere": "Connectez-vous ici",
+    "enterTheFuture": "Entrez dans l'avenir des newsletters, dès aujourd'hui",
+    "stayInformed": "Restez informé et ne manquez jamais les nouvelles les plus importantes.",
+    "withNewsletterHub": "Avec",
+    "newsletterHub": "Newsletter Hub",
+    "curatedArticles": "vous recevez des articles de haute qualité directement dans votre boîte de réception. Rejoignez-nous et faites partie de l'avenir de la diffusion de contenu !",
+    "newArticlesThisWeek": "Nouveaux articles cette semaine"
+  },
+
+  "sidebar": {
+    "title": "Hub de Newsletter",
+    "newPost": "Nouveau Post",
+    "posts": "Posts",
+    "analytics": "Analytique",
+    "subscribers": "Abonnés",
+    "settings": "Paramètres"
+  },
+
+  "editor": {
+    "editPost": "Modifier le post",
+    "createNewPost": "Créer un nouveau post",
+    "sendNow": "Envoyer maintenant",
+    "saveAsDraft": "Enregistrer comme brouillon",
+    "schedule": "Planifier",
+    "saveChanges": "Enregistrer les modifications",
+    "postTitlePlaceholder": "Titre du post",
+    "emailSubjectPlaceholder": "Objet de l'e-mail",
+    "previewTextPlaceholder": "Texte d'aperçu (apparaît dans les clients de messagerie)"
+  },
+
+  "POST": {
+    "CREATE_NEW": "Créer un nouveau post"
+  },
+  "LANG_SWITCH": "Changer de langue"
+}

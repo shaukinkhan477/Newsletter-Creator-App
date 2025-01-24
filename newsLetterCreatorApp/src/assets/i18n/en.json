@@ -1,0 +1,64 @@
+{
+
+"auth": {
+    "welcomeBack": "Welcome Back",
+    "goodToSeeYou": "Good to see you again! Please log in to access",
+    "newsletterHub": "Newsletter Hub",
+    "email": "Email",
+    "enterEmail": "Enter your email",
+    "password": "Password",
+    "enterPassword": "Enter your password",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "noAccount": "Don’t have an account yet?",
+    "signUpHere": "Sign up here",
+    "stayInTheLoop": "Stay in the Loop",
+    "readyForStories": "Ready for your next batch of fresh stories and insights?",
+    "keepExploring": "Keep exploring. Keep learning. Keep being inspired with",
+    "latestNewsletter": "Latest Newsletter",
+    "highlights": "Highlights",
+    "top5Articles": "Top 5 Articles"
+  },
+
+  "signup": {
+    "getStarted": "Get Started",
+    "welcomeToNewsletterHub": "Welcome to Newsletter Hub – Let’s get you signed up!",
+    "name": "Name",
+    "enterName": "Enter your name",
+    "email": "Email",
+    "enterEmail": "Enter your email",
+    "password": "Password",
+    "enterPassword": "Enter your password",
+    "signUp": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "enterTheFuture": "Enter the Future of Newsletters, Today",
+    "stayInformed": "Stay informed and never miss out on the news that matters most.",
+    "withNewsletterHub": "With",
+    "newsletterHub": "Newsletter Hub",
+    "curatedArticles": "you get curated, high-quality articles right in your inbox. Join us and be part of the future of content delivery!",
+    "newArticlesThisWeek": "New Articles This Week"
+  },
+
+  "sidebar": {
+    "title": "Newsletter Hub",
+    "newPost": "New Post",
+    "posts": "Posts",
+    "analytics": "Analytics",
+    "subscribers": "Subscribers",
+    "settings": "Settings"
+  },
+  "editor": {
+    "editPost": "Edit Post",
+    "createNewPost": "Create New Post",
+    "sendNow": "Send Now",
+    "saveAsDraft": "Save as Draft",
+    "schedule": "Schedule",
+    "saveChanges": "Save Changes",
+    "postTitlePlaceholder": "Post title",
+    "emailSubjectPlaceholder": "Email subject line",
+    "previewTextPlaceholder": "Preview text (appears in email clients)"
+  },
+
+  "LANG_SWITCH": "Switch Language"
+}

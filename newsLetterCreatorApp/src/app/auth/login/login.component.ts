@@ -3,11 +3,12 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -16,38 +17,43 @@ export class LoginComponent {
   password = '';
   errorMsg = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   onSubmit() {
-  if (!this.email || !this.password) {
-    this.errorMsg = 'All fields are required.';
-    return;
-  }
-  this.authService.login({ email: this.email, password: this.password })
-    .subscribe({
-      next: (res: any) => {
-        if (res.token) {
-          // 1) Store token
-          this.authService.setToken(res.token);
-          // 2) Store user info
-          if (res.user) {
-            this.authService.setUserInfo({
-              id: res.user.id,
-              email: res.user.email,
-              name: res.user.name
-            });
+    if (!this.email || !this.password) {
+      this.errorMsg = 'All fields are required.';
+      return;
+    }
+    this.authService
+      .login({ email: this.email, password: this.password })
+      .subscribe({
+        next: (res: any) => {
+          if (res.token) {
+            // 1) Store token
+            this.authService.setToken(res.token);
+            // 2) Store user info
+            if (res.user) {
+              this.authService.setUserInfo({
+                id: res.user.id,
+                email: res.user.email,
+                name: res.user.name,
+              });
+            }
+            // 3) Navigate to home or wherever
+            this.router.navigate(['/home']);
+          } else {
+            this.errorMsg = 'Invalid login response (no token).';
           }
-          // 3) Navigate to home or wherever
-          this.router.navigate(['/home']);
-        } else {
-          this.errorMsg = 'Invalid login response (no token).';
-        }
-      },
-      error: (err) => {
-        this.errorMsg = err.error?.message || 'Login failed.';
-      }
-    });
-}
+        },
+        error: (err) => {
+          this.errorMsg = err.error?.message || 'Login failed.';
+        },
+      });
+  }
 
   // Navigate to Forgot Password
   navigateToForgotPassword() {

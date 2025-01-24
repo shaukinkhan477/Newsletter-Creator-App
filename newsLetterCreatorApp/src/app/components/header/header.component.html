@@ -4,6 +4,15 @@
     <img src="assets/logo1.jpg" alt="App Logo" class="app-logo" aria-hidden="true" />
   </div>
 
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+    <select (change)="changeLanguage($event)">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
   <div class="profile-area">
     <!-- On click, navigate to profile -->
     <button class="profile-button" (click)="goToProfile()" aria-label="Go to Profile">

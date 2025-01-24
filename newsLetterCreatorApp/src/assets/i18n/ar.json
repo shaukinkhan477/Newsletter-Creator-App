@@ -1,0 +1,67 @@
+{
+  "auth": {
+    "welcomeBack": "مرحبًا بعودتك",
+    "goodToSeeYou": "سعيد برؤيتك مرة أخرى! يرجى تسجيل الدخول للوصول إلى",
+    "newsletterHub": "مركز النشرات الإخبارية",
+    "email": "البريد الإلكتروني",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "enterPassword": "أدخل كلمة المرور",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب بعد؟",
+    "signUpHere": "سجل هنا",
+    "stayInTheLoop": "ابقَ على اطلاع",
+    "readyForStories": "هل أنت مستعد للحصول على مجموعة جديدة من القصص والأفكار؟",
+    "keepExploring": "استمر في الاستكشاف. استمر في التعلم. استمر في الإلهام مع",
+    "latestNewsletter": "آخر نشرة إخبارية",
+    "highlights": "أبرز العناوين",
+    "top5Articles": "أفضل 5 مقالات"
+  },
+
+  "signup": {
+    "getStarted": "ابدأ الآن",
+    "welcomeToNewsletterHub": "مرحبًا بكم في مركز النشرات الإخبارية – لنبدأ بالتسجيل!",
+    "name": "الاسم",
+    "enterName": "أدخل اسمك",
+    "email": "البريد الإلكتروني",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "enterPassword": "أدخل كلمة المرور",
+    "signUp": "التسجيل",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "loginHere": "سجل الدخول هنا",
+    "enterTheFuture": "ادخل إلى مستقبل النشرات الإخبارية اليوم",
+    "stayInformed": "ابقَ على اطلاع ولا تفوت الأخبار الأكثر أهمية.",
+    "withNewsletterHub": "مع",
+    "newsletterHub": "مركز النشرات الإخبارية",
+    "curatedArticles": "ستحصل على مقالات عالية الجودة مختارة بعناية مباشرة في بريدك الوارد. انضم إلينا وكن جزءًا من مستقبل توصيل المحتوى!",
+    "newArticlesThisWeek": "مقالات جديدة هذا الأسبوع"
+  },
+
+  "sidebar": {
+    "title": "مركز النشرات الإخبارية",
+    "newPost": "منشور جديد",
+    "posts": "المنشورات",
+    "analytics": "التحليلات",
+    "subscribers": "المشتركين",
+    "settings": "الإعدادات"
+  },
+
+  "editor": {
+    "editPost": "تحرير المنشور",
+    "createNewPost": "إنشاء منشور جديد",
+    "sendNow": "إرسال الآن",
+    "saveAsDraft": "حفظ كمسودة",
+    "schedule": "جدولة",
+    "saveChanges": "حفظ التغييرات",
+    "postTitlePlaceholder": "عنوان المنشور",
+    "emailSubjectPlaceholder": "سطر موضوع البريد الإلكتروني",
+    "previewTextPlaceholder": "نص معاينة (يظهر في عملاء البريد الإلكتروني)"
+  },
+
+  "POST": {
+    "CREATE_NEW": "إنشاء منشور جديد"
+  },
+  "LANG_SWITCH": "تغيير اللغة"
+}

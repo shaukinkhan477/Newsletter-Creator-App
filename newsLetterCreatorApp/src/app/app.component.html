@@ -1,14 +1,19 @@
+<div class="app-wrapper">
   <!-- Header -->
-<div><app-header></app-header></div>
-<div class="app-container" [class.collapsed]="isSidebarCollapsed">
+  <div class="header-wrapper">
+    <app-header></app-header>
+  </div>
 
-  <!-- Sidebar -->
-  <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed">
-    <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
-  </aside>
+  <div class="app-container" [class.collapsed]="isSidebarCollapsed">
 
-  <!-- Main Content -->
-  <main class="main-content-container">
-    <router-outlet />
-  </main>
+    <!-- Sidebar -->
+    <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed">
+      <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content-container">
+      <router-outlet />
+    </main>
+  </div>
 </div>

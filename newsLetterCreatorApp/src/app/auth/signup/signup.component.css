@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-   border: 1px solid #898484;
+  border: 1px solid #898484;
 }
 
 .logo-area {
@@ -50,28 +50,50 @@
 .form-control {
   width: 100%;
   padding: 0.75rem;
-   border-radius: 30px;
+  border-radius: 30px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  outline: none;
 }
 
 .btn-primary {
-  padding: 0.75rem 2rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3b82f6;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-primary:focus {
+  outline: 3px solid rgba(59, 130, 246, 0.5);
 }
 
 a {
   cursor: pointer;
   color: blue;
+  text-decoration: underline;
 }
 
 .login-prompt {
   font-size: 0.9rem;
   margin-left: 8px;
+  text-align: center;
 }
 
 /* Right side - Promo Section */
@@ -83,7 +105,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-   border: 1px solid #898484;
+  border: 1px solid #898484;
 }
 
 .headline {
@@ -125,13 +147,6 @@ a {
   font-size: 2rem;
   font-weight: 700;
   margin: 0.25rem 0 0;
-}
-
-.mock-card-footer {
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 /* Error/Success Messages */

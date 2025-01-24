@@ -1,3 +1,4 @@
+/* Auth Container */
 .auth-container {
   display: flex;
   min-height: 100vh;
@@ -15,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-   border: 1px solid #898484;
+  border: 1px solid #898484;
 }
 
 .logo-area {
@@ -50,7 +51,7 @@
 .form-control {
   width: 100%;
   padding: 0.75rem;
-   border-radius: 30px;
+  border-radius: 30px;
   border: 1px solid #ccc;
   font-size: 1rem;
 }
@@ -62,6 +63,12 @@
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+  background-color: #3b82f6;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
 }
 
 .forgot-password-link {
@@ -70,6 +77,13 @@
   color: #777;
   cursor: pointer;
   margin-left: 290px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
 }
 
 a {
@@ -91,7 +105,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-   border: 1px solid #898484;
+  border: 1px solid #898484;
 }
 
 .headline {
@@ -133,13 +147,6 @@ a {
   font-size: 2rem;
   font-weight: 700;
   margin: 0.25rem 0 0;
-}
-
-.mock-card-footer {
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 /* Error/Success Messages */

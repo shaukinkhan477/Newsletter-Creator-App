@@ -1,74 +1,65 @@
 <div class="auth-container">
   <!-- Left side (Login Form) -->
-  <div class="form-section">
+  <div class="form-section" role="form" aria-labelledby="login-heading">
     <div class="logo-area">
       <!-- Replace with your own logo image or text -->
-      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" />
+      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
     </div>
-    <h2 class="title">Welcome Back</h2>
+    <h2 class="title" id="login-heading">Welcome Back</h2>
     <p class="subtitle">
       Good to see you again! Please log in to access <strong>Newsletter Hub</strong>.
     </p>
 
     <!-- Error Message -->
-    <div *ngIf="errorMsg" class="error-message">
+    <div *ngIf="errorMsg" class="error-message" role="alert" aria-live="assertive">
       {{ errorMsg }}
     </div>
 
     <!-- Login Form -->
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" aria-label="Login Form">
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
-          class="form-control"
-          required
-        />
+        <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required
+          aria-required="true" placeholder="Enter your email" />
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          class="form-control"
-          required
-        />
+        <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
+          aria-required="true" placeholder="Enter your password" />
         <!-- Forgot Password Link -->
-      <button
-        type="button"
-        class="btn-link forgot-password-link"
-        (click)="navigateToForgotPassword()"
-      >
-        Forgot Password?
-      </button>
+        <button type="button" class="btn-link forgot-password-link" (click)="navigateToForgotPassword()"
+          aria-label="Forgot Password">
+          Forgot Password?
+        </button>
       </div>
-      <button type="submit" class="btn-primary">Login</button>
-      <span class="login-prompt">Don’t have an account yet? <a (click)="navigateToSignup()">Sign up here</a>.</span>
+      <button type="submit" class="btn-primary" aria-label="Login">
+        Login
+      </button>
+      <span class="login-prompt">
+        Don’t have an account yet?
+        <a (click)="navigateToSignup()" tabindex="0" aria-label="Sign up here">
+          Sign up here
+        </a>.
+      </span>
     </form>
   </div>
 
   <!-- Right side (Marketing/Promo) -->
-  <div class="promo-section">
-    <h1 class="headline">Stay in the Loop</h1>
+  <div class="promo-section" aria-labelledby="promo-heading">
+    <h1 class="headline" id="promo-heading">Stay in the Loop</h1>
     <p class="description">
       Ready for your next batch of fresh stories and insights? <br />
       Keep exploring. Keep learning. Keep being inspired with
       <strong>Newsletter Hub</strong>.
     </p>
     <!-- Example mock card or graphic -->
-    <div class="mock-card">
+    <div class="mock-card" role="region" aria-label="Latest Newsletter">
       <span class="mock-card-header">Latest Newsletter</span>
       <div class="mock-card-body">
         <p>Highlights</p>
         <h2 class="mock-stat">Top 5 Articles</h2>
       </div>
-      <!-- <div class="mock-card-footer">Explore Now</div> -->
     </div>
   </div>
 </div>

@@ -6,9 +6,10 @@
   transition: grid-template-columns 0.3s ease;
 }
 
+
 /* Collapsed sidebar layout */
 .app-container.collapsed {
-  grid-template-columns: 80px 1fr; /* Collapsed sidebar width: 80px */
+  grid-template-columns: 80px 1fr;
 }
 /* Sidebar Container */
 .sidebar-container {

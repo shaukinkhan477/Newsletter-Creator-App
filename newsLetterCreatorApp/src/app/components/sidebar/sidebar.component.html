@@ -1,45 +1,31 @@
-<aside class="sidebar" [class.collapsed]="isCollapsed">
-  <button class="toggle-button" (click)="toggle()">
-      {{ isCollapsed ? '▶️' : '◀️' }}
-    </button>
+<aside class="sidebar" [class.collapsed]="isCollapsed" aria-label="Sidebar">
+  <button class="toggle-button" (click)="toggle()" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle sidebar"
+    tabindex="0">
+    {{ isCollapsed ? '▶️' : '◀️' }}
+  </button>
   <div class="logo-container">
-    <h2 class="text-xl font-bold" *ngIf="!isCollapsed">Newsletter Hub</h2>
-    <!-- <button class="toggle-button" (click)="toggle()">
-      {{ isCollapsed ? '▶️' : '◀️' }}
-    </button> -->
+    <h2 class="text-xl font-bold" *ngIf="!isCollapsed" id="sidebar-title">Newsletter Hub</h2>
   </div>
-  <nav class="nav-menu">
-    <a
-      class="nav-item"
-      [routerLink]="['/home']"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      <span class="icon" [title]="'New Post'">📝</span>
+  <nav class="nav-menu" role="navigation" aria-labelledby="sidebar-title">
+    <a class="nav-item" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      aria-label="New Post" tabindex="0">
+      <span class="icon" aria-hidden="true">📝</span>
       <span *ngIf="!isCollapsed">New Post</span>
     </a>
-    <a
-      class="nav-item"
-      [routerLink]="['/posts']"
-      routerLinkActive="active"
-    >
-      <span class="icon" [title]="'Posts'">📬</span>
+    <a class="nav-item" [routerLink]="['/posts']" routerLinkActive="active" aria-label="Posts" tabindex="0">
+      <span class="icon" aria-hidden="true">📬</span>
       <span *ngIf="!isCollapsed">Posts</span>
     </a>
-    <a
-      class="nav-item"
-      [routerLink]="['/analytics']"
-      routerLinkActive="active"
-    >
-      <span class="icon" [title]="'Analytics'">📊</span>
+    <a class="nav-item" [routerLink]="['/analytics']" routerLinkActive="active" aria-label="Analytics" tabindex="0">
+      <span class="icon" aria-hidden="true">📊</span>
       <span *ngIf="!isCollapsed">Analytics</span>
     </a>
-    <a class="nav-item" [routerLink]="['/subscribers']" routerLinkActive="active">
-      <span class="icon" [title]="'Subscribers'">👪</span>
+    <a class="nav-item" [routerLink]="['/subscribers']" routerLinkActive="active" aria-label="Subscribers" tabindex="0">
+      <span class="icon" aria-hidden="true">👪</span>
       <span *ngIf="!isCollapsed">Subscribers</span>
     </a>
-    <a class="nav-item" [routerLink]="['/settings']" routerLinkActive="active">
-      <span class="icon" [title]="'Settings'">⚙️</span>
+    <a class="nav-item" [routerLink]="['/settings']" routerLinkActive="active" aria-label="Settings" tabindex="0">
+      <span class="icon" aria-hidden="true">⚙️</span>
       <span *ngIf="!isCollapsed">Settings</span>
     </a>
   </nav>

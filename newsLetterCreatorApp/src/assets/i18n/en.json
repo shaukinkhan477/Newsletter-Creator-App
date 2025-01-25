@@ -1,8 +1,7 @@
 {
-
-"auth": {
+  "auth": {
     "welcomeBack": "Welcome Back",
-    "goodToSeeYou": "Good to see you again! Please log in to access",
+    "goodToSeeYou": "Good to see you again! Please Login to access",
     "newsletterHub": "Newsletter Hub",
     "email": "Email",
     "enterEmail": "Enter your email",

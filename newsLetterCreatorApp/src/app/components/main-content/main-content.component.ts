@@ -1,16 +1,19 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { PostsService } from '../../services/posts.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ScheduleModalComponent } from "../schedule-modal/schedule-modal.component";
+import { ScheduleModalComponent } from '../schedule-modal/schedule-modal.component';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+// import { selectDraft } from '../../store/newsletter/post.selectors';
+import {
+  updateDraftField,
+  updateDraft,
+} from '../../store/newsletter/post.actions';
+import { selectDraft } from '../../store/newsletter/post.selectors';
+import { Newsletter } from '../../models/newsletter.model';
 
 @Component({
   selector: 'app-main-content',
@@ -26,12 +29,13 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./main-content.component.css'],
 })
 export class MainContentComponent implements OnInit {
-  newsletter = {
+  newsletter: Partial<Newsletter> = {
     title: '',
     subject: '',
     preheader: '',
     content: '',
     schedule: null,
+    segmentId: '',
   };
 
   editMode = false;
@@ -45,7 +49,8 @@ export class MainContentComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private postsService: PostsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private store: Store
   ) {
     // Editor config initialization
     this.editorConfig = {
@@ -79,7 +84,17 @@ export class MainContentComponent implements OnInit {
     };
   }
 
+
+  // We'll subscribe to the store's draft
+  draft$ = this.store.select(selectDraft);
+
   ngOnInit() {
+    // Refill local 'newsletter' whenever the store's draft changes
+    this.draft$.subscribe((draft) => {
+      // Merge existing fields so we don't overwrite local changes?
+      // Or just replace it entirely:
+      this.newsletter = { ...draft };
+    });
     // Check if there's an :id in the route
     this.postId = this.route.snapshot.paramMap.get('id');
     if (this.postId) {
@@ -87,6 +102,13 @@ export class MainContentComponent implements OnInit {
       this.editMode = true;
       this.loadPost(this.postId);
     }
+  }
+
+  onFieldChange(field: keyof Newsletter, value: string) {
+    // 1) Update local state
+    this.newsletter[field] = value;
+    // 2) Dispatch partial update
+    this.store.dispatch(updateDraft({ partialDraft: { [field]: value } }));
   }
 
   loadPost(id: string) {

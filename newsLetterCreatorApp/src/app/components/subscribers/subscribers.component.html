@@ -1,28 +1,24 @@
 <div class="subscribers-container">
   <h2>Subscribers</h2>
 
-  <div class="alert error" *ngIf="errorMsg">
+  <!-- Show error / success from store -->
+  <div class="alert error" *ngIf="(errorMsg$ | async) as errorMsg">
     {{ errorMsg }}
   </div>
-  <div class="alert success" *ngIf="successMsg">
+  <div class="alert success" *ngIf="(successMsg$ | async) as successMsg">
     {{ successMsg }}
   </div>
 
-  <div class="add-subscriber-form">
-    <input
-      type="email"
-      [(ngModel)]="newEmail"
-      placeholder="Subscriber Email"
-    />
-    <input
-      type="text"
-      [(ngModel)]="newName"
-      placeholder="Subscriber Name"
-    />
-    <button (click)="addSubscriber()">Add Subscriber</button>
-  </div>
+  <!-- Or show a loading indicator -->
+  <div *ngIf="(loading$ | async)">Loading subscribers...</div>
 
-  <table *ngIf="subscribers.length > 0" class="subscribers-table">
+  <div class="add-subscriber-form">
+    <input type="email" [(ngModel)]="newEmail" placeholder="Subscriber Email" />
+    <input type="text" [(ngModel)]="newName" placeholder="Subscriber Name" />
+    <button (click)="addNewSubscriber()">Add Subscriber</button>
+  </div>
+  <ng-container *ngIf="subscribers$ | async as subs">
+  <table *ngIf="subs && subs.length > 0" class="subscribers-table">
     <thead>
       <tr>
         <th>Email</th>
@@ -31,17 +27,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let sub of subscribers">
+      <tr *ngFor="let sub of subs">
         <td>{{ sub.email }}</td>
         <td>{{ sub.name }}</td>
         <td>
-          <button (click)="deleteSub(sub._id)">Delete</button>
+          <button (click)="removeSubscriber(sub._id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <div class="no-subscribers" *ngIf="subscribers.length === 0">
+  <div class="no-subscribers" *ngIf="subs && subs.length === 0">
     No subscribers found.
   </div>
+  </ng-container>
 </div>

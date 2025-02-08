@@ -1,7 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {SubscribersService} from '../../services/subscribers.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import {
+  loadSubscribers,
+  addSubscriber,
+  deleteSubscriber,
+} from '../../store/subscribers/subscribers.actions';
+import {
+  selectAllSubscribers,
+  selectSubscriberLoading,
+  selectSubscriberError,
+  selectSubscriberSuccess,
+} from '../../store/subscribers/subscribers.selectors';
 
 @Component({
   selector: 'app-subscribers',
@@ -11,67 +24,54 @@ import {SubscribersService} from '../../services/subscribers.service';
   styleUrls: ['./subscribers.component.css'],
 })
 export class SubscribersComponent implements OnInit {
-  subscribers: any[] = [];
+  // Local form fields
   newEmail = '';
   newName = '';
-  errorMsg = '';
-  successMsg = '';
 
-  constructor(private subsService: SubscribersService) {}
+  // Observables from the store
+  subscribers$!: Observable<any[]>;
+  loading$!: Observable<boolean>;
+  errorMsg$!: Observable<string | null>;
+  successMsg$!: Observable<string | null>;
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.fetchSubscribers();
+    // Dispatch an action to load all subscribers
+    this.store.dispatch(loadSubscribers());
+
+    // Select data from the store
+    this.subscribers$ = this.store.select(selectAllSubscribers);
+    this.loading$ = this.store.select(selectSubscriberLoading);
+    this.errorMsg$ = this.store.select(selectSubscriberError);
+    this.successMsg$ = this.store.select(selectSubscriberSuccess);
   }
 
-  fetchSubscribers(): void {
-    this.subsService.getAll().subscribe({
-      next: (res: any) => {
-        this.subscribers = res.subscribers || [];
-      },
-      error: (err) => {
-        this.errorMsg = 'Error fetching subscribers.';
-      },
-    });
-  }
-
-  addSubscriber(): void {
+  addNewSubscriber(): void {
     if (!this.newEmail) {
-      this.errorMsg = 'Email is required.';
+      alert('Email is required');
       return;
     }
-    this.errorMsg = '';
-    this.successMsg = '';
 
-    this.subsService
-      .addSubscriber({ email: this.newEmail, name: this.newName })
-      .subscribe({
-        next: (response: any) => {
-          this.successMsg = 'Subscriber added successfully!';
-          this.newEmail = '';
-          this.newName = '';
-          this.fetchSubscribers();
-        },
-        error: (err) => {
-          this.errorMsg = err.error?.message || 'Error adding subscriber.';
-        },
-      });
+    // Dispatch the addSubscriber action
+    this.store.dispatch(
+      addSubscriber({
+        email: this.newEmail,
+        name: this.newName,
+      })
+    );
+
+    // Reset the local form fields
+    this.newEmail = '';
+    this.newName = '';
   }
 
-  deleteSub(id: string): void {
+  removeSubscriber(id: string): void {
     if (!confirm('Are you sure you want to delete this subscriber?')) {
       return;
     }
-    this.errorMsg = '';
-    this.successMsg = '';
 
-    this.subsService.deleteSubscriber(id).subscribe({
-      next: () => {
-        this.successMsg = 'Subscriber deleted successfully!';
-        this.fetchSubscribers();
-      },
-      error: (err) => {
-        this.errorMsg = err.error?.message || 'Error deleting subscriber.';
-      },
-    });
+    // Dispatch the deleteSubscriber action
+    this.store.dispatch(deleteSubscriber({ id }));
   }
 }

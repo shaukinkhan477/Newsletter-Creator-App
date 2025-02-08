@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -5,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -17,6 +18,8 @@ export class HeaderComponent {
   goToProfile() {
     this.router.navigate(['/profile']);
   }
+
+
 
   // Method to change the language
   changeLanguage(event: Event) {

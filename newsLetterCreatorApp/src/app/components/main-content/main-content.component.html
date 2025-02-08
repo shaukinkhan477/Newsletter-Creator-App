@@ -36,13 +36,15 @@
 
     <div class="editor-container card">
       <div class="mb-4">
-        <input type="text" class="title-input" [(ngModel)]="newsletter.title" name="title" [placeholder]="'editor.postTitlePlaceholder' | translate"
-          required aria-required="true" aria-label="Post Title" />
+        <input type="text" class="title-input" [(ngModel)]="newsletter.title" name="title" (ngModelChange)="onFieldChange('title', $event)"
+          [placeholder]="'editor.postTitlePlaceholder' | translate" required aria-required="true"
+          aria-label="Post Title" />
       </div>
 
       <div class="mb-4">
         <input type="text" class="form-control" [(ngModel)]="newsletter.subject" name="subject"
-          [placeholder]="'editor.emailSubjectPlaceholder' | translate" required aria-required="true" aria-label="Email Subject Line" />
+          [placeholder]="'editor.emailSubjectPlaceholder' | translate" required aria-required="true"
+          aria-label="Email Subject Line" />
       </div>
 
       <div class="mb-4">

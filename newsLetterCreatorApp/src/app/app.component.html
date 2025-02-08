@@ -4,9 +4,7 @@
     <app-header></app-header>
   </div>
 
-
   <div class="app-container" [class.collapsed]="isSidebarCollapsed">
-
     <!-- Sidebar -->
     <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed">
       <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>

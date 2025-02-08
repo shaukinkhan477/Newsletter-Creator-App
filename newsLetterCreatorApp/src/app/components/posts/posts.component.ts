@@ -1,50 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../../services/posts.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+// Import your actions and selectors
+import { loadPosts, sendNowPost } from '../../store/posts/posts.actions';
+import {
+  selectAllPosts,
+  selectPostsLoading,
+  selectPostsError,
+} from '../../store/posts/posts.selectors';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './posts.component.html',
-  styleUrl: './posts.component.css',
+  styleUrls: ['./posts.component.css'], // Ensure you use "styleUrls" (plural)
 })
 export class PostsComponent implements OnInit {
-  posts: any[] = [];
+  // Observables from store
+  posts$!: Observable<any[]>; // or a Post[] interface
+  loading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
 
-  constructor(private postsService: PostsService, private router: Router) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchPosts();
-  }
+    // Dispatch action to load posts
+    this.store.dispatch(loadPosts());
 
-  fetchPosts(): void {
-    this.postsService.getAllPosts().subscribe({
-      next: (res: any) => {
-        this.posts = res.posts || [];
-      },
-      error: (err) => console.error(err),
-    });
+    // Select state from store
+    this.posts$ = this.store.select(selectAllPosts);
+    this.loading$ = this.store.select(selectPostsLoading);
+    this.error$ = this.store.select(selectPostsError);
   }
 
   editPost(postId: string): void {
-    // Option A: Navigate to MainContentComponent with an 'edit' mode
-    // e.g. '/edit-post/:id'
     this.router.navigate(['/edit-post', postId]);
   }
 
   sendNow(postId: string): void {
-    // Directly call the sendNow endpoint
-    this.postsService.sendNow(postId).subscribe({
-      next: () => {
-        alert('Post sent successfully!');
-        this.fetchPosts(); // refresh list
-      },
-      error: (err) => {
-        alert(err.error?.message || 'Error sending post');
-      },
-    });
+    // Dispatch the "sendNowPost" action
+    this.store.dispatch(sendNowPost({ postId }));
   }
 }

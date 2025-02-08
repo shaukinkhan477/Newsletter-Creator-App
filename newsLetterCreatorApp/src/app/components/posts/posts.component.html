@@ -1,41 +1,42 @@
 <div class="posts-container">
   <h2>All Posts</h2>
 
-  <div *ngIf="posts.length === 0">
-    No posts found.
+  <!-- Show loading, error, or the posts list -->
+  <div *ngIf="(loading$ | async)">Loading posts...</div>
+  <div *ngIf="(error$ | async) as errMsg" class="alert alert-error">
+    {{ errMsg }}
   </div>
 
-  <div class="post-list" *ngIf="posts.length > 0">
-    <div class="post-item card" *ngFor="let p of posts">
-      <h3 class="post-title">{{ p.title }}</h3>
-      <p class="post-subject">Subject: {{ p.subject }}</p>
-      <p class="post-preheader">Preheader: {{ p.preheader }}</p>
-      <div class="post-status" [ngClass]="p.status">
-        Status: {{ p.status }}
-      </div>
+  <div *ngIf="(posts$ | async) as posts">
+    <div *ngIf="posts.length === 0">
+      No posts found.
+    </div>
 
-      <!-- If scheduled, show the date/time -->
-      <div *ngIf="p.status === 'scheduled'">
-        Scheduled At: {{ p.scheduledAt | date:'short' }}
-      </div>
+    <div class="post-list" *ngIf="posts.length > 0">
+      <div class="post-item card" *ngFor="let p of posts">
+        <h3 class="post-title">{{ p.title }}</h3>
+        <p class="post-subject">Subject: {{ p.subject }}</p>
+        <p class="post-preheader">Preheader: {{ p.preheader }}</p>
+        <div class="post-status" [ngClass]="p.status">
+          Status: {{ p.status }}
+        </div>
 
-      <!-- If sent, show the sentAt date/time -->
-      <div *ngIf="p.status === 'sent'">
-        Sent At: {{ p.sentAt | date:'short' }}
-      </div>
+        <div *ngIf="p.status === 'scheduled'">
+          Scheduled At: {{ p.scheduledAt | date:'short' }}
+        </div>
+        <div *ngIf="p.status === 'sent'">
+          Sent At: {{ p.sentAt | date:'short' }}
+        </div>
 
-      <div class="post-actions">
-        <!-- Edit button only if not sent -->
-        <button *ngIf="p.status !== 'sent'" class="btn-edit" (click)="editPost(p._id)">Edit</button>
+        <div class="post-actions">
+          <button *ngIf="p.status !== 'sent'" class="btn-edit" (click)="editPost(p._id)">
+            Edit
+          </button>
 
-        <!-- Send Now button only if not sent -->
-        <button
-          class="btn-send"
-          (click)="sendNow(p._id)"
-          *ngIf="p.status !== 'sent'"
-        >
-          Send Now
-        </button>
+          <button *ngIf="p.status !== 'sent'" class="btn-send" (click)="sendNow(p._id)">
+            Send Now
+          </button>
+        </div>
       </div>
     </div>
   </div>

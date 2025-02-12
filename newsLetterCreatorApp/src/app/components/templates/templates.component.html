@@ -1,0 +1,9 @@
+<div class="templates-container">
+  <h2>Select a Template</h2>
+  <div class="templates-list">
+    <div class="template-card" *ngFor="let t of templates" (click)="applyTemplate(t)">
+      <h3>{{ t.name }}</h3>
+      <p>{{ t.description }}</p>
+    </div>
+  </div>
+</div>

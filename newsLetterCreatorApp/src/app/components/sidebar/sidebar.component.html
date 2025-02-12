@@ -16,6 +16,12 @@
       <span class="icon" aria-hidden="true">📬</span>
       <span *ngIf="!isCollapsed">{{ 'sidebar.posts' | translate }}</span>
     </a>
+
+    <a class="nav-item" [routerLink]="['/templates']"terLinkActive="active" aria-label="templates" tabindex="0">
+      <span class="icon" aria-hidden="true">📃</span>
+      <span *ngIf="!isCollapsed">{{ 'sidebar.templates' | translate }}</span>
+    </a>
+
     <a class="nav-item" [routerLink]="['/analytics']" routerLinkActive="active" aria-label="Analytics" tabindex="0">
       <span class="icon" aria-hidden="true">📊</span>
       <span *ngIf="!isCollapsed">{{ 'sidebar.analytics' | translate }}</span>

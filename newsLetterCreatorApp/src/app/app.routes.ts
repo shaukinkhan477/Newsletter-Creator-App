@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthGuard } from './AuthGuards/auth.guard';
 import { PostsComponent } from './components/posts/posts.component';
+import { TemplatesComponent } from './components/templates/templates.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -42,5 +43,8 @@ export const routes: Routes = [
     component: SubscribersComponent,
     canActivate: [AuthGuard],
   },
+
+  { path: 'templates', component: TemplatesComponent, canActivate: [AuthGuard], },
+
   // { path: 'settings', component: SettingsComponent,canActivate: [AuthGuard] },
 ];

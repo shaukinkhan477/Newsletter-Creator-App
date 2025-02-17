@@ -1,9 +1,22 @@
 <div class="templates-container">
-  <h2>Select a Template</h2>
-  <div class="templates-list">
-    <div class="template-card" *ngFor="let t of templates" (click)="applyTemplate(t)">
-      <h3>{{ t.name }}</h3>
-      <p>{{ t.description }}</p>
+  <!-- CATEGORY NAVBAR -->
+  <nav class="category-navbar">
+    <ul>
+      <li *ngFor="let cat of categories" [class.active]="cat.name === selectedCategory"
+        (click)="selectCategory(cat.name)">
+        {{ cat.name }}
+      </li>
+    </ul>
+  </nav>
+
+  <h2>{{ selectedCategory }} Templates</h2>
+
+  <!-- GRID OF TEMPLATES -->
+  <div class="templates-grid">
+    <div class="template-card" *ngFor="let tmpl of currentTemplates" (click)="applyTemplate(tmpl)">
+      <img [src]="tmpl.previewImg" [alt]="tmpl.name" class="template-preview" />
+      <h3 class="template-name">{{ tmpl.name }}</h3>
+      <p class="template-desc">{{ tmpl.description }}</p>
     </div>
   </div>
 </div>

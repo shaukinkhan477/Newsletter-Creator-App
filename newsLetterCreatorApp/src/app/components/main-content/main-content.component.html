@@ -1,3 +1,14 @@
+<!-- Show skeleton loader while loading -->
+<ng-container *ngIf="loading; else mainContent">
+  <!-- Header skeleton (simulate the heading) -->
+  <ngx-skeleton-loader appearance="line" [theme]="{ height: '6rem', width: '100%', 'margin': '1rem', 'margin-bottom': '0.5rem', 'margin-top': '1rem', 'background-color': '#e0e0e0', 'border-radius': '1rem', }">
+  </ngx-skeleton-loader>
+  <!-- Editor container skeleton (simulate the main content area) -->
+  <ngx-skeleton-loader appearance="line" [theme]="{ height: '400px', width: '100%', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '1rem', }">
+  </ngx-skeleton-loader>
+</ng-container>
+
+<ng-template #mainContent>
 <div class="main-content-layout">
   <div class="editor-section">
     <div class="content-header">
@@ -60,3 +71,4 @@
   <app-schedule-modal *ngIf="showScheduleModal" [newsletter]="newsletter" (onClose)="closeModal()"
     (onSchedule)="schedulePost($event)"></app-schedule-modal>
 </div>
+</ng-template>

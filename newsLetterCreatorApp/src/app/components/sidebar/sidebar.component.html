@@ -1,38 +1,53 @@
-<aside class="sidebar" [class.collapsed]="isCollapsed" aria-label="Sidebar">
-  <button class="toggle-button" (click)="toggle()" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle sidebar"
-    tabindex="0">
-    {{ isCollapsed ? '▶️' : '◀️' }}
-  </button>
-  <div class="logo-container">
-    <h2 class="text-xl font-bold" *ngIf="!isCollapsed" id="sidebar-title">{{ 'sidebar.title' | translate }}</h2>
-  </div>
-  <nav class="nav-menu" role="navigation" aria-labelledby="sidebar-title">
-    <a class="nav-item" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-      aria-label="New Post" tabindex="0">
-      <span class="icon" aria-hidden="true">📝</span>
-      <span *ngIf="!isCollapsed">{{ 'sidebar.newPost' | translate }}</span>
-    </a>
-    <a class="nav-item" [routerLink]="['/posts']" routerLinkActive="active" aria-label="Posts" tabindex="0">
-      <span class="icon" aria-hidden="true">📬</span>
-      <span *ngIf="!isCollapsed">{{ 'sidebar.posts' | translate }}</span>
-    </a>
+<!-- Show skeleton loader while loading -->
+<ng-container *ngIf="loading; else sidebarContent">
+  <!-- Header skeleton (shorter height) -->
+  <ngx-skeleton-loader count="1" appearance="line" [theme]="{ height: '3rem', width: '250px', 'margin-bottom': '1rem' }">
+  </ngx-skeleton-loader>
 
-    <a class="nav-item" [routerLink]="['/templates']"terLinkActive="active" aria-label="templates" tabindex="0">
-      <span class="icon" aria-hidden="true">📃</span>
-      <span *ngIf="!isCollapsed">{{ 'sidebar.templates' | translate }}</span>
-    </a>
+  <!-- Navigation items skeleton: 6 lines -->
+  <ngx-skeleton-loader count="6" appearance="line"
+    [theme]="{ height: '2.6rem', width: '200px', 'margin-bottom': '1.5rem', 'background-color': '#e0e0e0', 'border-radius': '0.4rem', 'margin-left': '1rem'  }">
+  </ngx-skeleton-loader>
+</ng-container>
 
-    <a class="nav-item" [routerLink]="['/analytics']" routerLinkActive="active" aria-label="Analytics" tabindex="0">
-      <span class="icon" aria-hidden="true">📊</span>
-      <span *ngIf="!isCollapsed">{{ 'sidebar.analytics' | translate }}</span>
-    </a>
-    <a class="nav-item" [routerLink]="['/subscribers']" routerLinkActive="active" aria-label="Subscribers" tabindex="0">
-      <span class="icon" aria-hidden="true">👪</span>
-      <span *ngIf="!isCollapsed">{{ 'sidebar.subscribers' | translate }}</span>
-    </a>
-    <a class="nav-item" [routerLink]="['/settings']" routerLinkActive="active" aria-label="Settings" tabindex="0">
-      <span class="icon" aria-hidden="true">⚙️</span>
-      <span *ngIf="!isCollapsed">{{ 'sidebar.settings' | translate }}</span>
-    </a>
-  </nav>
-</aside>
+<ng-template #sidebarContent>
+  <aside class="sidebar" [class.collapsed]="isCollapsed" aria-label="Sidebar">
+    <button class="toggle-button" (click)="toggle()" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle sidebar"
+      tabindex="0">
+      {{ isCollapsed ? '▶️' : '◀️' }}
+    </button>
+    <div class="logo-container">
+      <h2 class="text-xl font-bold" *ngIf="!isCollapsed" id="sidebar-title">
+        {{ 'sidebar.title' | translate }}
+      </h2>
+    </div>
+    <nav class="nav-menu" role="navigation" aria-labelledby="sidebar-title">
+      <a class="nav-item" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        aria-label="New Post" tabindex="0">
+        <span class="icon" aria-hidden="true">📝</span>
+        <span *ngIf="!isCollapsed">{{ 'sidebar.newPost' | translate }}</span>
+      </a>
+      <a class="nav-item" [routerLink]="['/posts']" routerLinkActive="active" aria-label="Posts" tabindex="0">
+        <span class="icon" aria-hidden="true">📬</span>
+        <span *ngIf="!isCollapsed">{{ 'sidebar.posts' | translate }}</span>
+      </a>
+      <a class="nav-item" [routerLink]="['/templates']" routerLinkActive="active" aria-label="templates" tabindex="0">
+        <span class="icon" aria-hidden="true">📃</span>
+        <span *ngIf="!isCollapsed">{{ 'sidebar.templates' | translate }}</span>
+      </a>
+      <a class="nav-item" [routerLink]="['/analytics']" routerLinkActive="active" aria-label="Analytics" tabindex="0">
+        <span class="icon" aria-hidden="true">📊</span>
+        <span *ngIf="!isCollapsed">{{ 'sidebar.analytics' | translate }}</span>
+      </a>
+      <a class="nav-item" [routerLink]="['/subscribers']" routerLinkActive="active" aria-label="Subscribers"
+        tabindex="0">
+        <span class="icon" aria-hidden="true">👪</span>
+        <span *ngIf="!isCollapsed">{{ 'sidebar.subscribers' | translate }}</span>
+      </a>
+      <a class="nav-item" [routerLink]="['/settings']" routerLinkActive="active" aria-label="Settings" tabindex="0">
+        <span class="icon" aria-hidden="true">⚙️</span>
+        <span *ngIf="!isCollapsed">{{ 'sidebar.settings' | translate }}</span>
+      </a>
+    </nav>
+  </aside>
+</ng-template>

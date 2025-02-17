@@ -7,13 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleModalComponent } from '../schedule-modal/schedule-modal.component';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
-// import { selectDraft } from '../../store/newsletter/post.selectors';
 import {
   updateDraftField,
   updateDraft,
 } from '../../store/newsletter/post.actions';
 import { selectDraft } from '../../store/newsletter/post.selectors';
 import { Newsletter } from '../../models/newsletter.model';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-main-content',
@@ -24,6 +24,7 @@ import { Newsletter } from '../../models/newsletter.model';
     EditorModule,
     ScheduleModalComponent,
     TranslateModule,
+    NgxSkeletonLoaderModule,
   ],
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css'],
@@ -44,6 +45,7 @@ export class MainContentComponent implements OnInit {
   showScheduleModal = false;
   sharedDataService: any;
   postId: string | null = null;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,17 +86,34 @@ export class MainContentComponent implements OnInit {
     };
   }
 
-
   // We'll subscribe to the store's draft
   draft$ = this.store.select(selectDraft);
 
   ngOnInit() {
-    // Refill local 'newsletter' whenever the store's draft changes
-    this.draft$.subscribe((draft) => {
-      // Merge existing fields so we don't overwrite local changes?
-      // Or just replace it entirely:
-      this.newsletter = { ...draft };
+
+    // Simulate a delay
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000); // Adjust the delay as needed
+
+    // If the user arrived from a template
+    this.route.queryParams.subscribe((params) => {
+      if (params['subject']) {
+        this.newsletter.title = params['title'];
+        this.newsletter.image = params['image'];
+        this.newsletter.subject = params['subject'];
+        this.newsletter.preheader = params['preheader'];
+        this.newsletter.content = params['content'];
+      }
     });
+
+    // Refill local 'newsletter' whenever the store's draft changes
+    // this.draft$.subscribe((draft) => {
+    //   // Merge existing fields so we don't overwrite local changes?
+    //   // Or just replace it entirely:
+    //   this.newsletter = { ...draft };
+    // });
+
     // Check if there's an :id in the route
     this.postId = this.route.snapshot.paramMap.get('id');
     if (this.postId) {

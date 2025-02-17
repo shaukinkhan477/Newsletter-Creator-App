@@ -6,4 +6,5 @@ export interface Newsletter {
   preheader: string;
   schedule: Date | null;
   segmentId?: string;
+  image?: string;
 }

@@ -1,15 +1,22 @@
 <div class="posts-container">
   <h2>All Posts</h2>
 
+
+    <!-- Show skeleton loader while loading posts -->
+    <div *ngIf="(loading$ | async)">
+      <ngx-skeleton-loader count="6" appearance="line" [theme]="{ height: '10rem', 'margin-bottom': '1rem', 'background-color': '#e0e0e0', 'border-radius': '2rem' }"></ngx-skeleton-loader>
+    </div>
+
   <!-- Show loading, error, or the posts list -->
-  <div *ngIf="(loading$ | async)">Loading posts...</div>
+  <!-- <div *ngIf="(loading$ | async)">Loading posts...</div> -->
   <div *ngIf="(error$ | async) as errMsg" class="alert alert-error">
     {{ errMsg }}
   </div>
 
   <div *ngIf="(posts$ | async) as posts">
+
     <div *ngIf="posts.length === 0">
-      No posts found.
+      No posts found, Please create a new post.
     </div>
 
     <div class="post-list" *ngIf="posts.length > 0">

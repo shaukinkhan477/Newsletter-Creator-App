@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import {
   loadSubscribers,
@@ -19,7 +20,7 @@ import {
 @Component({
   selector: 'app-subscribers',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgxSkeletonLoaderModule],
   templateUrl: './subscribers.component.html',
   styleUrls: ['./subscribers.component.css'],
 })

@@ -1,8 +1,20 @@
+    <ng-container *ngIf="loading; else loginForm">
+    <div style="display: flex">
+  <ngx-skeleton-loader appearance="line" 
+  [theme]="{ height: '600px', width: '450px', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '3rem', }">
+  </ngx-skeleton-loader>
+  <ngx-skeleton-loader appearance="line"
+    [theme]="{ height: '600px', width: '450px', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '3rem', 'margin-right': '3rem' }">
+  </ngx-skeleton-loader>
+    </div>
+    </ng-container>
+
+
+<ng-template #loginForm>
 <div class="auth-container">
   <!-- Left side (Login Form) -->
   <div class="form-section" role="form" aria-labelledby="login-heading">
     <div class="logo-area">
-
       <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
     </div>
     <h2 class="title" id="login-heading">{{ 'auth.welcomeBack' | translate }}</h2>
@@ -63,3 +75,4 @@
     </div>
   </div>
 </div>
+</ng-template>

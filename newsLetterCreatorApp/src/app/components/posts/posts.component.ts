@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 // Import your actions and selectors
 import { loadPosts, sendNowPost } from '../../store/posts/posts.actions';
 import {
@@ -16,7 +16,7 @@ import {
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgxSkeletonLoaderModule],
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'], // Ensure you use "styleUrls" (plural)
 })

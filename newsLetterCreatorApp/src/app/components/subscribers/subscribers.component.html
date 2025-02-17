@@ -9,8 +9,9 @@
     {{ successMsg }}
   </div>
 
-  <!-- Or show a loading indicator -->
-  <div *ngIf="(loading$ | async)">Loading subscribers...</div>
+<ngx-skeleton-loader count="5" appearance="line" *ngIf="(loading$ | async)" [theme]="{ height: '3rem', 'margin-bottom': '0.5rem', 'background-color': '#e0e0e0', 'border-radius': '2rem' }">
+</ngx-skeleton-loader>
+
 
   <div class="add-subscriber-form">
     <input type="email" [(ngModel)]="newEmail" placeholder="Subscriber Email" />

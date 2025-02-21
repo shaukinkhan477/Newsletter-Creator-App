@@ -113,3 +113,51 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   outline: none;
 }
+
+
+/*
+  This positions the preview panel absolutely within a relatively positioned parent
+  (or you can use 'fixed' if you want it to be pinned to the viewport).
+*/
+.preview-section {
+  position: absolute;
+  top: 50px;         /* adjust as needed */
+  right: 50px;       /* adjust as needed */
+  z-index: 999;      /* ensure it's on top of other elements */
+  width: 320px;      /* width of the preview box */
+  max-height: 80vh;  /* prevent it from overflowing the screen */
+  overflow-y: auto;  /* scroll if content is long */
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid #4A5568;
+  cursor: move;      /* show a "move" cursor to indicate draggability */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Subtle scale effect while actively dragging */
+.preview-section:active {
+  transform: scale(1.03);
+}
+
+/* You can style headings, paragraphs, etc. within the preview if desired */
+.preview-section h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #2D3748;
+}
+
+.preview-section hr {
+  border: none;
+  border-bottom: 1px solid #CBD5E0;
+  margin: 0.5rem 0 1rem;
+}
+
+.preview-section .content-preview {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #F7FAFC;
+  border-radius: 0.25rem;
+}
+

@@ -21,6 +21,7 @@ export class SidebarComponent implements OnInit {
   @Output() toggleSidebar = new EventEmitter<boolean>();
   isCollapsed = false; // Sidebar is expanded by default
   loading = true;
+  isDropdownOpen = false;
 
   constructor(private translate: TranslateService) {}
 
@@ -34,5 +35,15 @@ export class SidebarComponent implements OnInit {
   toggle() {
     this.isCollapsed = !this.isCollapsed;
     this.toggleSidebar.emit(this.isCollapsed);
+  }
+
+   toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+    selectOption(option: string): void {
+    // Handle selection logic here
+    // For example: route to a different page or store the choice
+    console.log('Selected:', option);
+    this.isDropdownOpen = false; // close the dropdown
   }
 }

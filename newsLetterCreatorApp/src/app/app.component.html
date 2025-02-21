@@ -4,9 +4,9 @@
     <app-header></app-header>
   </div>
 
-  <div class="app-container" [class.collapsed]="isSidebarCollapsed">
+  <div class="app-container" [class.collapsed]="isSidebarCollapsed" [class.hide-sidebar]="hideSidebar">
     <!-- Sidebar -->
-    <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed">
+    <aside class="sidebar-container"  [class.collapsed]="isSidebarCollapsed" *ngIf="!hideSidebar">
       <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
     </aside>
 

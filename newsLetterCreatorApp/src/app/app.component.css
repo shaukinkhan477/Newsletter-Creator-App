@@ -11,6 +11,12 @@
 .app-container.collapsed {
   grid-template-columns: 80px 1fr;
 }
+
+/* Hidden sidebar layout: just one column */
+.app-container.hide-sidebar {
+  grid-template-columns: 1fr !important;
+}
+
 /* Sidebar Container */
 .sidebar-container {
   height: 100vh;
@@ -21,6 +27,6 @@
 
 /* Main Content Container */
 .main-content-container {
-  height: 100vh;
+  /* height: 100vh; */
   overflow-y: auto;
 }

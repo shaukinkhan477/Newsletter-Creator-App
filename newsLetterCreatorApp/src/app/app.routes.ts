@@ -10,9 +10,11 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthGuard } from './AuthGuards/auth.guard';
 import { PostsComponent } from './components/posts/posts.component';
 import { TemplatesComponent } from './components/templates/templates.component';
+import { ResumeComponent } from './components/resume/resume.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/homePage', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
@@ -26,7 +28,9 @@ export const routes: Routes = [
     component: ResetPasswordComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'homePage', component: HomeComponent },
   { path: 'home', component: MainContentComponent, canActivate: [AuthGuard] },
+  { path: 'resume', component: ResumeComponent, canActivate: [AuthGuard] },
   { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
   {
     path: 'edit-post/:id',
@@ -44,7 +48,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
-  { path: 'templates', component: TemplatesComponent, canActivate: [AuthGuard], },
+  {
+    path: 'templates',
+    component: TemplatesComponent,
+    canActivate: [AuthGuard],
+  },
 
   // { path: 'settings', component: SettingsComponent,canActivate: [AuthGuard] },
 ];

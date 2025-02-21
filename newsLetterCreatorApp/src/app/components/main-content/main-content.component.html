@@ -8,7 +8,7 @@
   </ngx-skeleton-loader>
 </ng-container>
 
-<ng-template #mainContent>
+<ng-template #mainContent style="position: relative">
 <div class="main-content-layout">
   <div class="editor-section">
     <div class="content-header">
@@ -64,10 +64,34 @@
           aria-label="Preview Text" />
       </div>
 
-      <editor [(ngModel)]="newsletter.content" apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
+      <editor [(ngModel)]="newsletter.content" (ngModelChange)="onFieldChange('content', $event)" apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2"
         [init]="editorConfig" aria-label="Content Editor"></editor>
     </div>
   </div>
+
+  <!-- ================== -->
+  <!-- 2. Live Preview    -->
+  <!-- ================== -->
+  <div class="preview-section card" ngDraggable >
+    <h2>Live Preview</h2>
+    <hr />
+
+    <!-- Title -->
+    <h3><strong>Title:</strong> {{ newsletter.title }}</h3>
+
+    <!-- Subject -->
+    <p><strong>Subject:</strong> {{ newsletter.subject }}</p>
+
+    <!-- Preheader -->
+    <p><strong>Preheader:</strong> {{ newsletter.preheader }}</p>
+
+    <!-- Content Preview (Rendered as HTML) -->
+    <div>
+      <strong>Content:</strong>
+    </div>
+    <div class="content-preview" [innerHTML]="safeContent"></div>
+  </div>
+
   <app-schedule-modal *ngIf="showScheduleModal" [newsletter]="newsletter" (onClose)="closeModal()"
     (onSchedule)="schedulePost($event)"></app-schedule-modal>
 </div>

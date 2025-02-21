@@ -8,7 +8,7 @@
   border-radius: 30px;
   transition: width 0.3s ease;
   height: 100vh;
-   position: relative;
+  position: relative;
 }
 
 .sidebar.collapsed {
@@ -107,4 +107,76 @@
 
 .sidebar.collapsed .icon {
   margin-right: 0;
+}
+
+
+
+/* dropdown css */
+
+.dropdown {
+  position: relative;
+  display: inline-block; /* So it wraps around the button neatly */
+}
+
+/* The toggle button (the purple outline + icon + caret) */
+.dropdown-toggle {
+  background-color: #f8f4ff;    /* Light purple background */
+  border: 2px solid #c0a7ff;    /* Purple outline */
+  border-radius: 8px;
+  color: #5f00d0;               /* Darker purple text */
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Optional hover effect */
+.dropdown-toggle:hover {
+  background-color: #f0e8ff;
+}
+
+/* The pen icon (left side) can be replaced with your own icon or an <img> */
+.dropdown-toggle .icon {
+  /* You can replace the emoji with an <svg> or an icon font */
+  font-size: 1rem;
+}
+
+/* The caret (▼) on the right */
+.dropdown-toggle .caret {
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+
+/* The dropdown menu container */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;  /* Show below the button */
+  left: 0;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 0.5rem 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+/* Menu items (styled as buttons) */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
 }

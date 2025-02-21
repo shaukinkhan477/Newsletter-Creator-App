@@ -14,6 +14,8 @@ import {
 import { selectDraft } from '../../store/newsletter/post.selectors';
 import { Newsletter } from '../../models/newsletter.model';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { AngularDraggableModule } from 'angular2-draggable';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-content',
@@ -25,6 +27,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ScheduleModalComponent,
     TranslateModule,
     NgxSkeletonLoaderModule,
+    AngularDraggableModule,
   ],
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css'],
@@ -46,12 +49,14 @@ export class MainContentComponent implements OnInit {
   sharedDataService: any;
   postId: string | null = null;
   loading = true;
+  safeContent: SafeHtml | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private postsService: PostsService,
     private translate: TranslateService,
+    private sanitizer: DomSanitizer,
     private store: Store
   ) {
     // Editor config initialization
@@ -90,13 +95,12 @@ export class MainContentComponent implements OnInit {
   draft$ = this.store.select(selectDraft);
 
   ngOnInit() {
-
-    // Simulate a delay
+    // Show skeleton loader for 1s, then reveal content
     setTimeout(() => {
       this.loading = false;
-    }, 1000); // Adjust the delay as needed
+    }, 1000);
 
-    // If the user arrived from a template
+    // // If the user arrived from a template with query params
     this.route.queryParams.subscribe((params) => {
       if (params['subject']) {
         this.newsletter.title = params['title'];
@@ -114,7 +118,7 @@ export class MainContentComponent implements OnInit {
     //   this.newsletter = { ...draft };
     // });
 
-    // Check if there's an :id in the route
+    // // Check if there's an :id in the route => editing an existing post
     this.postId = this.route.snapshot.paramMap.get('id');
     if (this.postId) {
       // We are editing an existing post
@@ -126,10 +130,15 @@ export class MainContentComponent implements OnInit {
   onFieldChange(field: keyof Newsletter, value: string) {
     // 1) Update local state
     this.newsletter[field] = value;
+    if (field === 'content') {
+      // Only do this if you trust the content (TinyMCE usually safe, but be sure)
+      this.safeContent = this.sanitizer.bypassSecurityTrustHtml(value);
+    }
     // 2) Dispatch partial update
     this.store.dispatch(updateDraft({ partialDraft: { [field]: value } }));
   }
 
+  //  Load an existing post by ID (edit mode)
   loadPost(id: string) {
     this.postsService.getPostById(id).subscribe({
       next: (res: any) => {
@@ -144,15 +153,14 @@ export class MainContentComponent implements OnInit {
       },
       error: () => {
         alert('Error loading post');
-        this.router.navigate(['/posts']); // or some fallback
+        this.router.navigate(['/posts']);
       },
     });
   }
 
   /* ------------------------------
-     EDITING an Existing Post
+     Save changes if EDITING an Existing Post
   --------------------------------*/
-
   saveChanges() {
     if (!this.postId) return;
     const updatedData = { ...this.newsletter };
@@ -167,6 +175,7 @@ export class MainContentComponent implements OnInit {
     });
   }
 
+  //Validate fields before saving or sending or Scheduling
   private fieldsAreValid(): boolean {
     const { title, subject, preheader, content } = this.newsletter;
     if (!title || !subject || !preheader || !content) {
@@ -178,9 +187,8 @@ export class MainContentComponent implements OnInit {
   }
 
   /* ------------------------------
-     Creating a NEW Post
+     Creating a NEW Post - - save as draft
   --------------------------------*/
-
   saveAsDraft(): void {
     if (!this.fieldsAreValid()) {
       return; // Show error message instead
@@ -212,6 +220,9 @@ export class MainContentComponent implements OnInit {
     this.showScheduleModal = true;
   }
 
+  /* ------------------------------
+     Schedule the post at the specified date/time.
+  --------------------------------*/
   schedulePost(dateTime: Date): void {
     const postData = {
       ...this.newsletter,

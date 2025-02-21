@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -21,9 +22,24 @@ import { HeaderComponent } from './components/header/header.component';
 export class AppComponent implements OnInit {
   title = 'newsLetterCreatorApp';
 
+  hideSidebar = false;
+
   isSidebarCollapsed = false;
 
-  constructor() {}
+  constructor(private router: Router) {
+    // Listen to NavigationEnd events to check the current route
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        // If the URL is /homePage, hide the sidebar
+        if (event.url === '/homePage') {
+          this.hideSidebar = true;
+        } else {
+          this.hideSidebar = false;
+        }
+      });
+  }
+
 
   ngOnInit() {}
 

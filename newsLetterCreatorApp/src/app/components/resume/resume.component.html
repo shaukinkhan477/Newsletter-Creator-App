@@ -1,0 +1,107 @@
+<!-- resume.component.html -->
+<div class="resume-container">
+  <!-- Left: Form Section -->
+  <div class="form-section">
+    <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name*</label>
+        <input id="firstName" type="text" formControlName="firstName" placeholder="e.g. Saanvi" />
+        <div class="error" *ngIf="resumeForm.get('firstName')?.touched && resumeForm.get('firstName')?.invalid">
+          First name is required
+        </div>
+      </div>
+
+      <!-- Surname -->
+      <div class="form-group">
+        <label for="surname">Surname*</label>
+        <input id="surname" type="text" formControlName="surname" placeholder="e.g. Patel" />
+        <div class="error" *ngIf="resumeForm.get('surname')?.touched && resumeForm.get('surname')?.invalid">
+          Surname is required
+        </div>
+      </div>
+
+      <!-- City -->
+      <div class="form-group">
+        <label for="city">City*</label>
+        <input id="city" type="text" formControlName="city" placeholder="e.g. New Delhi" />
+        <div class="error" *ngIf="resumeForm.get('city')?.touched && resumeForm.get('city')?.invalid">
+          City is required
+        </div>
+      </div>
+
+      <!-- Country -->
+      <div class="form-group">
+        <label for="country">Country*</label>
+        <input id="country" type="text" formControlName="country" placeholder="e.g. India" />
+        <div class="error" *ngIf="resumeForm.get('country')?.touched && resumeForm.get('country')?.invalid">
+          Country is required
+        </div>
+      </div>
+
+      <!-- Pin Code -->
+      <div class="form-group">
+        <label for="pinCode">Pin Code*</label>
+        <input id="pinCode" type="text" formControlName="pinCode" placeholder="e.g. 110034" />
+        <div class="error" *ngIf="resumeForm.get('pinCode')?.touched && resumeForm.get('pinCode')?.invalid">
+          Pin code is required
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone*</label>
+        <input id="phone" type="text" formControlName="phone" placeholder="e.g. +91 22 1234 5677" />
+        <div class="error" *ngIf="resumeForm.get('phone')?.touched && resumeForm.get('phone')?.invalid">
+          Phone number is required
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email*</label>
+        <input id="email" type="text" formControlName="email" placeholder="e.g. [email protected]" />
+        <div class="error" *ngIf="resumeForm.get('email')?.touched && resumeForm.get('email')?.invalid">
+          Please enter a valid email address
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="resumeForm.invalid">
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <!-- Right: Preview Section -->
+  <div class="preview-section">
+    <h2>Your Name</h2>
+    <p>{{ resumeForm.value.firstName }} {{ resumeForm.value.surname }}</p>
+
+    <h3>Address</h3>
+    <p>
+      {{ resumeForm.value.city }},
+      {{ resumeForm.value.country }},
+      {{ resumeForm.value.pinCode }}
+    </p>
+
+    <h3>Contact</h3>
+    <p>{{ resumeForm.value.phone }}</p>
+    <p>{{ resumeForm.value.email }}</p>
+
+    <h3>Skills</h3>
+    <ul>
+      <li>Skill 1</li>
+      <li>Skill 2</li>
+      <!-- Add more dynamic skill fields if needed -->
+    </ul>
+
+    <h3>Work History</h3>
+    <p>Company A, Position, 2020-2021</p>
+    <p>Company B, Position, 2021-Present</p>
+    <!-- You can make these dynamic as well -->
+
+    <h3>Education</h3>
+    <p>Institution, Degree, Year-Year</p>
+  </div>
+</div>

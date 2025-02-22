@@ -2,16 +2,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #ffffff; */
   padding: 0.5rem 1rem;
-  /* border-bottom: 1px solid #ddd; */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
 }
 
 .logo-area .app-logo {
   height: 40px;
   border-radius: 100px;
+}
+
+.language-switcher {
+  margin-right: -1000px;
+}
+
+@media (max-width: 600px) {
+  .language-switcher {
+    margin-right: 0;
+  }
+}
+
+.language-switcher select {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .profile-area {

@@ -26,22 +26,23 @@ export class AppComponent implements OnInit {
 
   isSidebarCollapsed = false;
 
-  constructor(private router: Router) {
-    // Listen to NavigationEnd events to check the current route
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Listen for navigation changes
     this.router.events
-      .pipe(filter((event: any) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        // If the URL is /homePage, hide the sidebar
-        if (event.url === '/homePage') {
-          this.hideSidebar = true;
-        } else {
-          this.hideSidebar = false;
-        }
+      .pipe(
+        filter(
+          (event): event is NavigationEnd => event instanceof NavigationEnd
+        ) // Ensure event is NavigationEnd
+      )
+      .subscribe((event: NavigationEnd) => {
+        const currentUrl = event.urlAfterRedirects; // Get final redirected URL
+
+        // Hide sidebar for homePage route
+        this.hideSidebar = currentUrl.startsWith('/homePage');
       });
   }
-
-
-  ngOnInit() {}
 
   onToggleSidebar(isCollapsed: boolean) {
     this.isSidebarCollapsed = isCollapsed;

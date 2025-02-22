@@ -2,11 +2,15 @@
   <!-- HERO SECTION -->
   <section class="hero-section">
     <div class="hero-content">
-      <h1 class="hero-title">Newsletter Hub</h1>
+      <h1 class="hero-title">
+        <span id="typing-text"></span>
+        <span class="cursor">|</span>
+      </h1>
+      <h1 class="hero-title">{{ 'home.heroTitle' | translate }}</h1>
       <p class="hero-subtitle">
-        Effortlessly craft and send beautiful newsletters to engage your audience and grow your brand.
+        {{ 'home.heroSubtitle' | translate }}
       </p>
-      <button class="btn-cta" (click)="onGetStarted()">Get Started</button>
+      <button class="btn-cta" (click)="onGetStarted()">{{ 'home.getStarted' | translate }}</button>
     </div>
     <div class="hero-image">
       <img src="assets/homepage/hero5.png" alt="Hero Illustration" />
@@ -15,37 +19,37 @@
 
   <!-- FEATURES SECTION -->
   <section class="features-section">
-    <h2 class="section-title">Why Choose Our Newsletter App?</h2>
+    <h2 class="section-title">{{ 'home.whyChoose' | translate }}</h2>
     <div class="features-grid">
       <div class="feature-card">
         <img src="assets/homepage/editor.webp" alt="Editor Icon" class="feature-img" />
-        <h3>Rich Editor</h3>
+        <h3>{{ 'home.richEditor' | translate }}</h3>
         <p>
-          Use our powerful yet easy WYSIWYG editor to design beautiful emails with text, images, and more.
+          {{ 'home.richEditorDesc' | translate }}
         </p>
       </div>
 
       <div class="feature-card">
         <img src="assets/homepage/templates.png" alt="Templates Icon" class="feature-img" />
-        <h3>Stunning Templates</h3>
+        <h3>{{ 'home.stunningTemplates' | translate }}</h3>
         <p>
-          Pick from our curated library of categories—Holiday, Fashion, Event Marketing, and more—to start in seconds.
+          {{ 'home.stunningTemplatesDesc' | translate }}
         </p>
       </div>
 
       <div class="feature-card">
         <img src="assets/homepage/analytics.avif" alt="Analytics Icon" class="feature-img" />
-        <h3>Analytics & Insights</h3>
+        <h3>{{ 'home.analyticsInsights' | translate }}</h3>
         <p>
-          Track open rates, clicks, and engagement to see how your campaigns perform in real-time.
+          {{ 'home.analyticsInsightsDesc' | translate }}
         </p>
       </div>
 
       <div class="feature-card">
         <img src="assets/homepage/schedule.webp" alt="Schedule Icon" class="feature-img" />
-        <h3>Scheduling & Automation</h3>
+        <h3>{{ 'home.schedulingAutomation' | translate }}</h3>
         <p>
-          Save time by automating your campaigns—send now or schedule for later with just one click.
+          {{ 'home.schedulingAutomationDesc' | translate }}
         </p>
       </div>
     </div>
@@ -53,40 +57,38 @@
 
   <!-- CTA SECTION -->
   <section class="cta-section">
-    <h2>Ready to Elevate Your Email Marketing?</h2>
+    <h2>{{ 'home.ctaTitle' | translate }}</h2>
     <p>
-      Sign up now and get started with our free templates and advanced editor.
+      {{ 'home.ctaSubtitle' | translate }}
     </p>
-    <button class="btn-cta" (click)="onGetStarted()">Create a Newsletter</button>
+    <button class="btn-cta" (click)="onGetStarted()">{{ 'home.createNewsletter' | translate }}</button>
   </section>
 
   <!-- FOOTER SECTION -->
   <section>
-  <footer class="footer-section">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <h3>Newsletter Hub</h3>
-        <p>Crafting your newsletters with ease and style.</p>
+    <footer class="footer-section">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>{{ 'home.heroTitle' | translate }}</h3>
+          <p>{{ 'footerDescription.createNewsletter' | translate }}</p>
+        </div>
+        <div class="footer-links">
+          <a>{{ 'home.footerLinks.home' | translate }}</a>
+          <a>{{ 'home.footerLinks.features' | translate }}</a>
+          <a>{{ 'home.footerLinks.pricing' | translate }}</a>
+          <a>{{ 'home.footerLinks.about' | translate }}</a>
+          <a>{{ 'home.footerLinks.contact' | translate }}</a>
+        </div>
+        <div class="footer-social">
+          <a class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a class="social-icon"><i class="bi bi-twitter-x"></i></a>
+          <a class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a class="social-icon"><i class="bi bi-linkedin"></i></a>
+        </div>
       </div>
-      <div class="footer-links">
-        <a>Home</a>
-        <a>Features</a>
-        <a>Pricing</a>
-        <a>About</a>
-        <a>Contact</a>
+      <div class="footer-bottom">
+        <p>&copy; {{ 'home.footerCopyright' | translate }}</p>
       </div>
-      <div class="footer-social">
-        <a class="social-icon"><i class="bi bi-facebook"></i></a>
-        <a class="social-icon"><i class="bi bi-twitter-x"></i></a>
-        <a class="social-icon"><i class="bi bi-instagram"></i></a>
-        <a class="social-icon"><i class="bi bi-linkedin"></i></a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Newsletter Hub. All rights reserved.</p>
-    </div>
-  </footer>
+    </footer>
   </section>
 </div>
-
-

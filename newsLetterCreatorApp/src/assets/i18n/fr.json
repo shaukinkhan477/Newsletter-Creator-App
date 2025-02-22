@@ -1,5 +1,32 @@
 {
 
+  "home": {
+    "heroTitle": "Hub de Newsletter",
+    "heroSubtitle": "Créez et envoyez facilement de magnifiques newsletters pour engager votre audience et développer votre marque.",
+    "getStarted": "Commencer",
+    "whyChoose": "Pourquoi Choisir Notre Application de Newsletter?",
+    "richEditor": "Éditeur Avancé",
+    "richEditorDesc": "Utilisez notre éditeur WYSIWYG puissant et intuitif pour concevoir de magnifiques e-mails avec du texte, des images et bien plus.",
+    "stunningTemplates": "Modèles Époustouflants",
+    "stunningTemplatesDesc": "Choisissez parmi notre bibliothèque de modèles dans diverses catégories — Fêtes, Mode, Marketing événementiel, et bien plus.",
+    "analyticsInsights": "Analyse et Statistiques",
+    "analyticsInsightsDesc": "Suivez les taux d'ouverture, les clics et l'engagement pour voir les performances de vos campagnes en temps réel.",
+    "schedulingAutomation": "Planification et Automatisation",
+    "schedulingAutomationDesc": "Gagnez du temps en automatisant vos campagnes — envoyez-les immédiatement ou programmez-les en un clic.",
+    "ctaTitle": "Prêt à Améliorer Votre Marketing par E-mail?",
+    "ctaSubtitle": "Inscrivez-vous dès maintenant et commencez avec nos modèles gratuits et notre éditeur avancé.",
+    "createNewsletter": "Créer une Newsletter",
+    "footerDescription": "Créez vos newsletters avec facilité et élégance.",
+    "footerLinks": {
+      "home": "Accueil",
+      "features": "Fonctionnalités",
+      "pricing": "Tarification",
+      "about": "À propos",
+      "contact": "Contact"
+    },
+    "footerCopyright": "© 2025 Hub de Newsletter. Tous droits réservés."
+  },
+
 "auth": {
     "welcomeBack": "Content de vous revoir",
     "goodToSeeYou": "Ravi de vous revoir ! Veuillez vous connecter pour accéder à",

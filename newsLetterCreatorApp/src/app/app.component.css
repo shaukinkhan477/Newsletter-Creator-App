@@ -27,6 +27,6 @@
 
 /* Main Content Container */
 .main-content-container {
-  /* height: 100vh; */
+  height: 100vh;
   overflow-y: auto;
 }

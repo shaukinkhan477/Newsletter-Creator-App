@@ -13,10 +13,19 @@
 
   <!-- GRID OF TEMPLATES -->
   <div class="templates-grid">
-    <div class="template-card" *ngFor="let tmpl of currentTemplates" (click)="applyTemplate(tmpl)">
-      <img [src]="tmpl.previewImg" [alt]="tmpl.name" class="template-preview" />
+    <div class="template-card" *ngFor="let tmpl of currentTemplates">
+      <!-- Template Preview Image -->
+      <!-- <img [src]="tmpl.previewImg" [alt]="tmpl.name" class="template-preview" /> -->
+
+      <!-- Template Name and Description -->
       <h3 class="template-name">{{ tmpl.name }}</h3>
       <p class="template-desc">{{ tmpl.description }}</p>
+
+      <!-- Preview Section -->
+      <div class="preview-section" [innerHTML]="getSafeHtml(tmpl.content)"></div>
+
+      <!-- Apply Template Button -->
+      <button class="apply-button" (click)="applyTemplate(tmpl)">Apply Template</button>
     </div>
   </div>
 </div>

@@ -1,107 +1,118 @@
-<!-- resume.component.html -->
-<div class="resume-container">
-  <!-- Left: Form Section -->
-  <div class="form-section">
-    <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
-      <!-- First Name -->
-      <div class="form-group">
-        <label for="firstName">First Name*</label>
-        <input id="firstName" type="text" formControlName="firstName" placeholder="e.g. Saanvi" />
-        <div class="error" *ngIf="resumeForm.get('firstName')?.touched && resumeForm.get('firstName')?.invalid">
-          First name is required
+<!-- Show skeleton loader while loading -->
+<ng-container *ngIf="loading; else mainContent">
+  <!-- Header skeleton (simulate the heading) -->
+  <ngx-skeleton-loader appearance="line" [theme]="{
+      height: '6rem',
+      width: '100%',
+      margin: '1rem',
+      'margin-bottom': '0.5rem',
+      'margin-top': '1rem',
+      'background-color': '#e0e0e0',
+      'border-radius': '1rem'
+    }"></ngx-skeleton-loader>
+  <!-- Editor container skeleton (simulate the main content area) -->
+  <ngx-skeleton-loader appearance="line" [theme]="{
+      height: '400px',
+      width: '100%',
+      'background-color': '#e0e0e0',
+      'border-radius': '1rem',
+      margin: '1rem'
+    }"></ngx-skeleton-loader>
+</ng-container>
+
+<ng-template #mainContent>
+  <!--
+    Main layout: side by side editor and preview sections
+    Editor section: contains the editor for creating a new post
+  -->
+  <div class="main-content-layout">
+
+    <!-- ============ Editor Section ============ -->
+    <div class="editor-section">
+      <div class="content-header">
+        <!-- <h1 class="text-2xl font-bold" id="editor-heading">
+          {{ editMode ? ('editor.editPost' | translate) : ('editor.createNewPost' | translate) }}
+        </h1> -->
+        <div class="action-buttons">
+          <!-- If NOT edit mode, show "Save as Draft", "Schedule", "Send Now" -->
+          <ng-container *ngIf="!editMode; else editButtons">
+            <button class="btn btn-primary" (click)="sendNow()" aria-label="Send Now">
+              {{ 'editor.sendNow' | translate }}
+            </button>
+            <button class="btn btn-secondary" (click)="saveAsDraft()" aria-label="Save as Draft">
+              {{ 'editor.saveAsDraft' | translate }}
+            </button>
+            <button class="btn btn-secondary" (click)="openScheduleModal()" aria-label="Schedule">
+              {{ 'editor.schedule' | translate }}
+            </button>
+          </ng-container>
+          <!-- If edit mode, show "Save Changes" -->
+          <ng-template #editButtons>
+            <button class="btn btn-primary" (click)="saveChanges()" aria-label="Save Changes">
+              {{ 'editor.saveChanges' | translate }}
+            </button>
+            <button class="btn btn-secondary" (click)="openScheduleModal()" aria-label="Schedule">
+              {{ 'editor.schedule' | translate }}
+            </button>
+          </ng-template>
         </div>
       </div>
 
-      <!-- Surname -->
-      <div class="form-group">
-        <label for="surname">Surname*</label>
-        <input id="surname" type="text" formControlName="surname" placeholder="e.g. Patel" />
-        <div class="error" *ngIf="resumeForm.get('surname')?.touched && resumeForm.get('surname')?.invalid">
-          Surname is required
-        </div>
+      <!-- Display error message if fields are invalid -->
+      <div class="error-box" *ngIf="errorMsg" role="alert" aria-live="assertive">
+        {{ errorMsg }}
       </div>
 
-      <!-- City -->
-      <div class="form-group">
-        <label for="city">City*</label>
-        <input id="city" type="text" formControlName="city" placeholder="e.g. New Delhi" />
-        <div class="error" *ngIf="resumeForm.get('city')?.touched && resumeForm.get('city')?.invalid">
-          City is required
+      <div class="editor-container card">
+        <div class="mb-4">
+          <input type="text" class="title-input" [(ngModel)]="newsletter.title" name="title"
+            (ngModelChange)="onFieldChange('title', $event)" [placeholder]="'editor.postTitlePlaceholder' | translate"
+            required aria-required="true" aria-label="Post Title" />
         </div>
-      </div>
 
-      <!-- Country -->
-      <div class="form-group">
-        <label for="country">Country*</label>
-        <input id="country" type="text" formControlName="country" placeholder="e.g. India" />
-        <div class="error" *ngIf="resumeForm.get('country')?.touched && resumeForm.get('country')?.invalid">
-          Country is required
+        <div class="mb-4">
+          <input type="text" class="form-control" [(ngModel)]="newsletter.subject" name="subject"
+            [placeholder]="'editor.emailSubjectPlaceholder' | translate" required aria-required="true"
+            aria-label="Email Subject Line" />
         </div>
-      </div>
 
-      <!-- Pin Code -->
-      <div class="form-group">
-        <label for="pinCode">Pin Code*</label>
-        <input id="pinCode" type="text" formControlName="pinCode" placeholder="e.g. 110034" />
-        <div class="error" *ngIf="resumeForm.get('pinCode')?.touched && resumeForm.get('pinCode')?.invalid">
-          Pin code is required
+        <div class="mb-4">
+          <input type="text" class="form-control" [(ngModel)]="newsletter.preheader" name="preheader"
+            [placeholder]="'editor.previewTextPlaceholder' | translate" required aria-required="true"
+            aria-label="Preview Text" />
         </div>
-      </div>
 
-      <!-- Phone -->
-      <div class="form-group">
-        <label for="phone">Phone*</label>
-        <input id="phone" type="text" formControlName="phone" placeholder="e.g. +91 22 1234 5677" />
-        <div class="error" *ngIf="resumeForm.get('phone')?.touched && resumeForm.get('phone')?.invalid">
-          Phone number is required
-        </div>
+        <editor [(ngModel)]="newsletter.content" (ngModelChange)="onFieldChange('content', $event)"
+          apiKey="79pbhqm88nqufa2vzfdolsojoakdv8w3t3rx6pi7tt3nxpt2" [init]="editorConfig" aria-label="Content Editor">
+        </editor>
       </div>
+    </div>
 
-      <!-- Email -->
-      <div class="form-group">
-        <label for="email">Email*</label>
-        <input id="email" type="text" formControlName="email" placeholder="e.g. [email protected]" />
-        <div class="error" *ngIf="resumeForm.get('email')?.touched && resumeForm.get('email')?.invalid">
-          Please enter a valid email address
-        </div>
+    <!-- ============ Live Preview Section ============ -->
+    <div class="preview-section card">
+      <span>Preview</span>
+      <button [routerLink]="['/templates']" routerLinkActive="router-link-active" >Change Templete</button>
+      <hr />
+
+      <!-- Title -->
+      <h3><strong>Title:</strong> {{ newsletter.title }}</h3>
+
+      <!-- Subject -->
+      <p><strong>Subject:</strong> {{ newsletter.subject }}</p>
+
+      <!-- Preheader -->
+      <p><strong>Preheader:</strong> {{ newsletter.preheader }}</p>
+
+      <!-- Content Preview (Rendered as HTML) -->
+      <div>
+        <strong>Content:</strong>
       </div>
+      <div class="content-preview" [innerHTML]="safeContent"></div>
+    </div>
 
-      <!-- Submit Button -->
-      <button type="submit" [disabled]="resumeForm.invalid">
-        Submit
-      </button>
-    </form>
   </div>
 
-  <!-- Right: Preview Section -->
-  <div class="preview-section">
-    <h2>Your Name</h2>
-    <p>{{ resumeForm.value.firstName }} {{ resumeForm.value.surname }}</p>
-
-    <h3>Address</h3>
-    <p>
-      {{ resumeForm.value.city }},
-      {{ resumeForm.value.country }},
-      {{ resumeForm.value.pinCode }}
-    </p>
-
-    <h3>Contact</h3>
-    <p>{{ resumeForm.value.phone }}</p>
-    <p>{{ resumeForm.value.email }}</p>
-
-    <h3>Skills</h3>
-    <ul>
-      <li>Skill 1</li>
-      <li>Skill 2</li>
-      <!-- Add more dynamic skill fields if needed -->
-    </ul>
-
-    <h3>Work History</h3>
-    <p>Company A, Position, 2020-2021</p>
-    <p>Company B, Position, 2021-Present</p>
-    <!-- You can make these dynamic as well -->
-
-    <h3>Education</h3>
-    <p>Institution, Degree, Year-Year</p>
-  </div>
-</div>
+  <!-- Schedule modal -->
+  <app-schedule-modal *ngIf="showScheduleModal" [newsletter]="newsletter" (onClose)="closeModal()"
+    (onSchedule)="schedulePost($event)"></app-schedule-modal>
+</ng-template>

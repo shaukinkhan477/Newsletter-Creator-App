@@ -10,8 +10,9 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthGuard } from './AuthGuards/auth.guard';
 import { PostsComponent } from './components/posts/posts.component';
 import { TemplatesComponent } from './components/templates/templates.component';
-import { ResumeComponent } from './components/resume/resume.component';
+// import { ResumeComponent } from './components/resume/resume.component';
 import { HomeComponent } from './components/home/home.component';
+import { ResumeComponent } from './components/resume/resume.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/homePage', pathMatch: 'full' },

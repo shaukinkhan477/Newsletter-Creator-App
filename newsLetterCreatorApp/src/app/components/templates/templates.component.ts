@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TemplateService } from '../../services/templates.service';
 import { NewsletterTemplate, TemplateCategory } from '../../models/templates.model';
-// import { TemplateService } from './template.service';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-templates',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxSkeletonLoaderModule],
   templateUrl: './templates.component.html',
   styleUrls: ['./templates.component.css'],
 })
-export class TemplatesComponent {
+export class TemplatesComponent implements OnInit {
   categories: TemplateCategory[];
   selectedCategory = 'Holiday';
+  loadingTemplates: boolean = true;
 
   constructor(
     private router: Router,
@@ -23,6 +24,12 @@ export class TemplatesComponent {
     private templateService: TemplateService
   ) {
     this.categories = this.templateService.getCategories();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.loadingTemplates = false;
+    }, 1000);
   }
 
   get currentTemplates() {

@@ -1,4 +1,40 @@
 <div class="templates-container">
+  <ng-container *ngIf="loadingTemplates; else templatesContent">
+    <!-- Skeleton for Category Navbar -->
+    <ngx-skeleton-loader [theme]="{
+        height: '90px',
+        width: '100%',
+        'margin-bottom': '1rem',
+        'border-radius': '2rem',
+        'background-color': '#e0e0e0'
+      }">
+    </ngx-skeleton-loader>
+
+    <!-- Skeleton for Header (Selected Category Title) -->
+    <ngx-skeleton-loader [theme]="{
+        height: '2rem',
+        width: '50%',
+        'margin-bottom': '1rem',
+        'border-radius': '2rem',
+        'background-color': '#e0e0e0'
+      }">
+    </ngx-skeleton-loader>
+
+    <!-- Skeleton for Templates Grid -->
+    <div class="templates-grid">
+      <!-- Render a few skeleton cards to mimic the template cards -->
+      <ngx-skeleton-loader *ngFor="let item of [1,2,3,4]" [theme]="{
+            height: '300px',
+            width: '100%',
+            'margin-bottom': '1rem',
+            'border-radius': '2rem',
+            'background-color': '#e0e0e0'
+         }">
+      </ngx-skeleton-loader>
+    </div>
+  </ng-container>
+
+    <ng-template #templatesContent>
   <!-- CATEGORY NAVBAR -->
   <nav class="category-navbar">
     <ul>
@@ -28,4 +64,5 @@
       <button class="apply-button" (click)="applyTemplate(tmpl)">Apply Template</button>
     </div>
   </div>
+  </ng-template>
 </div>

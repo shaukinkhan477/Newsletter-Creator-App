@@ -1,18 +1,22 @@
 import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [CommonModule, TranslateModule, NgxSkeletonLoaderModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements AfterViewInit {
+
+  loading: boolean = true;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -34,6 +38,9 @@ export class HomeComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       this.startTypingEffect();
     }
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   }
 
   startTypingEffect() {

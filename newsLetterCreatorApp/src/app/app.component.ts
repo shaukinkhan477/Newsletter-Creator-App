@@ -4,6 +4,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { filter } from 'rxjs';
+import { HomeComponent } from "./components/home/home.component";
 
 
 @Component({
@@ -15,7 +16,8 @@ import { filter } from 'rxjs';
     CommonModule,
     SidebarComponent,
     HeaderComponent,
-  ],
+    HomeComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

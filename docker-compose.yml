@@ -1,0 +1,30 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: ./newsLetterCreatorApp # Path to frontend directory
+    ports:
+      - "8080:80"
+    networks:
+      - newsletter-network
+
+  backend:
+    build:
+      context: ./newsLetter-backend # Path to backend directory
+    ports:
+      - "3000:3000"
+    networks:
+      - newsletter-network
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - newsletter-network
+
+networks:
+  newsletter-network:
+    driver: bridge

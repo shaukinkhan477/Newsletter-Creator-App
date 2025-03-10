@@ -50,6 +50,13 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml push
 
+      # ✅ Build the Angular App Before Deploying
+      - name: Build Angular App
+        working-directory: ./newsLetterCreatorApp  # ✅ Go inside the frontend directory
+        run: |
+          npm install
+          npm run build -- --configuration=production  # ✅ Generates 'dist' folder
+
       # Deploy to Firebase (for frontend deployment)
       - name: Deploy to Firebase (Frontend)
         env:

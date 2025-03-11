@@ -167,3 +167,15 @@ exports.resetPassword = async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
+exports.googleCallback = (req, res) => {
+  // req.user is populated by the Passport strategy
+  const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  // Redirect to the frontend OAuth callback route with the token.
+  // Make sure to define CLIENT_URL in your .env file (e.g., http://localhost:4200)
+  res.redirect(`${process.env.CLIENT_URL}/oauth-callback?token=${token}`);
+};

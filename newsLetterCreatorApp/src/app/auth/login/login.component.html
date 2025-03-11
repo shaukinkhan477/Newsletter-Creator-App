@@ -1,78 +1,79 @@
-    <ng-container *ngIf="loading; else loginForm">
-    <div style="display: flex">
-  <ngx-skeleton-loader appearance="line" 
-  [theme]="{ height: '600px', width: '450px', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '3rem', }">
-  </ngx-skeleton-loader>
-  <ngx-skeleton-loader appearance="line"
-    [theme]="{ height: '600px', width: '450px', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '3rem', 'margin-right': '3rem' }">
-  </ngx-skeleton-loader>
-    </div>
-    </ng-container>
+<ng-container *ngIf="loading; else loginForm">
+  <div style="display: flex">
+    <ngx-skeleton-loader appearance="line"
+      [theme]="{ height: '600px', width: '450px', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '3rem', }">
+    </ngx-skeleton-loader>
+    <ngx-skeleton-loader appearance="line"
+      [theme]="{ height: '600px', width: '450px', 'background-color': '#e0e0e0', 'border-radius': '1rem', 'margin': '3rem', 'margin-right': '3rem' }">
+    </ngx-skeleton-loader>
+  </div>
+</ng-container>
 
 
 <ng-template #loginForm>
-<div class="auth-container">
-  <!-- Left side (Login Form) -->
-  <div class="form-section" role="form" aria-labelledby="login-heading">
-    <div class="logo-area">
-      <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
-    </div>
-    <h2 class="title" id="login-heading">{{ 'auth.welcomeBack' | translate }}</h2>
-    <p class="subtitle">
-      {{ 'auth.goodToSeeYou' | translate }} <strong>{{ 'auth.newsletterHub' | translate }}</strong>.
-    </p>
+  <div class="auth-container">
+    <!-- Left side (Login Form) -->
+    <div class="form-section" role="form" aria-labelledby="login-heading">
+      <div class="logo-area">
+        <img src="assets/logo1.jpg" alt="Newsletter Hub Logo" class="app-logo" aria-hidden="true" />
+      </div>
+      <h2 class="title" id="login-heading">{{ 'auth.welcomeBack' | translate }}</h2>
+      <p class="subtitle">
+        {{ 'auth.goodToSeeYou' | translate }} <strong>{{ 'auth.newsletterHub' | translate }}</strong>.
+      </p>
 
-    <!-- Error Message -->
-    <div *ngIf="errorMsg" class="error-message" role="alert" aria-live="assertive">
-      {{ errorMsg }}
-    </div>
-
-    <!-- Login Form -->
-    <form (ngSubmit)="onSubmit()" aria-label="Login Form">
-      <div class="form-group">
-        <label for="email">{{ 'auth.email' | translate }}</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required
-          aria-required="true" [placeholder]="'auth.enterEmail' | translate" />
+      <!-- Error Message -->
+      <div *ngIf="errorMsg" class="error-message" role="alert" aria-live="assertive">
+        {{ errorMsg }}
       </div>
 
-      <div class="form-group">
-        <label for="password">{{ 'auth.password' | translate }}</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
-          aria-required="true" [placeholder]="'auth.enterPassword' | translate" />
-        <!-- Forgot Password Link -->
-        <button type="button" class="btn-link forgot-password-link" (click)="navigateToForgotPassword()"
-          aria-label="Forgot Password">
-          {{ 'auth.forgotPassword' | translate }}
+      <!-- Login Form -->
+      <form (ngSubmit)="onSubmit()" aria-label="Login Form">
+        <div class="form-group">
+          <label for="email">{{ 'auth.email' | translate }}</label>
+          <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required
+            aria-required="true" [placeholder]="'auth.enterEmail' | translate" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">{{ 'auth.password' | translate }}</label>
+          <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
+            aria-required="true" [placeholder]="'auth.enterPassword' | translate" />
+          <button (click)="loginWithGoogle()"><i class="bi bi-google"></i></button>
+          <!-- Forgot Password Link -->
+          <button type="button" class="btn-link forgot-password-link" (click)="navigateToForgotPassword()"
+            aria-label="Forgot Password">
+            {{ 'auth.forgotPassword' | translate }}
+          </button>
+        </div>
+        <button type="submit" class="btn-primary" aria-label="Login">
+          {{ 'auth.login' | translate }}
         </button>
-      </div>
-      <button type="submit" class="btn-primary" aria-label="Login">
-        {{ 'auth.login' | translate }}
-      </button>
-      <span class="login-prompt">
-        {{ 'auth.noAccount' | translate }}
-        <a (click)="navigateToSignup()" tabindex="0" aria-label="Sign up here">
-          {{ 'auth.signUpHere' | translate }}
-        </a>.
-      </span>
-    </form>
-  </div>
+        <span class="login-prompt">
+          {{ 'auth.noAccount' | translate }}
+          <a (click)="navigateToSignup()" tabindex="0" aria-label="Sign up here">
+            {{ 'auth.signUpHere' | translate }}
+          </a>.
+        </span>
+      </form>
+    </div>
 
-  <!-- Right side (Marketing/Promo) -->
-  <div class="promo-section" aria-labelledby="promo-heading">
-    <h1 class="headline" id="promo-heading">{{ 'auth.stayInTheLoop' | translate }}</h1>
-    <p class="description">
-      {{ 'auth.readyForStories' | translate }} <br />
-      {{ 'auth.keepExploring' | translate }}
-      <strong>{{ 'auth.newsletterHub' | translate }}</strong>.
-    </p>
-    <!-- Example mock card or graphic -->
-    <div class="mock-card" role="region" aria-label="Latest Newsletter">
-      <span class="mock-card-header">{{ 'auth.latestNewsletter' | translate }}</span>
-      <div class="mock-card-body">
-        <p>{{ 'auth.highlights' | translate }}</p>
-        <h2 class="mock-stat">{{ 'auth.top5Articles' | translate }}</h2>
+    <!-- Right side (Marketing/Promo) -->
+    <div class="promo-section" aria-labelledby="promo-heading">
+      <h1 class="headline" id="promo-heading">{{ 'auth.stayInTheLoop' | translate }}</h1>
+      <p class="description">
+        {{ 'auth.readyForStories' | translate }} <br />
+        {{ 'auth.keepExploring' | translate }}
+        <strong>{{ 'auth.newsletterHub' | translate }}</strong>.
+      </p>
+      <!-- Example mock card or graphic -->
+      <div class="mock-card" role="region" aria-label="Latest Newsletter">
+        <span class="mock-card-header">{{ 'auth.latestNewsletter' | translate }}</span>
+        <div class="mock-card-body">
+          <p>{{ 'auth.highlights' | translate }}</p>
+          <h2 class="mock-stat">{{ 'auth.top5Articles' | translate }}</h2>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </ng-template>

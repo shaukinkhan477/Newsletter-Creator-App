@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   errorMsg = '';
   loading: boolean = true;
 
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -68,6 +67,10 @@ export class LoginComponent implements OnInit {
           this.errorMsg = err.error?.message || 'Login failed.';
         },
       });
+  }
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
   }
 
   // Navigate to Forgot Password

@@ -14,14 +14,26 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
-      minlength: 6,
+    required: function () {
+        // only require a password if no oauthProvider
+        return !this.oauthProvider;
+      },
+    minlength: 6,
     },
+    oauthProvider: {
+      type: String,
+      default: null,
+    },
+    oauthId: {
+      type: String,
+      default: null,
+    },
+
     // For reset password
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
-  
+
   {
     timestamps: true,
   }

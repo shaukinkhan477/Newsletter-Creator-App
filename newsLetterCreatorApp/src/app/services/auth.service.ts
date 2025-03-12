@@ -29,6 +29,14 @@ export class AuthService {
   }
 
   /*=============================
+   =      OAUTH (Google)       =
+   =============================*/
+  loginWithGoogle(): void {
+    // Redirect to backend OAuth endpoint for Google login.
+    window.location.href = `${this.baseUrl}/google`;
+  }
+
+  /*=============================
    =        TOKEN STORAGE      =
    =============================*/
   setToken(token: string): void {

@@ -12,10 +12,12 @@ import { PostsComponent } from './components/posts/posts.component';
 import { TemplatesComponent } from './components/templates/templates.component';
 import { HomeComponent } from './components/home/home.component';
 import { ResumeComponent } from './components/resume/resume.component';
+import { OAuthCallbackComponent } from './auth/oauth-callback.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/homePage', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'oauth-callback', component: OAuthCallbackComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {

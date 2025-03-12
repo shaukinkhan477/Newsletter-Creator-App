@@ -39,7 +39,7 @@
           <label for="password">{{ 'auth.password' | translate }}</label>
           <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required
             aria-required="true" [placeholder]="'auth.enterPassword' | translate" />
-          <button (click)="loginWithGoogle()"><i class="bi bi-google"></i></button>
+          <i (click)="loginWithGoogle()" class="bi bi-google"></i>
           <!-- Forgot Password Link -->
           <button type="button" class="btn-link forgot-password-link" (click)="navigateToForgotPassword()"
             aria-label="Forgot Password">

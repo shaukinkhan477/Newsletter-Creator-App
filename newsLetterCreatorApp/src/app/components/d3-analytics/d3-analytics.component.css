@@ -1,0 +1,42 @@
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f5f7fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Modern tooltip styling */
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-radius: 8px;
+  pointer-events: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 10;
+}

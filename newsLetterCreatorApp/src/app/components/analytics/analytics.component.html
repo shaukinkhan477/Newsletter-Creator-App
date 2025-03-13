@@ -1,53 +1,36 @@
 <div class="analytics-container">
-  <h2 class="title">Analytics Dashboard</h2>
+  <header class="header">
+    <h2 class="title">Analytics Dashboard</h2>
+  </header>
 
-  <div class="controls">
-    <label>
-      <input
-        type="radio"
-        name="period"
-        value="daily"
-        [checked]="selectedPeriod === 'daily'"
-        (change)="onPeriodChange('daily')"
-      />
-      Daily
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="period"
-        value="weekly"
-        [checked]="selectedPeriod === 'weekly'"
-        (change)="onPeriodChange('weekly')"
-      />
-      Weekly
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="period"
-        value="monthly"
-        [checked]="selectedPeriod === 'monthly'"
-        (change)="onPeriodChange('monthly')"
-      />
-      Monthly
-    </label>
+  <section class="controls">
+    <div class="period-selector">
+      <label class="radio">
+        <input type="radio" name="period" value="daily" [checked]="selectedPeriod === 'daily'"
+          (change)="onPeriodChange('daily')" />
+        Daily
+      </label>
+      <label class="radio">
+        <input type="radio" name="period" value="weekly" [checked]="selectedPeriod === 'weekly'"
+          (change)="onPeriodChange('weekly')" />
+        Weekly
+      </label>
+      <label class="radio">
+        <input type="radio" name="period" value="monthly" [checked]="selectedPeriod === 'monthly'"
+          (change)="onPeriodChange('monthly')" />
+        Monthly
+      </label>
+    </div>
+    <button (click)="trackClick()" class="btn btn-track">Track Click</button>
+  </section>
 
-    <button (click)="trackClick()" class="btn btn-secondary">Track Click</button>
-  </div>
+  <section class="chart-section">
+    <div class="chart-wrapper">
+      <canvas *ngIf="isBrowser" baseChart [data]="chartData" [options]="chartOptions" [type]="chartType"></canvas>
+    </div>
+  </section>
 
-  <!-- Chart -->
-  <div class="chart-wrapper">
-    <canvas *ngIf="isBrowser"
-      baseChart
-      [data]="chartData"
-      [options]="chartOptions"
-      [type]="chartType"
-    ></canvas>
-  </div>
-
-  <!-- Customer Stats Table -->
-  <div class="customer-stats card">
+  <section class="stats-section card">
     <h3>Customer Email Stats</h3>
     <table class="stats-table">
       <thead>
@@ -58,12 +41,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let c of customerStats">
-          <td>{{ c.customerEmail }}</td>
-          <td>{{ c.sentCount }}</td>
-          <td>{{ c.clickedCount }}</td>
+        <tr *ngFor="let customer of customerStats">
+          <td>{{ customer.customerEmail }}</td>
+          <td>{{ customer.sentCount }}</td>
+          <td>{{ customer.clickedCount }}</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 </div>

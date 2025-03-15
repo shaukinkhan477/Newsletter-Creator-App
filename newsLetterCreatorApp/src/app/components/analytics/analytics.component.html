@@ -4,6 +4,7 @@
   </header>
 
   <section class="controls">
+    <!-- Period Selector -->
     <div class="period-selector">
       <label class="radio">
         <input type="radio" name="period" value="daily" [checked]="selectedPeriod === 'daily'"
@@ -21,6 +22,18 @@
         Monthly
       </label>
     </div>
+
+    <!-- Chart Type Selector -->
+    <div class="chart-type-selector">
+      <label for="chartTypeSelect">Chart Type:</label>
+  <select #chartTypeSelect id="chartTypeSelect" (change)="onChartTypeChange(chartTypeSelect.value)">
+    <option *ngFor="let type of availableChartTypes" [value]="type" [selected]="chartType === type">
+      {{ type | titlecase }}
+    </option>
+  </select>
+
+    </div>
+
     <button (click)="trackClick()" class="btn btn-track">Track Click</button>
   </section>
 
@@ -48,5 +61,8 @@
         </tr>
       </tbody>
     </table>
+  </section>
+  <section class="d3-container">
+  <app-d3-visualizations></app-d3-visualizations>
   </section>
 </div>

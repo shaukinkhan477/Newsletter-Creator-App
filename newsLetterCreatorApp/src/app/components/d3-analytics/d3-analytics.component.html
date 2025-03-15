@@ -1,0 +1,24 @@
+<div class="analytics-container">
+  <h2>Analytics Dashboard (D3 Grouped Chart)</h2>
+  <div class="controls">
+    <label>
+      <input type="radio" name="period" value="daily"
+             [checked]="selectedPeriod === 'daily'"
+             (change)="onPeriodChange('daily')">
+      Daily
+    </label>
+    <label>
+      <input type="radio" name="period" value="weekly"
+             [checked]="selectedPeriod === 'weekly'"
+             (change)="onPeriodChange('weekly')">
+      Weekly
+    </label>
+    <label>
+      <input type="radio" name="period" value="monthly"
+             [checked]="selectedPeriod === 'monthly'"
+             (change)="onPeriodChange('monthly')">
+      Monthly
+    </label>
+  </div>
+  <div #chart class="chart-wrapper"></div>
+</div>

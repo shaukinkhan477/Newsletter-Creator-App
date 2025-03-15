@@ -13,6 +13,7 @@ import { TemplatesComponent } from './components/templates/templates.component';
 import { HomeComponent } from './components/home/home.component';
 import { ResumeComponent } from './components/resume/resume.component';
 import { OAuthCallbackComponent } from './auth/oauth-callback.component';
+import { D3AnalyticsComponent } from './components/d3-analytics/d3-analytics.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/homePage', pathMatch: 'full' },
@@ -42,6 +43,11 @@ export const routes: Routes = [
   {
     path: 'analytics',
     component: AnalyticsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'd3-analytics',
+    component: D3AnalyticsComponent,
     canActivate: [AuthGuard],
   },
   {

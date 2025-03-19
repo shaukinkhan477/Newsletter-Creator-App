@@ -14,7 +14,7 @@
     "schedulingAutomation": "Planification et Automatisation",
     "schedulingAutomationDesc": "Gagnez du temps en automatisant vos campagnes — envoyez-les immédiatement ou programmez-les en un clic.",
     "ctaTitle": "Prêt à Améliorer Votre Marketing par E-mail?",
-    "ctaSubtitle": "Inscrivez-vous dès maintenant et commencez avec nos modèles gratuits et notre éditeur avancé.",
+    "ctaSubtitle": "Commencez votre essai gratuit de 14 jours. Aucune carte de crédit requise.",
     "createNewsletter": "Créer une Newsletter",
     "footerDescription": "Créez vos newsletters avec facilité et élégance.",
     "footerLinks": {
@@ -24,7 +24,41 @@
       "about": "À propos",
       "contact": "Contact"
     },
-    "footerCopyright": "© 2025 Hub de Newsletter. Tous droits réservés."
+    "footerCopyright": "© 2025 Hub de Newsletter. Tous droits réservés.",
+
+    "testimonialsTitle": "Plébiscité par les professionnels de la newsletter",
+    "testimonialsSubtitle": "Rejoignez des milliers de spécialistes du marketing satisfaits qui nous font confiance",
+    "testimonial1Quote": "Cette plateforme a révolutionné la façon dont nous gérons notre newsletter technique. Les fonctionnalités d'analyse et de planification nous font gagner un temps précieux chaque mois.",
+    "testimonial1Name": "Alex Rivera",
+    "testimonial1Role": "Directeur Marketing chez TechCorp",
+    "testimonial2Quote": "Les outils de création de campagnes et les modèles sont parfaits pour notre public technique. Nous avons constaté une augmentation de 40 % de l'engagement depuis que nous avons adopté cette solution.",
+    "testimonial2Name": "Sarah Chen",
+    "testimonial2Role": "Responsable Newsletter chez DevNews",
+    "testimonial3Quote": "La possibilité de tester différents objets et contenus a considérablement amélioré nos taux d'ouverture. Les analyses sont complètes tout en restant faciles à interpréter.",
+    "testimonial3Name": "Michael Kim",
+    "testimonial3Role": "Responsable Contenu chez CodeWeekly",
+
+    "pricingtitle": "Améliorez vos campagnes par e-mail dès aujourd'hui",
+    "pricingSubtitle": "Choisissez un plan qui vous convient",
+    "pricingTitle": "Tarification",
+    "basicPlan": "Forfait Basique",
+    "proPlan": "Forfait Pro",
+    "enterprisePlan": "Forfait Entreprise",
+    "contactUs": "Contactez-nous",
+    "selectPlan": "Choisir ce forfait",
+    "contactSales": "Contacter le service commercial",
+
+    "basicFeature1": "Accès aux modèles de base",
+    "basicFeature2": "Assistance par e-mail",
+    "basicFeature3": "Jusqu'à 1 000 abonnés",
+
+    "proFeature1": "Accès à tous les modèles premium",
+    "proFeature2": "Assistance prioritaire par e-mail",
+    "proFeature3": "Jusqu'à 10 000 abonnés",
+
+    "enterpriseFeature1": "Modèles illimités",
+    "enterpriseFeature2": "Gestionnaire de compte dédié",
+    "enterpriseFeature3": "Abonnés illimités"
   },
 
 "auth": {

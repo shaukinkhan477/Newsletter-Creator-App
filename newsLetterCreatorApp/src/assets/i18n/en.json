@@ -13,7 +13,7 @@
     "schedulingAutomation": "Scheduling & Automation",
     "schedulingAutomationDesc": "Save time by automating your campaigns—send now or schedule for later with just one click.",
     "ctaTitle": "Ready to Elevate Your Email Marketing?",
-    "ctaSubtitle": "Sign up now and get started with our free templates and advanced editor.",
+    "ctaSubtitle": "Start with our 14-day free trial. No credit card required.",
     "createNewsletter": "Create a Newsletter",
     "footerDescription": "Crafting your newsletters with ease and style.",
     "footerLinks": {
@@ -23,9 +23,43 @@
       "about": "About",
       "contact": "Contact"
     },
-    "footerCopyright": "© 2025 Newsletter Hub. All rights reserved."
-  },
+    "footerCopyright": "© 2025 Newsletter Hub. All rights reserved.",
+
+    "testimonialsTitle": "Trusted by newsletter professionals",
+    "testimonialsSubtitle": "Join thousands of satisfied marketers who trust our platform",
+    "testimonial1Quote": "This platform has revolutionized how we manage our tech newsletter. The analytics and scheduling features save us countless hours every month.",
+    "testimonial1Name": "Alex Rivera",
+    "testimonial1Role": "Marketing Director at TechCorp",
+    "testimonial2Quote": "The campaign creation tools and templates are perfect for our technical audience. We’ve seen a 40% increase in engagement since switching.",
+    "testimonial2Name": "Sarah Chen",
+    "testimonial2Role": "Newsletter Manager at DevNews",
+    "testimonial3Quote": "The ability to A/B test different subject lines and content has significantly improved our open rates. The analytics are comprehensive yet easy to interpret.",
+    "testimonial3Name": "Michael Kim",
+    "testimonial3Role": "Content Lead at CodeWeekly",
   
+    "pricingtitle": "Elevate your email campaigns today",
+    "pricingSubtitle": "Choose a plan that works for you",
+    "pricingTitle": "Pricing",
+    "basicPlan": "Basic Plan",
+    "proPlan": "Pro Plan",
+    "enterprisePlan": "Enterprise Plan",
+    "contactUs": "Contact Us",
+    "selectPlan": "Select Plan",
+    "contactSales": "Contact Sales",
+
+    "basicFeature1": "Access to basic templates",
+    "basicFeature2": "Email support",
+    "basicFeature3": "Up to 1,000 subscribers",
+
+    "proFeature1": "Access to all premium templates",
+    "proFeature2": "Priority email support",
+    "proFeature3": "Up to 10,000 subscribers",
+
+    "enterpriseFeature1": "Unlimited templates",
+    "enterpriseFeature2": "Dedicated account manager",
+    "enterpriseFeature3": "Unlimited subscribers"
+  },
+
   "auth": {
     "welcomeBack": "Welcome Back",
     "goodToSeeYou": "Good to see you again! Please Login to access",

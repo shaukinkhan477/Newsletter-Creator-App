@@ -48,7 +48,9 @@
           <h1 class="hero-title">
             <span id="typing-text"></span>
             <span class="cursor">|</span>
+            <span class="heroText">your email campaigns</span>
           </h1>
+          <span>With our</span>
           <h1 class="hero-title">{{ 'home.heroTitle' | translate }}</h1>
           <p class="hero-subtitle">
             {{ 'home.heroSubtitle' | translate }}
@@ -98,6 +100,101 @@
         </div>
       </section>
 
+
+      <!-- TESTIMONIALS SECTION -->
+      <section class="testimonials-section">
+        <h2 class="section-title">{{'home.testimonialsTitle' | translate}}</h2>
+        <p class="section-subtitle">{{'home.testimonialsSubtitle' | translate}}</p>
+
+        <div class="testimonials-container">
+          <div class="testimonial-card">
+            <div class="testimonial-quote">
+              “This platform has revolutionized how we manage our tech newsletter. The analytics and scheduling features
+              save
+              us countless hours every month.”
+            </div>
+            <div class="testimonial-author">
+              <img src="assets/homepage/testimonial1.jpg" alt="Alex Rivera" class="testimonial-avatar" />
+              <div class="author-info">
+                <span class="author-name">Alex Rivera</span>
+                <span class="author-role">Marketing Director at TechCorp</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-quote">
+              “The campaign creation tools and templates are perfect for our technical audience. We’ve seen a 40%
+              increase in
+              engagement since switching.”
+            </div>
+            <div class="testimonial-author">
+              <img src="assets/homepage/testimonial2.jpg" alt="Sarah Chen" class="testimonial-avatar" />
+              <div class="author-info">
+                <span class="author-name">Sarah Chen</span>
+                <span class="author-role">Newsletter Manager at DevNews</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-quote">
+              “The ability to A/B test different subject lines and content has significantly improved our open rates.
+              The
+              analytics are comprehensive yet easy to interpret.”
+            </div>
+            <div class="testimonial-author">
+              <img src="assets/homepage/testimonial3.jpg" alt="Sarah Chen" class="testimonial-avatar" />
+              <div class="author-info">
+                <span class="author-name">Michael Kim</span>
+                <span class="author-role">Content Lead at CodelWeekly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- PRICING SECTION  -->
+      <section class="pricing-section">
+        <h2 class="section-title">{{'home.pricingtitle' | translate}}</h2>
+        <span class="section-subtitle">{{'home.pricingSubtitle' | translate}}</span>
+        <h2 class="section-title">{{ 'home.pricingTitle' | translate }}</h2>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <h3>{{ 'home.basicPlan' | translate }}</h3>
+            <p class="price">$9.99<span>/month</span></p>
+            <ul class="pricing-features">
+              <li><span>✅</span>{{ 'home.basicFeature1' | translate }}</li>
+              <li><span>✅</span>{{ 'home.basicFeature2' | translate }}</li>
+              <li><span>✅</span>{{ 'home.basicFeature3' | translate }}</li>
+            </ul>
+            <button class="btn-cta" (click)="onGetStarted()">{{ 'home.selectPlan' | translate }}</button>
+          </div>
+          <div class="pricing-card recommended">
+            <h3>{{ 'home.proPlan' | translate }}</h3>
+            <p class="price">$19.99<span>/month</span></p>
+            <ul class="pricing-features">
+              <li><span>✅</span>{{ 'home.proFeature1' | translate }}</li>
+              <li><span>✅</span>{{ 'home.proFeature2' | translate }}</li>
+              <li><span>✅</span>{{ 'home.proFeature3' | translate }}</li>
+            </ul>
+            <button class="btn-cta" (click)="onGetStarted()">{{ 'home.selectPlan' | translate }}</button>
+          </div>
+          <div class="pricing-card">
+            <h3>{{ 'home.enterprisePlan' | translate }}</h3>
+            <p class="price">{{ 'home.contactUs' | translate }}</p>
+            <ul class="pricing-features">
+              <li><span>✅</span>{{ 'home.enterpriseFeature1' | translate }}</li>
+              <li><span>✅</span>{{ 'home.enterpriseFeature2' | translate }}</li>
+              <li><span>✅</span>{{ 'home.enterpriseFeature3' | translate }}</li>
+            </ul>
+            <button class="btn-cta" (click)="onGetStarted()">{{ 'home.contactSales' | translate }}</button>
+          </div>
+        </div>
+      </section>
+
+
       <!-- CTA SECTION -->
       <section class="cta-section">
         <h2>{{ 'home.ctaTitle' | translate }}</h2>
@@ -113,7 +210,7 @@
           <div class="footer-content">
             <div class="footer-brand">
               <h3>{{ 'home.heroTitle' | translate }}</h3>
-              <p>{{ 'footerDescription.createNewsletter' | translate }}</p>
+              <p>{{ 'home.footerDescription' | translate }}</p>
             </div>
             <div class="footer-links">
               <a>{{ 'home.footerLinks.home' | translate }}</a>

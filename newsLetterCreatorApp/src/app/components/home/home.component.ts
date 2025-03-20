@@ -15,7 +15,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 })
 export class HomeComponent implements AfterViewInit {
 
-  loading: boolean = true;
+  loading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -38,16 +38,16 @@ export class HomeComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       this.startTypingEffect();
     }
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
+    // setTimeout(() => {
+    //   this.loading = false;
+    // }, 1000);
   }
 
   startTypingEffect() {
     const textElement = document.getElementById('typing-text');
     if (!textElement) return;
 
-    const words = ['Create. ', 'Engage. ', 'Inspire. '];
+    const words = ['Create', 'Manage', 'Monitor', 'Engage', 'Inspire'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;

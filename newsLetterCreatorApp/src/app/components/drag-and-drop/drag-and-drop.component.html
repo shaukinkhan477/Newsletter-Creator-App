@@ -1,0 +1,81 @@
+<!-- Show skeleton loader while loading -->
+<ng-container *ngIf="loading; else mainContent">
+  <!-- Header skeleton (simulate the heading) -->
+  <ngx-skeleton-loader appearance="line"
+    [theme]="{ height: '6rem', width: '100%', margin: '1rem', 'margin-bottom': '0.5rem', 'margin-top': '1rem', 'background-color': '#e0e0e0', 'border-radius': '1rem' }">
+  </ngx-skeleton-loader>
+  <!-- Editor container skeleton (simulate the main content area) -->
+  <ngx-skeleton-loader appearance="line"
+    [theme]="{ height: '400px', width: '100%', 'background-color': '#e0e0e0', 'border-radius': '1rem', margin: '1rem' }">
+  </ngx-skeleton-loader>
+</ng-container>
+
+<ng-template #mainContent>
+  <div class="main-content-layout">
+    <!-- Section 1: Header & Action Buttons -->
+    <div class="section section-header">
+      <h1 id="editor-heading">
+        <!-- {{ editMode ? ('editor.editPost' | translate) : ('editor.createNewPost' | translate) }} -->
+          <span class="heading">Craft your newsletter with Drag & Drop</span>
+      </h1>
+      <div class="action-buttons">
+        <!-- If NOT edit mode, show "Send Now", "Save as Draft", "Schedule" -->
+        <ng-container *ngIf="!editMode; else editButtons">
+          <button class="btn btn-primary" (click)="sendNow()" aria-label="Send Now">
+            {{ 'editor.sendNow' | translate }}
+          </button>
+          <button class="btn btn-secondary" (click)="saveAsDraft()" aria-label="Save as Draft">
+            {{ 'editor.saveAsDraft' | translate }}
+          </button>
+          <button class="btn btn-secondary" (click)="openScheduleModal()" aria-label="Schedule">
+            {{ 'editor.schedule' | translate }}
+          </button>
+        </ng-container>
+        <!-- If edit mode, show "Save Changes" and "Schedule" -->
+        <ng-template #editButtons>
+          <button class="btn btn-primary" (click)="saveChanges()" aria-label="Save Changes">
+            {{ 'editor.saveChanges' | translate }}
+          </button>
+          <button class="btn btn-secondary" (click)="openScheduleModal()" aria-label="Schedule">
+            {{ 'editor.schedule' | translate }}
+          </button>
+        </ng-template>
+      </div>
+    </div>
+      <!-- Error Message -->
+      <div class="error-box" *ngIf="errorMsg" role="alert" aria-live="assertive">
+        {{ errorMsg }}
+      </div>
+
+    <!-- Section 2: Input Fields -->
+    <div class="section section-inputs">
+      <div class="input-group">
+        <input type="text" class="title-input" [(ngModel)]="newsletter.title" name="title"
+          (ngModelChange)="onFieldChange('title', $event)" [placeholder]="'editor.postTitlePlaceholder' | translate"
+          required aria-required="true" aria-label="Post Title" />
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="newsletter.subject" name="subject"
+          [placeholder]="'editor.emailSubjectPlaceholder' | translate" required aria-required="true"
+          aria-label="Email Subject Line" />
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="newsletter.preheader" name="preheader"
+          [placeholder]="'editor.previewTextPlaceholder' | translate" required aria-required="true"
+          aria-label="Preview Text" />
+      </div>
+    </div>
+
+    <!-- Section 3: Editor -->
+    <div class="section section-editor">
+      <div #editorContainer id="unlayer-editor"></div>
+    </div>
+
+
+
+    <!-- Schedule Modal -->
+    <app-schedule-modal *ngIf="showScheduleModal" [newsletter]="newsletter" (onClose)="closeModal()"
+      (onSchedule)="schedulePost($event)"></app-schedule-modal>
+  </div>
+</ng-template>
+

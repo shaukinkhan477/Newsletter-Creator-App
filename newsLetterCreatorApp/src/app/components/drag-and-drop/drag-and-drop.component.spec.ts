@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { D3AnalyticsComponent } from './d3-analytics.component';
+import { DragAndDropComponent } from './drag-and-drop.component';
 
-describe('D3AnalyticsComponent', () => {
-  let component: D3AnalyticsComponent;
-  let fixture: ComponentFixture<D3AnalyticsComponent>;
+describe('DragAndDropComponent', () => {
+  let component: DragAndDropComponent;
+  let fixture: ComponentFixture<DragAndDropComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [D3AnalyticsComponent]
+      imports: [DragAndDropComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(D3AnalyticsComponent);
+    fixture = TestBed.createComponent(DragAndDropComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

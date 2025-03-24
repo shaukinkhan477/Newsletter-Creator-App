@@ -1,0 +1,108 @@
+.testimonials-section {
+  margin-bottom: 3rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 1rem;
+}
+
+.testimonials-section .section-title {
+  color: #1f2937;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.testimonials-section .section-subtitle {
+  color: #4b5563;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.testimonials-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  position: relative;
+  border-radius: 1rem;
+  padding: 2rem;
+  background: rgba(243, 244, 246, 0.5);
+  box-shadow: 0 4px 15px rgba(31, 38, 135, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(31, 38, 135, 0.3);
+}
+
+/* Large, faded quotes for visual flair */
+.testimonial-card::before {
+  content: "“";
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 3rem;
+  background: linear-gradient(45deg, #0ded93, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+}
+
+/* Testimonial Text & Author */
+.testimonial-quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #374151;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Avatar styling */
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  /* object-fit: cover;
+  border: 3px solid transparent;
+  border-image: linear-gradient(45deg, #6ee7b7, #3b82f6) 1;
+  border-image-slice: 1;   */
+}
+
+/* Name and Role styling */
+.author-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.author-name {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #3b82f6;
+}
+
+.author-role {
+  font-size: 0.5rem;
+  background: linear-gradient(45deg, #6ee7b7, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 0.25rem;
+}
+
+/* Responsive adjustments for Testimonials Section */
+@media (max-width: 768px) {
+  .testimonials-container {
+    grid-template-columns: 1fr;
+  }
+}

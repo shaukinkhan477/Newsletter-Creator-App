@@ -13,6 +13,10 @@ const authRoutes = require("./routes/auth.routes");
 const postRoutes = require("./routes/post.routes");
 const subscriberRoutes = require("./routes/subscriber.routes");
 
+// Import ApolloServer and our combined GraphQL schema/resolvers
+const { ApolloServer } = require("apollo-server-express");
+const { typeDefs, resolvers } = require("./graphql");
+
 
 const app = express();
 
@@ -32,7 +36,9 @@ app.use(cors());
 // Initialize Passport
 app.use(passport.initialize());
 
-// Routes
+// REST Routes
+
+// Auth Routes
 app.use("/api/auth", authRoutes);
 
 // Post routes (newsletter)
@@ -46,8 +52,24 @@ app.get("/", (req, res) => {
   res.send("Newsletter App - Authentication Service Running");
 });
 
+
+// Function to start the Apollo GraphQL server and integrate with Express
+async function startServer() {
+  const server = new ApolloServer({ typeDefs, resolvers });
+  await server.start();
+  server.applyMiddleware({ app, path: "/graphql" });
+
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`GraphQL endpoint available at http://localhost:${PORT}${server.graphqlPath}`);
+  });
+}
+
+startServer();
+
 // Listen
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });

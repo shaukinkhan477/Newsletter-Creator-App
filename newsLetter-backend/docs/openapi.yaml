@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: Newsletter API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful retrieval of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+  /api/posts/{id}:
+    get:
+      summary: Get a post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval of a post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    put:
+      summary: Update a post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    delete:
+      summary: Delete a post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Post deleted successfully
+  /api/subscribers:
+    get:
+      summary: Get all subscribers
+      responses:
+        '200':
+          description: Successful retrieval of subscribers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscriber'
+  /api/subscribers/{id}:
+    get:
+      summary: Get a subscriber by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval of a subscriber
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscriber'
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "5f8d0d55b54764421b7156c5"
+        title:
+          type: string
+          example: "Post Title"
+        subject:
+          type: string
+          example: "Newsletter Subject"
+        preheader:
+          type: string
+          example: "Brief summary"
+        content:
+          type: string
+          example: "Full content of the newsletter"
+        status:
+          type: string
+          example: "draft"
+        scheduledAt:
+          type: string
+          format: date-time
+          example: "2025-03-26T12:00:00Z"
+        sentAt:
+          type: string
+          format: date-time
+          example: "2025-03-26T12:05:00Z"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-03-16T12:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2025-03-16T12:10:00Z"
+    Subscriber:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "5f8d0d55b54764421b7156c6"
+        email:
+          type: string
+          example: "subscriber@example.com"
+        name:
+          type: string
+          example: "John Doe"
+        status:
+          type: string
+          example: "active"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-03-16T12:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2025-03-16T12:10:00Z"

@@ -13,6 +13,16 @@ const authRoutes = require("./routes/auth.routes");
 const postRoutes = require("./routes/post.routes");
 const subscriberRoutes = require("./routes/subscriber.routes");
 
+// Import ApolloServer and our combined GraphQL schema/resolvers
+const { ApolloServer } = require("apollo-server-express");
+const { typeDefs, resolvers } = require("./graphql");
+
+// OpenAPI/Swagger integration
+const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
+const path = require('path');
+const yaml = require('js-yaml');
+
 
 const app = express();
 
@@ -32,7 +42,9 @@ app.use(cors());
 // Initialize Passport
 app.use(passport.initialize());
 
-// Routes
+// REST Routes
+
+// Auth Routes
 app.use("/api/auth", authRoutes);
 
 // Post routes (newsletter)
@@ -41,13 +53,40 @@ app.use('/api/posts', postRoutes);
 // Subscriber routes
 app.use('/api/subscribers', subscriberRoutes);
 
+
+// Serve OpenAPI docs
+try {
+  const openapiPath = path.join(__dirname, 'docs', 'openapi.yaml');
+  const openapiDocument = yaml.load(fs.readFileSync(openapiPath, 'utf8'));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiDocument));
+} catch (err) {
+  console.error("Failed to load OpenAPI document:", err);
+}
+
 // Basic route
 app.get("/", (req, res) => {
   res.send("Newsletter App - Authentication Service Running");
 });
 
+
+// Function to start the Apollo GraphQL server and integrate with Express
+async function startServer() {
+  const server = new ApolloServer({ typeDefs, resolvers });
+  await server.start();
+  server.applyMiddleware({ app, path: "/graphql" });
+
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`GraphQL endpoint available at http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`OpenAPI docs available at http://localhost:${PORT}/api-docs`);
+  });
+}
+
+startServer();
+
 // Listen
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });

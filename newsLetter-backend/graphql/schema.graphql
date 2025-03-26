@@ -1,0 +1,48 @@
+
+type Post {
+  id: ID!
+  title: String!
+  subject: String!
+  preheader: String
+  content: String
+  status: String
+  scheduledAt: String
+  sentAt: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Subscriber {
+  id: ID!
+  email: String!
+  name: String
+  status: String
+  createdAt: String
+  updatedAt: String
+}
+
+type User {
+  id: ID!
+  name: String
+  email: String!
+  oauthProvider: String
+  oauthId: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  posts: [Post]
+  subscribers: [Subscriber]
+  users: [User]
+
+  post(id: ID!): Post
+  subscriber(id: ID!): Subscriber
+  user(id: ID!): User
+}
+
+type Mutation {
+  createPost(title: String!, subject: String!, preheader: String, content: String): Post
+  createSubscriber(email: String!, name: String, status: String): Subscriber
+  createUser(name: String, email: String!, password: String!): User
+}

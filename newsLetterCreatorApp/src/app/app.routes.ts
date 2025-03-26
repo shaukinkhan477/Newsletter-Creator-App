@@ -13,7 +13,8 @@ import { TemplatesComponent } from './components/templates/templates.component';
 import { HomeComponent } from './components/home/home.component';
 import { ResumeComponent } from './components/resume/resume.component';
 import { OAuthCallbackComponent } from './auth/oauth-callback.component';
-import { D3AnalyticsComponent } from './components/d3-analytics/d3-analytics.component';
+import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: '/homePage', pathMatch: 'full' },
@@ -34,6 +35,11 @@ export const routes: Routes = [
   { path: 'homePage', component: HomeComponent },
   { path: 'home', component: MainContentComponent, canActivate: [AuthGuard] },
   { path: 'resume', component: ResumeComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dragAndDrop',
+    component: DragAndDropComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
   {
     path: 'edit-post/:id',
@@ -45,11 +51,7 @@ export const routes: Routes = [
     component: AnalyticsComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'd3-analytics',
-    component: D3AnalyticsComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'subscribers',
     component: SubscribersComponent,

@@ -1,80 +1,45 @@
-import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FooterSectionComponent } from "../../home-page-sections/footer-section/footer-section.component";
+import { CtaSectionComponent } from "../../home-page-sections/cta-section/cta-section.component";
+import { PricingSectionComponent } from "../../home-page-sections/pricing-section/pricing-section.component";
+import { TestimonialsSectionComponent } from "../../home-page-sections/testimonials-section/testimonials-section.component";
+import { FeaturesSectionComponent } from "../../home-page-sections/features-section/features-section.component";
+import { HeroSectionComponent } from "../../home-page-sections/hero-section/hero-section.component";
+import { WhyChooseSectionComponent } from "../../home-page-sections/why-choose-section/why-choose-section.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TranslateModule, NgxSkeletonLoaderModule],
+  imports: [CommonModule, TranslateModule, NgxSkeletonLoaderModule, FooterSectionComponent, CtaSectionComponent, PricingSectionComponent, TestimonialsSectionComponent, FeaturesSectionComponent, HeroSectionComponent, WhyChooseSectionComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent {
 
-  loading: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private translate: TranslateService,
-    @Inject(PLATFORM_ID) private platformId: any
+    private router: Router
   ) {}
 
   onGetStarted() {
     if (!this.authService.isLoggedIn()) {
-      // Not logged in => go to login
       this.router.navigate(['/login']);
     } else {
-      // Already logged in => go to editor
       this.router.navigate(['/home']);
     }
   }
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.startTypingEffect();
-    }
-    // setTimeout(() => {
-    //   this.loading = false;
-    // }, 1000);
-  }
-
-  startTypingEffect() {
-    const textElement = document.getElementById('typing-text');
-    if (!textElement) return;
-
-    const words = ['Create', 'Manage', 'Monitor', 'Engage', 'Inspire'];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    const type = () => {
-      if (wordIndex >= words.length) wordIndex = 0;
-      const word = words[wordIndex];
-      const speed = isDeleting ? 50 : 100;
-
-      if (isDeleting) {
-        textElement.innerText = word.substring(0, charIndex--);
-      } else {
-        textElement.innerText = word.substring(0, charIndex++);
-      }
-
-      if (!isDeleting && charIndex === word.length + 1) {
-        isDeleting = true;
-        setTimeout(type, 1000); // Pause before deleting
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex++;
-        setTimeout(type, 500); // Pause before next word
-      } else {
-        setTimeout(type, speed);
-      }
-    };
-
-    type();
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   }
 }

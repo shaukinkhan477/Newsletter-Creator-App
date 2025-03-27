@@ -1,0 +1,44 @@
+<section class="pricing-section">
+  <h2 class="section-title">{{ 'home.pricingtitle' | translate }}</h2>
+  <span class="section-subtitle">{{ 'home.pricingSubtitle' | translate }}</span>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <h3>{{ 'home.basicPlan' | translate }}</h3>
+      <p class="price">$9.99<span>/month</span></p>
+      <ul class="pricing-features">
+        <li><span>✅</span>{{ 'home.basicFeature1' | translate }}</li>
+        <li><span>✅</span>{{ 'home.basicFeature2' | translate }}</li>
+        <li><span>✅</span>{{ 'home.basicFeature3' | translate }}</li>
+      </ul>
+      <button class="btn-cta" (click)="onGetStarted()">
+        {{ 'home.selectPlan' | translate }}
+      </button>
+    </div>
+
+    <div class="pricing-card recommended">
+      <h3>{{ 'home.proPlan' | translate }}</h3>
+      <p class="price">$19.99<span>/month</span></p>
+      <ul class="pricing-features">
+        <li><span>✅</span>{{ 'home.proFeature1' | translate }}</li>
+        <li><span>✅</span>{{ 'home.proFeature2' | translate }}</li>
+        <li><span>✅</span>{{ 'home.proFeature3' | translate }}</li>
+      </ul>
+      <button class="btn-cta" (click)="onGetStarted()">
+        {{ 'home.selectPlan' | translate }}
+      </button>
+    </div>
+
+    <div class="pricing-card">
+      <h3>{{ 'home.enterprisePlan' | translate }}</h3>
+      <p class="price">{{ 'home.contactUs' | translate }}</p>
+      <ul class="pricing-features">
+        <li><span>✅</span>{{ 'home.enterpriseFeature1' | translate }}</li>
+        <li><span>✅</span>{{ 'home.enterpriseFeature2' | translate }}</li>
+        <li><span>✅</span>{{ 'home.enterpriseFeature3' | translate }}</li>
+      </ul>
+      <button class="btn-cta" (click)="onGetStarted()">
+        {{ 'home.contactSales' | translate }}
+      </button>
+    </div>
+  </div>
+</section>

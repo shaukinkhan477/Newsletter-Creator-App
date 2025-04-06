@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,28 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
-  constructor(private router: Router, private translate: TranslateService) {
+export class HeaderComponent implements OnInit{
+
+  isDarkMode: boolean = false;
+  
+  constructor(private router: Router,
+    private translate: TranslateService,
+    private themeService: ThemeService) {
     translate.setDefaultLang('en');
+  }
+
+    ngOnInit(): void {
+    this.themeService.darkMode$.subscribe((isDark) => {
+      this.isDarkMode = isDark;
+    });
   }
 
   goToProfile() {
     this.router.navigate(['/profile']);
+  }
+
+    toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 
 

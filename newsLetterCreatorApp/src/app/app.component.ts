@@ -4,7 +4,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { filter } from 'rxjs';
-import { HomeComponent } from "./components/home/home.component";
+import { ThemeService } from './services/theme.service';
 
 
 @Component({
@@ -16,21 +16,25 @@ import { HomeComponent } from "./components/home/home.component";
     CommonModule,
     SidebarComponent,
     HeaderComponent,
-    HomeComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
   title = 'newsLetterCreatorApp';
-
   hideSidebar = false;
-
   isSidebarCollapsed = false;
+  isDarkMode = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private themeService: ThemeService) {}
 
   ngOnInit() {
+
+        // Subscribe to theme changes
+    this.themeService.darkMode$.subscribe((isDark) => {
+      this.isDarkMode = isDark;
+    });
+    
     // Listen for navigation changes
     this.router.events
       .pipe(
@@ -39,11 +43,13 @@ export class AppComponent implements OnInit {
         ) // Ensure event is NavigationEnd
       )
       .subscribe((event: NavigationEnd) => {
-        const currentUrl = event.urlAfterRedirects; // Get final redirected URL
-
-        // Hide sidebar for homePage route
-        this.hideSidebar = currentUrl.startsWith('/homePage');
-      });
+  const currentUrl = event.urlAfterRedirects;
+  // Define routes where the sidebar should be hidden
+  const hideSidebarRoutes = ['/homePage', '/login', '/signup', '/forgot-password', 'reset-password/'];
+  
+  // Hide sidebar if currentUrl starts with any of the specified routes
+  this.hideSidebar = hideSidebarRoutes.some(route => currentUrl.startsWith(route));
+});
   }
 
   onToggleSidebar(isCollapsed: boolean) {

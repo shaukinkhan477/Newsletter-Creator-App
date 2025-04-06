@@ -6,13 +6,13 @@
 
 .cta-section h2 {
   font-size: 1.75rem;
-  color: #1f2937;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
 .cta-section p {
   font-size: 1rem;
-  color: #4b5563;
+  color: var(--secondary-color);
   margin-bottom: 1.5rem;
   line-height: 1.5;
 }
@@ -20,7 +20,7 @@
 /* Shared Button Styles (or repeat as needed) */
 .btn-cta {
   display: inline-block;
-  background: linear-gradient(45deg, #6ee7b7, #3b82f6);
+  background: linear-gradient(45deg, var(--button-start), var(--accent-color));
   color: #fff;
   padding: 0.75rem 1.25rem;
   border-radius: 0.375rem;
@@ -34,6 +34,6 @@
 }
 
 .btn-cta:hover {
-  background: linear-gradient(45deg, #3b82f6, #3b82f6);
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color));
   transform: scale(1.05);
 }

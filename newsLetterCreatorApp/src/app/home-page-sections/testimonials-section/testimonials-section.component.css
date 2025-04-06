@@ -6,13 +6,13 @@
 }
 
 .testimonials-section .section-title {
-  color: #1f2937;
+  color: var(--text-color);
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
 }
 
 .testimonials-section .section-subtitle {
-  color: #4b5563;
+  color: var(--secondary-color);
   font-size: 1rem;
   margin-bottom: 2rem;
 }
@@ -28,7 +28,7 @@
   position: relative;
   border-radius: 1rem;
   padding: 2rem;
-  background: rgba(243, 244, 246, 0.5);
+  background: var(--card-bg);
   box-shadow: 0 4px 15px rgba(31, 38, 135, 0.2);
   transition: transform 0.3s, box-shadow 0.3s;
   overflow: hidden;
@@ -46,7 +46,7 @@
   top: 15px;
   left: 20px;
   font-size: 3rem;
-  background: linear-gradient(45deg, #0ded93, #3b82f6);
+  background: linear-gradient(45deg, var(--gradient-start), var(--accent-color));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -57,7 +57,7 @@
 .testimonial-quote {
   font-size: 1rem;
   line-height: 1.6;
-  color: #374151;
+  color: var(--secondary-color);
   font-style: italic;
 }
 
@@ -72,10 +72,6 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  /* object-fit: cover;
-  border: 3px solid transparent;
-  border-image: linear-gradient(45deg, #6ee7b7, #3b82f6) 1;
-  border-image-slice: 1;   */
 }
 
 /* Name and Role styling */
@@ -88,12 +84,12 @@
 .author-name {
   font-weight: bold;
   font-size: 0.9rem;
-  color: #3b82f6;
+  color: var(--accent-color);
 }
 
 .author-role {
   font-size: 0.5rem;
-  background: linear-gradient(45deg, #6ee7b7, #3b82f6);
+  background: linear-gradient(45deg, #6ee7b7, var(--accent-color));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

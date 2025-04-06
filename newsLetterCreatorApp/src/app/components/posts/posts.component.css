@@ -2,6 +2,14 @@
   padding: 1rem;
 }
 
+.heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
 .post-list {
   display: flex;
   flex-direction: column;
@@ -11,13 +19,15 @@
 .post-item {
   padding: 1rem;
   border-radius: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
+  background-color: var(--card-bg);
 }
 
 .post-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  color: var(--text-color);
 }
 
 .post-subject,
@@ -25,18 +35,19 @@
 .post-status {
   margin-bottom: 0.25rem;
   color: #555;
+  color: var(--secondary-color, #555);
 }
 
 .post-status.draft {
-  color: #6366f1; /* e.g. Indigo */
+  color: var(--draft-color, #6366f1);
 }
 
 .post-status.scheduled {
-  color: #f59e0b; /* Amber */
+  color: var(--scheduled-color, #f59e0b);
 }
 
 .post-status.sent {
-  color: #10b981; /* Green */
+  color: var(--sent-color, #10b981);
 }
 
 .post-actions {
@@ -54,15 +65,15 @@
 }
 
 .btn-edit {
-  background-color: #3b82f6; /* Blue */
+  background-color: var(--accent-color, #3b82f6);
 }
 .btn-edit:hover {
-  background-color: #2563eb;
+  background-color: var(--accent-color-hover, #2563eb);
 }
 
 .btn-send {
-  background-color: #10b981; /* Green */
+  background-color: var(--sent-color, #10b981);
 }
 .btn-send:hover {
-  background-color: #059669;
+  background-color: var(--sent-color-hover, #059669);
 }

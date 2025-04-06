@@ -1,8 +1,10 @@
 .d3-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   margin-top: 2rem;
+  width: 100%;
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
 }
 
 .map-visualization, .icicle-visualization {
@@ -10,9 +12,10 @@
   min-width: 300px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  background: #fff;
-  padding: 1rem;
+  background: var(--card-bg, #ffffff);
+  /* padding: 1rem; */
   position: relative;
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
 }
 
 /* Tooltip styling */

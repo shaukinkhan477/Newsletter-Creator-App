@@ -13,6 +13,7 @@ import { HeroSectionComponent } from "../../home-page-sections/hero-section/hero
 import { WhyChooseSectionComponent } from "../../home-page-sections/why-choose-section/why-choose-section.component";
 
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -26,7 +27,7 @@ export class HomeComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   onGetStarted() {
@@ -38,6 +39,7 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
+    // Simulate loading delay
     setTimeout(() => {
       this.loading = false;
     }, 1000);

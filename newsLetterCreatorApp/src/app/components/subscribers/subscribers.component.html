@@ -1,5 +1,5 @@
 <div class="subscribers-container">
-  <h2>Subscribers</h2>
+  <h2 class="heading">Subscribers</h2>
 
   <!-- Show error / success from store -->
   <div class="alert error" *ngIf="(errorMsg$ | async) as errorMsg">
@@ -16,7 +16,7 @@
   <div class="add-subscriber-form">
     <input type="email" [(ngModel)]="newEmail" placeholder="Subscriber Email" />
     <input type="text" [(ngModel)]="newName" placeholder="Subscriber Name" />
-    <button (click)="addNewSubscriber()">Add Subscriber</button>
+    <button class="addBtn" (click)="addNewSubscriber()">Add Subscriber</button>
   </div>
   <ng-container *ngIf="subscribers$ | async as subs">
   <table *ngIf="subs && subs.length > 0" class="subscribers-table">

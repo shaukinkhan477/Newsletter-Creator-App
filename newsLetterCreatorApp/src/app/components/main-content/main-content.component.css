@@ -2,15 +2,11 @@
   display: grid;
   padding: 0.5rem;
   height: 100vh;
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
 }
 
 .editor-section {
   min-width: 0;
   margin-top: 0rem;
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
 }
 
 .content-header {
@@ -19,15 +15,16 @@
   align-items: center;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  background-color: #fff;
+  background-color: var(--card-bg, #fff);
+  color: var(--text-color);
   padding: 2rem;
   border-radius: 30px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+   box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
 }
 
 .error-box {
-  background-color: #fde2e2;
-  color: #b91c1c;
+  background-color: var(--error-bg, #fde2e2);
+  color: var(--error-text, #b91c1c);
   margin-bottom: 4px;
   padding: 0.75rem;
   border-radius: 10px;
@@ -48,12 +45,12 @@
 }
 
 .btn-primary {
-  background-color: #3b82f6;
+  background-color:  var(--accent-color, #3b82f6);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #2563eb;
+  background-color: var(--accent-color-hover, #2563eb);
 }
 
 .btn-primary:focus {
@@ -87,77 +84,53 @@
   font-weight: 600;
   width: 100%;
   border: none;
-  padding: 0.5rem 0;
+  padding: 0.75rem;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #e5e7eb;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 8px;
+  background-color: var(--input-bg, #fff);
+  border-bottom: 2px solid var(--border-color, #e5e7eb);
 }
 
 .title-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent-color, #3b82f6);
 }
 
 .form-control {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color, #ccc);
   border-radius: 8px;
   font-size: 1rem;
-  color: #333;
-  background-color: #fff;
+  color: var(--text-color, #333);
+  background-color: var(--input-bg, #fff);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-control:focus {
-  border-color: #3b82f6;
+  border-color: var(--accent-color, #3b82f6);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   outline: none;
 }
 
-
-/*
-  This positions the preview panel absolutely within a relatively positioned parent
-  (or you can use 'fixed' if you want it to be pinned to the viewport).
-*/
-.preview-section {
-  position: absolute;
-  top: 50px;         /* adjust as needed */
-  right: 50px;       /* adjust as needed */
-  z-index: 999;      /* ensure it's on top of other elements */
-  width: 320px;      /* width of the preview box */
-  max-height: 80vh;  /* prevent it from overflowing the screen */
-  overflow-y: auto;  /* scroll if content is long */
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  border: 2px solid #4A5568;
-  cursor: move;      /* show a "move" cursor to indicate draggability */
-  transition: transform 0.2s ease-in-out;
+.editor-container {
+  background-color: var(--card-bg, #fff);
+  /* border-radius: 30px; */
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
+  padding: 2rem;
 }
 
-/* Subtle scale effect while actively dragging */
-.preview-section:active {
-  transform: scale(1.03);
+/* .tox-edit-area__iframe {
+  background-color: var(--card-bg, #fff);
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 100px;
 }
 
-/* You can style headings, paragraphs, etc. within the preview if desired */
-.preview-section h2 {
-  margin-top: 0;
-  font-size: 1.25rem;
-  color: #2D3748;
-}
-
-.preview-section hr {
-  border: none;
-  border-bottom: 1px solid #CBD5E0;
-  margin: 0.5rem 0 1rem;
-}
-
-.preview-section .content-preview {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  background: #F7FAFC;
-  border-radius: 0.25rem;
-}
-
+#tiny-angular_95411263511743860526233 {
+  background-color: var(--card-bg, #fff);
+  border-radius: 20px;
+  box-shadow: 0 1px 3px var(--shadow-color, rgba(0, 0, 0, 0.1));
+} */

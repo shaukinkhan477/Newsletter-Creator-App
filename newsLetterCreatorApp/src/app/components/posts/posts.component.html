@@ -1,7 +1,5 @@
 <div class="posts-container">
-  <h2>All Posts</h2>
-
-
+  <h2 class="heading">All Posts</h2>
     <!-- Show skeleton loader while loading posts -->
     <div *ngIf="(loading$ | async)">
       <ngx-skeleton-loader count="6" appearance="line" [theme]="{ height: '10rem', 'margin-bottom': '1rem', 'background-color': '#e0e0e0', 'border-radius': '2rem' }"></ngx-skeleton-loader>

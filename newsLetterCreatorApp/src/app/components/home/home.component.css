@@ -1,10 +1,14 @@
+
 .home-container {
   /* max-width: 1200px; */
   margin: 0 auto;
   padding: 2rem;
   font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   animation: fadeIn 1s ease-in-out;
 }
+
 
 @keyframes fadeIn {
   from {

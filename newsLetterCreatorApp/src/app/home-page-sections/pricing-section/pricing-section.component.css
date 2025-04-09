@@ -7,7 +7,7 @@
 
 .pricing-section .section-title {
   margin-bottom: 2rem;
-  color: #1f2937;
+  color: var(--text-color);
   font-size: 1.75rem;
 }
 
@@ -21,7 +21,7 @@
 .pricing-card {
   padding: 2rem 1rem;
   border-radius: 1rem;
-  background: rgba(243, 244, 246, 0.5);
+  background: var(--card-bg);
   box-shadow: 0 4px 15px rgba(31, 38, 135, 0.2);
   transition: transform 0.3s;
 }
@@ -33,26 +33,26 @@
 .pricing-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #1f2937;
+  color: var(--text-color);
 }
 
 .pricing-card .price {
   font-size: 2rem;
   font-weight: bold;
-  color: #3b82f6;
+  color: var(--accent-color);
   margin-bottom: 1rem;
 }
 
 .pricing-card .price span {
   font-size: 1rem;
-  color: #374151;
+  color: var(--secondary-color);
 }
 
 .pricing-features {
   list-style: none;
   padding: 0;
   margin-bottom: 1.5rem;
-  color: #4b5563;
+  color: var(--secondary-color);
   font-size: 0.95rem;
 }
 
@@ -61,13 +61,13 @@
 }
 
 .pricing-card.recommended {
-  border: 2px solid #3b82f6;
+  border: 2px solid var(--accent-color);
 }
 
 /* Shared Button Styles (if not moved to a shared file) */
 .btn-cta {
   display: inline-block;
-  background: linear-gradient(45deg, #6ee7b7, #3b82f6);
+  background: linear-gradient(45deg, var(--button-start), var(--accent-color));
   color: #fff;
   padding: 0.75rem 1.25rem;
   border-radius: 0.375rem;
@@ -81,6 +81,6 @@
 }
 
 .btn-cta:hover {
-  background: linear-gradient(45deg, #3b82f6, #3b82f6);
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color));
   transform: scale(1.05);
 }

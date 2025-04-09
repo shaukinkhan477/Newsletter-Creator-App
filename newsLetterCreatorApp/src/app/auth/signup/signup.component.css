@@ -3,19 +3,20 @@
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
   padding: 2rem;
+  background-color: var(--bg-color);
 }
 
 /* Left side - Form */
 .form-section {
   flex: 1;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   padding: 20px;
   margin-right: 15px;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #898484;
+  border: 1px solid var(--border-color);
 }
 
 .logo-area {
@@ -34,12 +35,13 @@
   font-size: 2rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  color: var(--text-color);
 }
 
 .subtitle {
   font-size: 1rem;
   margin-bottom: 2rem;
-  color: #777;
+  color: var(--secondary-color);
 }
 
 /* Form styles */
@@ -51,15 +53,15 @@
   width: 100%;
   padding: 0.75rem;
   border-radius: 30px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   font-size: 1rem;
-  color: #333;
-  background-color: #fff;
+  color: var(--text-color);
+  background-color: var(--input-bg);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-control:focus {
-  border-color: #3b82f6;
+  border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   outline: none;
 }
@@ -67,7 +69,7 @@
 .btn-primary {
   width: 100%;
   padding: 0.75rem;
-  background-color: #3b82f6;
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
   border-radius: 0.5rem;
@@ -86,7 +88,7 @@
 
 a {
   cursor: pointer;
-  color: blue;
+  color: var(--link-color);
   text-decoration: underline;
 }
 
@@ -94,18 +96,19 @@ a {
   font-size: 0.9rem;
   margin-left: 8px;
   text-align: center;
+  color: var(--text-color);
 }
 
 /* Right side - Promo Section */
 .promo-section {
   flex: 1;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   border-radius: 30px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #898484;
+  border: 1px solid var(--border-color);
 }
 
 .headline {
@@ -114,17 +117,18 @@ a {
   margin-bottom: 1rem;
   font-weight: 700;
   line-height: 1.2;
+  color: var(--text-color);
 }
 
 .description {
   font-size: 1.125rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-  color: #777;
+  color: var(--secondary-color);
 }
 
 .mock-card {
-  background-color: rgba(141, 131, 131, 0.1);
+  background-color: var(--promo-bg);
   border-radius: 8px;
   padding: 1.5rem;
   max-width: 300px;
@@ -135,6 +139,7 @@ a {
   margin-bottom: 0.5rem;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 }
@@ -144,6 +149,7 @@ a {
 }
 
 .mock-stat {
+  color: var(--secondary-color);
   font-size: 2rem;
   font-weight: 700;
   margin: 0.25rem 0 0;
@@ -151,7 +157,7 @@ a {
 
 /* Error/Success Messages */
 .error-message {
-  background-color: #f87171;
+  background-color: var(--error-bg);
   color: #fff;
   padding: 0.75rem;
   border-radius: 4px;
@@ -159,7 +165,7 @@ a {
 }
 
 .success-message {
-  background-color: #34d399;
+  background-color: var(--success-bg);
   color: #fff;
   padding: 0.75rem;
   border-radius: 4px;

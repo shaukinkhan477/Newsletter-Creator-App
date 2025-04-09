@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
-  background: #f9fafb;
+  background-color: var(--bg-color);
   font-family: 'Roboto', sans-serif;
 }
 
@@ -16,7 +16,7 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-color, #111827);
   margin: 0;
 }
 
@@ -35,7 +35,7 @@
 
 .radio {
   font-size: 1rem;
-  color: #374151;
+  color: var(--secondary-color, #374151);
 }
 
 .radio input {
@@ -43,7 +43,7 @@
 }
 
 .btn-track {
-  background-color: #2563eb;
+  background-color: var(--btn-track-bg, #2563eb);
   color: #ffffff;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -54,7 +54,7 @@
 }
 
 .btn-track:hover {
-  background-color: #1d4ed8;
+  background-color: var(--btn-track-bg-hover, #1d4ed8);
 }
 
 /* Chart Section */
@@ -67,24 +67,24 @@
   width: 100%;
   /* max-width: 800px; */
   height: 400px;
-  background: #ffffff;
+  background: var(--card-bg, #ffffff);
   padding: 1rem;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
 }
 
 /* Stats Section */
 .stats-section {
-  background: #ffffff;
+  background: var(--card-bg, #ffffff);
   padding: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
 }
 
 .stats-section h3 {
   margin-top: 0;
   font-size: 1.5rem;
-  color: #111827;
+  color: var(--text-color, #111827);
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 0.5rem;
 }
@@ -99,20 +99,21 @@
 .stats-table td {
   padding: 0.75rem 1rem;
   text-align: left;
+  color: var(--text-color, #111827);
 }
 
 .stats-table th {
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--table-header-bg, #f3f4f6);
+  color: var(--secondary-color, #374151);
   font-weight: 600;
 }
 
 .stats-table tr:nth-child(even) {
-  background: #f9fafb;
+  background: var(--promo-bg, #f9fafb);
 }
 
 .stats-table tr:hover {
-  background: #e5e7eb;
+ background: var(--hover-bg, #e5e7eb);
   transition: background 0.3s ease;
 }
 

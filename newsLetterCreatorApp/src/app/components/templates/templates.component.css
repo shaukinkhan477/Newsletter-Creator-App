@@ -4,10 +4,11 @@
 }
 
 nav{
-  background-color: white;
+  background-color: var(--card-bg, white);
   padding: 20px;
   text-align: center;
   border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
 }
 
 /* Category navbar styles */
@@ -21,17 +22,23 @@ nav{
 .category-navbar li {
   cursor: pointer;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color, #ccc);
   border-radius: 20px;
+  color: var(--text-color);
 }
 
 .category-navbar li.active {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--active-bg, #007bff);
+  color: var(--active-text, white);
 }
 
 h2 {
   margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-color);
 }
 
 /* Template grid styles */
@@ -47,8 +54,8 @@ h2 {
   border-radius: 20px;
   padding: 10px;
   text-align: center;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-bg, #fff);
+   box-shadow: 2px 2px 2px 2px var(--shadow-color, rgba(0,0,0,0.1));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,12 +70,12 @@ h2 {
 .template-name {
   margin: 10px 0 5px;
   font-size: 18px;
-  color: #333;
+  color: var(--text-color, #333);
 }
 
 .template-desc {
   font-size: 14px;
-  color: #666;
+  color: var(--secondary-color, #666);
 }
 
 /* Preview Section Styles */
@@ -79,9 +86,9 @@ h2 {
   border-radius: 5px;
   background-color: #f9f9f9;
   text-align: left;
-  max-height: 200px; /* Limit height to make it compact */
-  overflow-y: auto; /* Add scrollbar if content overflows */
-  width: 100%; /* Ensure it takes full width of the card */
+  max-height: 200px; 
+  overflow-y: auto; 
+  width: 100%; 
 }
 
 /* Global styles for the preview content */

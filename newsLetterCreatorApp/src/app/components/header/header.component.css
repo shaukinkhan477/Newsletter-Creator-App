@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--card-bg);
   padding: 0.5rem 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 .logo-area .app-logo {
@@ -12,18 +13,36 @@
   cursor: pointer;
 }
 
-.language-switcher {
-  margin-right: -1000px;
+/* Right side container */
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-@media (max-width: 600px) {
-  .language-switcher {
-    margin-right: 0;
-  }
+.theme-toggle button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle-icon.dark::before {
+  content: '🌙'; /* dark mode icon */
+}
+
+.toggle-icon.light::before {
+  content: '☀️'; /* light mode icon */
 }
 
 .language-switcher select {
+  background-color: var(--card-bg);
+  color: var(--text-color);
   padding: 0.5rem;
+  padding-right: 0rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -60,3 +79,11 @@
   outline: 3px solid rgba(59, 130, 246, 0.5);
   outline-offset: 2px;
 }
+
+
+@media (max-width: 600px) {
+  .language-switcher {
+    margin-right: 0;
+  }
+}
+

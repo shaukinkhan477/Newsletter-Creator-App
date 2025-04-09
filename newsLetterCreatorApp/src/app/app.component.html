@@ -1,18 +1,17 @@
-<div class="app-wrapper">
+<div class="app-wrapper" [class.dark-theme]="isDarkMode">
   <!-- Header -->
-  <div class="header-wrapper">
+  <!-- <div class="header-wrapper">
     <app-header></app-header>
-    <!-- <app-home></app-home> -->
-  </div>
+  </div> -->
 
   <div class="app-container" [class.collapsed]="isSidebarCollapsed" [class.hide-sidebar]="hideSidebar">
     <!-- Sidebar -->
-    <aside class="sidebar-container"  [class.collapsed]="isSidebarCollapsed" *ngIf="!hideSidebar">
+    <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed" *ngIf="!hideSidebar">
       <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
     </aside>
-
     <!-- Main Content -->
     <main class="main-content-container">
+      <app-header></app-header>
       <router-outlet />
     </main>
   </div>

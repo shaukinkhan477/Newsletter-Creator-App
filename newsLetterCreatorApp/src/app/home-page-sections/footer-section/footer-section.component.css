@@ -20,11 +20,13 @@
 .footer-brand h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .footer-brand p {
   font-size: 1rem;
   color: #4b5563;
+  color: var(--secondary-color);
 }
 
 .footer-links {
@@ -38,12 +40,12 @@
 .footer-links a {
   text-decoration: none;
   font-size: 1rem;
-  color: #374151;
+  color: var(--secondary-color);
   transition: color 0.3s;
 }
 
 .footer-links a:hover {
-  color: #3b82f6;
+  color: var(--accent-color);
 }
 
 .footer-social {
@@ -55,18 +57,18 @@
 
 .footer-social a {
   font-size: 1.25rem;
-  color: #374151;
+  color: var(--secondary-color);
   transition: color 0.3s;
 }
 
 .footer-social a:hover {
-  color: #3b82f6;
+  color: var(--accent-color);
 }
 
 .footer-bottom {
   text-align: center;
   font-size: 0.875rem;
-  color: #4b5563;
+  color: var(--secondary-color);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   padding-top: 1rem;
 }

@@ -1,23 +1,9 @@
-/* Root Variables */
-:root {
-  --primary-color: #3b82f6;
-  --accent-color: #2563eb;
-  --secondary-color: #f3f4f6;
-  --text-color: #000;
-  --bg-color: #fff;
-  --error-bg: #fde2e2;
-  --error-text: #b91c1c;
-  --border-radius: 10px;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.3s;
-}
 
-/* Main Layout */
 .main-content-layout {
-  background: #f9f9f9;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   overflow-x: hidden;
+  background: var(--bg-color);
 }
 
 /* Common Section Style */
@@ -31,7 +17,7 @@
 /* Example: Section Header Styling */
 .section-header {
   text-align: center;
-  background-color: #f3f4f6; /* Light gray background for contrast */
+  background-color: var(--card-bg, #fff);
   border-bottom: 1px solid #e0e0e0;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -107,6 +93,7 @@
   border: 1px solid #ccc;
   border-radius: var(--border-radius);
   color: var(--text-color);
+  background-color: var(--input-bg, #fff);
   transition: border-color var(--transition-speed);
 }
 .input-group input:focus {

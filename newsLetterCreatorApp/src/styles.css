@@ -12,35 +12,103 @@ body {
   background-color: #f3f4f6;
   color: #1f2937;
   line-height: 1.5;
-  /* overflow:hidden; */
 }
 
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
+/* Light theme variables (default) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111827;
+  --card-bg: #f3f4f6;
+  --card-bg: rgba(243, 244, 246, 0.5);
+  --accent-color: #3b82f6;
+  --accent-color-hover: #2563eb;
+  --link-color: blue;
+  --secondary-color: #374151;
+  --button-start: #6ee7b7;
+  --gradient-start: #0ded93;
+  --shadow-color: rgba(31, 38, 135, 0.2);
+  --input-bg: #ffffff;
+  --border-color: #ccc;
+  --promo-bg: rgba(141, 131, 131, 0.1);
+  --error-bg: #f87171;
+  --success-bg: #34d399;
+   /* Dropdown variables */
+  --nav-hover-bg: #f3f4f6; 
+  --dropdown-bg: #f8f4ff;
+  --dropdown-border: #c0a7ff;
+  --dropdown-text: #5f00d0;
+  --dropdown-hover-bg: #f0e8ff;
+  /* post */
+  --draft-color: #6366f1;        
+  --scheduled-color: #f59e0b;    
+  --sent-color: #10b981;         
+  --sent-color-hover: #059669;    
+  /* Templates */
+  --apply-bg: #7e92a6;             
+  --apply-bg-hover: #0056b3;        
+  /* Subscribers */
+  --table-border: #eee;
+  --table-header-bg: #f9fafb;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --no-subscribers-color: #6b7280;
+  /* Analytics */
+  --btn-track-bg: #2563eb;              
+  --btn-track-bg-hover: #1d4ed8;         
+  --table-header-bg: #f3f4f6;             
+  --promo-bg: #f9fafb;               
+  --hover-bg: #e5e7eb;  
 }
 
-.btn-primary {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
+/* Dark theme overrides */
+.dark-theme {
+  --bg-color: #111827;
+  --text-color: #ffffff;
+  --card-bg: #1f2937;
+  --input-bg: #1f2937;
+  --accent-color: #3b82f6;
+  --secondary-color: #a3a3a3;
+  --button-start: #6ee7b7;
+  --gradient-start: #0ded93;
+  --shadow-color: rgba(31, 38, 135, 0.2);
+  --accent-color-hover: #3b82f6;
+  --link-color: #90cdf4;
+  --border-color: #898484;
+  --promo-bg: rgba(141, 131, 131, 0.2);
+  --error-bg: #f87171;
+  --success-bg: #34d399;
+  /* Dropdown overrides if desired */
+  --nav-hover-bg: #374151; 
+  --dropdown-bg: #1f2937;
+  --dropdown-border: #898484;
+  --dropdown-text: #ffffff;
+  --dropdown-hover-bg: #374151;
+  /* post */
+  --draft-color: #8b9cff;
+  --scheduled-color: #f5c94a;
+  --sent-color: #34d399;
+  --sent-color-hover: #34d399;
+  /* Templates */
+  --apply-bg: #7e92a6;     
+  --apply-bg-hover: #0056b3;
+  /* Subscribers */
+  --table-border: #444;
+  --table-header-bg: #374151;
+  --danger-color: #ef4444; 
+  --danger-hover: #dc2626;
+  --no-subscribers-color: #a3a3a3;
+  /* Analytics */
+  --btn-track-bg: #2563eb;        
+  --btn-track-bg-hover: #1d4ed8;
+  --table-header-bg: #374151;
+  --promo-bg: #111827;
+  --hover-bg: #2d3748;
 }
 
-.btn-primary:hover {
-  background-color: #2563eb;
-}
+/* .light-theme {
+ 
+} */
 
-.btn-secondary {
-  background: #f3f4f6;
-  color: #1f2937;
-}
-
-.btn-secondary:hover {
-  background: #e5e7eb;
-}
 
 .form-control {
   width: 100%;

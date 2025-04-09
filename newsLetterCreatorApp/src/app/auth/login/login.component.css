@@ -4,19 +4,20 @@
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
   padding: 2rem;
+  background-color: var(--bg-color);
 }
 
 /* Left side - Form */
 .form-section {
   flex: 1;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   padding: 20px;
   margin-right: 15px;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #898484;
+  border: 1px solid var(--border-color);
 }
 
 .logo-area {
@@ -32,6 +33,7 @@
 
 /* Titles and subtitles */
 .title {
+  color: var(--text-color);
   font-size: 2rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
@@ -40,7 +42,7 @@
 .subtitle {
   font-size: 1rem;
   margin-bottom: 2rem;
-  color: #777;
+  color: var(--secondary-color);
 }
 
 /* Form styles */
@@ -51,7 +53,9 @@
 .form-control {
   width: 100%;
   padding: 0.75rem;
-  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-color);
   border: 1px solid #ccc;
   font-size: 1rem;
 }
@@ -63,18 +67,18 @@
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #3b82f6;
+  background-color: var(--accent-color);
   transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #2563eb;
+  background-color: var(--accent-color-hover);
 }
 
 .forgot-password-link {
   font-size: 0.9rem;
   text-align: center;
-  color: #777;
+  color: var(--secondary-color);
   cursor: pointer;
   margin-left: 290px;
   background: none;
@@ -94,18 +98,19 @@ a {
 .login-prompt {
   font-size: 0.9rem;
   margin-left: 8px;
+  color: var(--text-color);
 }
 
 /* Right side - Promo Section */
 .promo-section {
   flex: 1;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   border-radius: 30px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #898484;
+  border: 1px solid var(--border-color);
 }
 
 .headline {
@@ -114,17 +119,18 @@ a {
   margin-bottom: 1rem;
   font-weight: 700;
   line-height: 1.2;
+  color: var(--text-color);
 }
 
 .description {
   font-size: 1.125rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-  color: #777;
+  color: var(--secondary-color);
 }
 
 .mock-card {
-  background-color: rgba(141, 131, 131, 0.1);
+  background-color: var(--promo-bg);
   border-radius: 8px;
   padding: 1.5rem;
   max-width: 300px;
@@ -135,6 +141,8 @@ a {
   margin-bottom: 0.5rem;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+  font-weight: 600;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 }
@@ -144,6 +152,7 @@ a {
 }
 
 .mock-stat {
+  color: var(--secondary-color);
   font-size: 2rem;
   font-weight: 700;
   margin: 0.25rem 0 0;
@@ -151,7 +160,7 @@ a {
 
 /* Error/Success Messages */
 .error-message {
-  background-color: #f87171;
+  background-color: var(--error-bg);
   color: #fff;
   padding: 0.75rem;
   border-radius: 4px;
@@ -159,7 +168,7 @@ a {
 }
 
 .success-message {
-  background-color: #34d399;
+  background-color: var(--success-bg);
   color: #fff;
   padding: 0.75rem;
   border-radius: 4px;

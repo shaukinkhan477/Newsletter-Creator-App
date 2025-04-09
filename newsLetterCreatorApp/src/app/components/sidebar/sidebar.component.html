@@ -23,12 +23,6 @@
       </h2>
     </div>
     <nav class="nav-menu" role="navigation" aria-labelledby="sidebar-title">
-      <!-- <a class="nav-item" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-        aria-label="New Post" tabindex="0">
-        <span class="icon" aria-hidden="true">📝</span>
-        <span *ngIf="!isCollapsed">{{ 'sidebar.newPost' | translate }}</span>
-      </a> -->
-
       <div class="dropdown">
         <!-- The toggle button -->
         <button *ngIf="!isCollapsed" class="dropdown-toggle" (click)="toggleDropdown()">

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,24 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private baseUrl = 'http://localhost:3000/api/auth';
 
-  constructor(private http: HttpClient) {}
+    // Create a BehaviorSubject to track login status. Initialize based on whether a token is present.
+  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.hasToken());
+  
+  // Expose the login status as an observable so components can subscribe to changes.
+  public loggedIn$: Observable<boolean> = this.loggedInSubject.asObservable();
+
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
+
+    /**
+   * Helper to determine if there is a stored auth token.
+   */
+  private hasToken(): boolean {
+     if (!isPlatformBrowser(this.platformId)) {
+      // In non-browser environments, return false
+      return false;
+    }
+    return !!localStorage.getItem('authToken');
+  }
 
   /*=============================
    =          SIGNUP           =
@@ -40,20 +58,30 @@ export class AuthService {
    =        TOKEN STORAGE      =
    =============================*/
   setToken(token: string): void {
-    localStorage.setItem('authToken', token);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('authToken', token);
+      this.loggedInSubject.next(true);
+    }
   }
 
   getToken(): string | null {
+    if (!isPlatformBrowser(this.platformId)) {
+      return null;
+    }
     return localStorage.getItem('authToken');
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    // return !!this.getToken();
+    return this.hasToken();
   }
 
   logout(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('currentUser'); // remove user info as well
+      if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('currentUser'); // remove user info as well
+      this.loggedInSubject.next(false);
+    }
     // Optionally call backend logout endpoint if necessary
   }
 
@@ -65,13 +93,18 @@ export class AuthService {
    * so we can display it in the Profile component.
    */
   setUserInfo(user: { id: string; email: string; name: string }): void {
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
   }
 
   /**
    * Get user info (e.g. name, email)
    */
   getUserInfo(): { id: string; email: string; name: string } | null {
+    if (!isPlatformBrowser(this.platformId)) {
+      return null;
+    }
     const userString = localStorage.getItem('currentUser');
     if (!userString) {
       return null;

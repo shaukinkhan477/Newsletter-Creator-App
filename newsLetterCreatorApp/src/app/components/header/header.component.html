@@ -20,12 +20,21 @@
     </select>
   </div>
   <!-- <i class="bi bi-globe language-switcher"></i> -->
+    <!-- Authentication Buttons -->
+    <ng-container *ngIf="!isLoggedIn">
+    <div class="auth-buttons">
+      <button class="btn-login" (click)="login()">Login</button>
+      <button class="btn-signup" (click)="signup()">Sign Up</button>
+    </div>
+    </ng-container>
 
+  <ng-container *ngIf="isLoggedIn">
   <div class="profile-area">
     <!-- On click, navigate to profile -->
     <button class="profile-button" (click)="goToProfile()" aria-label="Go to Profile">
       <img src="assets/profile.webp" alt="Profile Icon" class="profile-icon" aria-hidden="true" />
     </button>
   </div>
+  </ng-container>
   </div>
 </header>

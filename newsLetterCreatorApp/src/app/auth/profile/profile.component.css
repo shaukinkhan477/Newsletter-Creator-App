@@ -3,18 +3,19 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: var(--card-bg, #ffffff);
   border-radius: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-color, rgba(0, 0, 0, 0.1));
   text-align: center;
 }
 
 /* Profile Heading */
 .profile-container h2 {
   font-size: 1.75rem;
-  color: #333;
+  color: var(--text-color, #333);
   margin-bottom: 1.5rem;
 }
+
 
 /* Profile Picture Section */
 .profile-picture {
@@ -27,32 +28,13 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #3b82f6;
+  border: 4px solid var(--accent-color, #3b82f6);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .profile-img:hover {
   transform: scale(1.05);
-  border-color: #2563eb;
-}
-
-.edit-profile-btn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.edit-profile-btn:hover {
-  background-color: #2563eb;
-  transform: translateY(-2px);
+  border-color: var(--accent-color-hover, #2563eb);
 }
 
 /* Profile Details */
@@ -63,17 +45,17 @@
 
 .profile-details p {
   font-size: 1rem;
-  color: #555;
+  color: var(--secondary-color, #555);
   margin: 0.75rem 0;
 }
 
 .profile-details strong {
-  color: #333;
+  color: var(--text-color, #333);
 }
 
 /* Logout Button */
 .btn-primary {
-  background-color: #3b82f6;
+  background-color: var(--accent-color, #3b82f6);
   color: white;
   border: none;
   border-radius: 8px;

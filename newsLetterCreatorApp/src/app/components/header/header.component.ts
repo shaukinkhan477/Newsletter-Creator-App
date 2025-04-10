@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../services/theme.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,11 @@ import { ThemeService } from '../../services/theme.service';
 export class HeaderComponent implements OnInit{
 
   isDarkMode: boolean = false;
+  isLoggedIn: boolean = false;
   
   constructor(private router: Router,
     private translate: TranslateService,
+    private authService: AuthService,
     private themeService: ThemeService) {
     translate.setDefaultLang('en');
   }
@@ -25,10 +28,24 @@ export class HeaderComponent implements OnInit{
     this.themeService.darkMode$.subscribe((isDark) => {
       this.isDarkMode = isDark;
     });
+
+    this.authService.loggedIn$.subscribe((loggedIn) => {
+    this.isLoggedIn = loggedIn;
+    });
+      
   }
+  
 
   goToProfile() {
     this.router.navigate(['/profile']);
+  }
+
+   login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  signup(): void {
+    this.router.navigate(['/signup']);
   }
 
     toggleTheme(): void {

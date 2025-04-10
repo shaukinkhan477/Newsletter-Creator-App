@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object // Inject PLATFORM_ID
+    @Inject(PLATFORM_ID) private platformId: Object 
   ) {}
 
   ngOnInit() {

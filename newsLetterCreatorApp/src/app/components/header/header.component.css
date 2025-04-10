@@ -48,6 +48,29 @@
   cursor: pointer;
 }
 
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-login,
+.btn-signup {
+  background: none;
+  border:none;
+  /* border: 1px solid var(--accent-color, #3b82f6); */
+   border-radius: 5px;
+  color: var(--accent-color, #3b82f6);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-login:hover,
+.btn-signup:hover {
+  background-color: var(--accent-color, #3b82f6);
+  color: #fff;
+}
+
 .profile-area {
   cursor: pointer;
 }

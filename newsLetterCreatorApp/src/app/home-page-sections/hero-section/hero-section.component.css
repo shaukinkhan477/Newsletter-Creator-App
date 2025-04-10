@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  padding: 4rem 0rem;   
   margin-bottom: 6rem;
 }
 
@@ -27,11 +28,12 @@
 }
 
 .hero-image {
-  flex: 1 1 300px;
+  flex: 1 1 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   /* background-color: rgba(243, 244, 246, 0.5); */
+  margin-bottom: 30px;
 }
 
 .hero-image img {
@@ -73,7 +75,7 @@
 /* Optional: shared button styles (can be moved to a shared CSS file) */
 .btn-cta {
   display: inline-block;
-  background: linear-gradient(45deg, var(--button-start, #6ee7b7), var(--accent-color));
+  background: linear-gradient(45deg, var(--button-start), var(--accent-color));
   color: #fff;
   padding: 0.75rem 1.25rem;
   border-radius: 0.375rem;

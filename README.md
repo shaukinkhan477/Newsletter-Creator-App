@@ -1,84 +1,275 @@
-# Newsletter-Creator-App
+## Newsletter Creator App
 
-## **Project Scope and Objectives**  
+A full-stack newsletter management platform featuring:
 
-The core objective of this project is to create a **dynamic newsletter builder** with an intuitive and responsive user interface. Users should be able to create professional-quality newsletters by selecting predefined templates or building custom ones using a form-based template editor.
+Rich editor (TinyMCE), Drag & Drop Editor, Write with Preview for composing email newsletters
 
-The application should include the following key functionalities:  
-1. **Newsletter Builder**:  
-   - WYSIWYG (What You See Is What You Get) editor for designing newsletters.  
-   - Drag-and-drop components (text, images, buttons, dividers, etc.).  
-   - Form-based input for specifying content (title, body, images, links, etc.).  
-   - Real-time preview of the generated newsletter.  
-2. **Template Management**:  
-   - Predefined templates for commonly used newsletter layouts.  
-   - Ability to save and load custom templates.  
-   - Export functionality for newsletters in multiple formats (HTML, PDF, etc.).  
-3. **User Authentication & Roles**:  
-   - User registration and login (JWT-based authentication).  
-   - Role-based access (Admin, Editor, Viewer).  
-4. **Backend Integration**:  
-   - REST API integration for data storage and management.  
-   - Email scheduling and sending functionality via third-party services (e.g., SendGrid, Mailgun).  
-5. **Analytics & Reporting**:  
-   - Track newsletter performance (open rate, click rate, etc.).  
-   - Generate detailed reports on user engagement.
+Draft, schedule, and “send now” workflows
 
----
+Subscriber management (add/delete/filter subscribers)
 
-## **Technical Requirements**  
+Rich Templates
 
-### **Frontend**  
-- **Framework**: Angular 16+  
-- **Language**: TypeScript  
-- **UI Framework**: Angular Material, Bootstrap, or TailwindCSS  
-- **State Management**: NgRx (or another suitable state management library)  
-- **Routing**: Angular Router  
-- **Validation**: Reactive Forms for form management and validation  
-- **Internationalization**: Support for multiple languages (i18n)  
+Analytics dashboards (charts for send/open/click rates)
 
-### **Backend (Optional Scope)**  
-If the backend is part of your scope, these technologies are preferred:  
-- **Node.js with NestJS** for REST API development  
-- **Database**: PostgreSQL or MongoDB  
-- **Authentication**: JWT (JSON Web Token)  
-- **Email Service Integration**: SendGrid, Mailgun, or similar  
+User authentication with JWT and Google OAuth
 
----
+REST API (Express + MongoDB) with OpenAPI/Swagger docs
 
-## **Key Deliverables**  
-1. Fully functional **Newsletter Generator Application** with all core features implemented.  
-2. Well-documented and maintainable codebase following best practices.  
-3. Responsive and cross-browser compatible UI.  
-4. Unit tests for critical components and features (preferably using Jasmine/Karma).  
-5. Deployment instructions and CI/CD integration (if applicable).  
+GraphQL endpoint (Apollo Server) with per‑user access control
 
----
+Background scheduler (node‑cron) for dispatching scheduled newsletters
 
-## **Required Skills & Qualifications**  
-- Proven experience with **Angular 10+** (preferably Angular 16+)  
-- Proficiency in **TypeScript, HTML5, CSS3, SCSS**, and responsive design principles  
-- Experience with **Reactive Forms** and **State Management** (NgRx, Akita, etc.)  
-- Strong understanding of **RESTful APIs** and third-party integrations  
-- Familiarity with version control systems (Git) and best practices for branching and code reviews  
-- Experience with **email template creation** and WYSIWYG editors is a plus  
+Angular 17 front‑end with NgRx state management, internationalization, accessibility, Cypress e2e, and Jest unit tests
 
----
+## 🔧 Tech Stack
 
-## **Nice-to-Have Skills**  
-- Experience with **NestJS** for backend development  
-- Knowledge of **GraphQL**  
-- Familiarity with **CI/CD pipelines** (GitHub Actions, Azure DevOps, etc.)  
-- **Docker** and containerization experience  
+## Backend:
 
----
+Node.js, Express, MongoDB (Mongoose), Apollo Server (GraphQL), Passport.js (Google OAuth), JWT, Nodemailer
 
-## **Timeline and Milestones**  
-We expect the project to be completed within **X months** (based on the developer’s estimate and agreed scope). Milestones will be defined as follows:  
+## Frontend: 
 
-1. **Phase 1** – Project Setup & Core Architecture (2 weeks)  
-2. **Phase 2** – UI Development and Form-based Template Builder (4 weeks)  
-3. **Phase 3** – Backend Integration and API Development (if applicable) (4 weeks)  
-4. **Phase 4** – Testing, Deployment, and Documentation (2 weeks)  
+Angular 17, NgRx, @ngx-translate, TinyMCE, ng2-charts, Cypress, Jest
 
----
+## DevOps & Docs:
+
+Swagger/OpenAPI, Docker support (optional), node-cron
+
+## 🚀 Features
+
+Authentication
+
+Sign up / log in / log out
+
+JWT token guard
+
+Google OAuth 2.0 integration
+
+Newsletter Workflows
+
+Draft, Schedule, Send Now
+
+WYSIWYG editor with color‑picker & templates
+
+Recurring background job to dispatch scheduled newsletters
+
+Subscribers Management
+
+Add, delete, and filter subscribers (active / inactive / pending / need approval)
+
+Segmentation support
+
+Analytics
+
+Charts for daily/weekly/monthly sends, opens, clicks
+
+External trackers (Google Analytics, Meta Pixel) hooks
+
+REST API & GraphQL
+
+Fully documented OpenAPI at /api-docs
+
+GraphQL playground (introspection enabled) at /graphql
+
+Front‑end Excellence
+
+Feature modules & shared components
+
+NgRx for global state (posts, drafts, subscribers)
+
+Internationalization (en, fr, ar)
+
+Accessibility enhancements (ARIA, keyboard nav)
+
+E2E testing with Cypress
+
+Unit tests with Jest
+
+## 📥 Prerequisites
+
+Node.js >= 18
+
+npm or yarn
+
+MongoDB (local or Atlas)
+
+Google OAuth credentials (for 3rd‑party login)
+
+## 🔨 Backend Setup 
+
+Clone & install
+
+git clone https://github.com/shaukinkhan477/Newsletter-Creator-App
+cd newsLetter-backend
+npm install
+
+## Environment variables (.env in /backend):
+
+
+PORT=3000
+MONGO_URI=mongodb://127.0.0.1:27017/newsletterAppDB
+MONGO_URI=mongodb://mongo:27017/newsletterAppDB
+JWT_SECRET=someSuperSecretKey
+JWT_EXPIRES_IN=1d
+RESET_TOKEN_EXPIRES=3600000
+EMAIL_HOST=sandbox.smtp.mailtrap.io
+EMAIL_PORT=
+EMAIL_USER=
+EMAIL_PASS=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+CLIENT_URL=http://localhost:4200
+GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/google/callback
+
+## Start server
+node server.js
+
+
+## 🖥 Frontend Setup
+
+Install & launch
+
+cd newsLetterCreatorApp
+npm install
+ng serve --open
+App runs at http://localhost:4200
+
+## Configuration
+
+The Angular HTTP interceptor attaches JWT from localStorage
+
+i18n JSON files in src/assets/i18n/{en,fr,ar}.json
+
+To add languages, drop in a new JSON and register in app.config.ts
+
+Testing
+
+Unit: npm run test (Jest)
+
+E2E: npm run e2e (Cypress)
+
+## 📂 Folder Structure
+
+## backend
+
+newsLetter-backend/
+├── config/                   # app‑wide configuration (DB, passport strategies, etc.)
+│   ├── db.js
+│   └── passport.js
+│
+├── controllers/              # Express route handlers
+│   ├── auth.controller.js
+│   ├── post.controller.js
+│   └── subscriber.controller.js
+│
+├── graphql/                  # Apollo / GraphQL server
+│   ├── index.js              # applies ApolloServer to Express
+│   ├── resolvers.js
+│   └── schema.graphql
+│
+├── middlewares/              # custom Express middleware
+│   └── auth.middleware.js
+│
+├── models/                   # Mongoose schemas
+│   ├── user.model.js
+│   ├── post.model.js
+│   └── subscriber.model.js
+│
+├── routes/                   # Express route definitions
+│   ├── auth.routes.js
+│   ├── post.routes.js
+│   └── subscriber.routes.js
+│
+├── docs/                     # OpenAPI / Swagger specs
+│   └── openapi.yaml
+│
+├── cron.js                   # scheduled job to send out posts
+├── server.js                 # main Express + Apollo startup
+├── Dockerfile
+├── .dockerignore
+├── .env
+├── package.json
+└── package-lock.json
+
+## frontend
+
+newsLetterCreatorApp/
+├── src/
+│   ├── app/
+│   │   ├── auth/                 # standalone auth components
+│   │   │   ├── login/
+│   │   │   ├── signup/
+│   │   │   ├── forgot-password/
+│   │   │   ├── reset-password/
+│   │   │   └── profile/
+│   │   │
+│   │   ├── components/           # feature components
+│   │   │   ├── header/
+│   │   │   ├── sidebar/
+│   │   │   ├── main-content/
+│   │   │   ├── posts/
+│   │   │   ├── subscribers/
+│   │   │   ├── analytics/
+│   │   │   └── templates/
+│   │   │
+│   │   ├── services/             # HTTP & GraphQL services
+│   │   │   ├── auth.service.ts
+│   │   │   ├── posts.service.ts
+│   │   │   └── subscribers.service.ts
+│   │   │
+│   │   ├── interceptors/         # HTTP interceptors (JWT)
+│   │   │   └── auth.interceptor.ts
+│   │   │
+│   │   ├── store/                # NgRx state
+│   │   │   ├── newsletter/
+│   │   │   │   ├── post.actions.ts
+│   │   │   │   ├── post.reducer.ts
+│   │   │   │   └── post.selectors.ts
+│   │   │   ├── posts/
+│   │   │   └── subscribers/
+│   │   │
+│   │   ├── app.routes.ts         # route definitions
+│   │   ├── app.config.ts         # all providers (HTTP, Store, i18n, etc.)
+│   │   └── app.component.ts      # root shell (header + sidebar + outlet)
+│   │
+│   ├── assets/                   # images, icons, i18n JSON files…
+│   ├── environments/             # environment.ts / production.ts
+│   └── main.ts                   # bootstrapping
+│
+├── e2e/                          # Cypress end‑to‑end tests
+├── jest.config.ts                # Jest unit‑test config
+├── cypress.config.ts
+├── angular.json
+├── tsconfig.json
+├── package.json
+├── Dockerfile
+└── README.md
+
+
+## 💡 Usage
+
+Sign up a new account (or log in via Google OAuth).
+
+Create or import subscribers.
+
+Compose a newsletter using the rich editors, choose draft/schedule/send.
+
+choose prebuilt rich templates
+
+View your analytics on the dashboard.
+
+Manage your account profile, change password, log out.
+
+## 🤝 Contributing
+
+Fork the repo & create a feature branch
+
+Write tests & ensure npm run test passes
+
+Submit a pull request describing your changes
+
+## 📄 License
+
+This project is licensed under the MIT License.

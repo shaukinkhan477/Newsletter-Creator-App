@@ -1,15 +1,16 @@
-// routes/subscriber.routes.js
 const express = require("express");
 const router = express.Router();
 const subscriberController = require("../controllers/subscriber.controller");
+const { protect } = require("../middlewares/auth.middleware");
 
-// GET /api/subscribers
+// **Protect all subscriber routes**
+router.use(protect);
+
+// GET your subscribers
 router.get("/", subscriberController.getAllSubscribers);
-
-// POST /api/subscribers
+// POST: add one of yours
 router.post("/", subscriberController.addSubscriber);
-
-// DELETE /api/subscribers/:id
+// DELETE one of yours
 router.delete("/:id", subscriberController.deleteSubscriber);
 
 module.exports = router;

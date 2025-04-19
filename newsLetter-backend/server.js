@@ -13,9 +13,8 @@ const authRoutes = require("./routes/auth.routes");
 const postRoutes = require("./routes/post.routes");
 const subscriberRoutes = require("./routes/subscriber.routes");
 
-// Import ApolloServer and our combined GraphQL schema/resolvers
-const { ApolloServer } = require("apollo-server-express");
-const { typeDefs, resolvers } = require("./graphql");
+// This pulls in and applies your GraphQL server
+const applyGraphQL = require('./graphql');
 
 // OpenAPI/Swagger integration
 const swaggerUi = require('swagger-ui-express');
@@ -71,14 +70,13 @@ app.get("/", (req, res) => {
 
 // Function to start the Apollo GraphQL server and integrate with Express
 async function startServer() {
-  const server = new ApolloServer({ typeDefs, resolvers });
-  await server.start();
-  server.applyMiddleware({ app, path: "/graphql" });
+  await applyGraphQL(app);
+ 
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`GraphQL endpoint available at http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`GraphQL endpoint available at http://localhost:${PORT}/graphql`);
     console.log(`OpenAPI docs available at http://localhost:${PORT}/api-docs`);
   });
 }

@@ -3,10 +3,7 @@ const Subscriber = require("../models/subscriber.model");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-/* 
-  Create a transporter (for demonstration).
-  Adjust to real SMTP credentials or use your existing transporter.
-*/
+// configure your transporter (SMTP etc.)
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT,
@@ -20,8 +17,7 @@ const transporter = nodemailer.createTransport({
 // 1) CREATE Post (DRAFT or SCHEDULE)
 exports.createPost = async (req, res) => {
   try {
-    const { title, subject, preheader, content, status, scheduledAt } =
-      req.body;
+    const { title, subject, preheader, content, status, scheduledAt } = req.body;
 
     const newPost = await Post.create({
       title,
@@ -30,6 +26,7 @@ exports.createPost = async (req, res) => {
       content,
       status: status || "draft",
       scheduledAt: scheduledAt || null,
+      user: req.user.id,       // ← associate
     });
 
     return res.status(201).json({ message: "Post created", post: newPost });
@@ -44,18 +41,19 @@ exports.sendNow = async (req, res) => {
   try {
     const { postId } = req.params;
 
-    // Find the post
-    const post = await Post.findById(postId);
+    // fetch only your post
+    const post = await Post.findOne({ _id: postId, user: req.user.id });
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    // Fetch all active subscribers
-    const subscribers = await Subscriber.find({ status: "active" });
+    // fetch only your active subscribers
+    const subscribers = await Subscriber.find({
+      user: req.user.id,
+      status: "active"
+    });
 
-    // Actually send the emails
-    // For brevity, we do a simple loop with nodemailer
-    // Real usage might require a queue (Bull, RabbitMQ, etc.)
+    // send
     for (const sub of subscribers) {
       await transporter.sendMail({
         from: `"Newsletter App" <${process.env.EMAIL_USER}>`,
@@ -66,7 +64,6 @@ exports.sendNow = async (req, res) => {
       });
     }
 
-    // Update the post to "sent"
     post.status = "sent";
     post.sentAt = new Date();
     await post.save();
@@ -78,10 +75,11 @@ exports.sendNow = async (req, res) => {
   }
 };
 
-// 3) LIST / GET ALL POSTS
+// 3) GET ALL POSTS (yours only)
 exports.getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find().sort({ createdAt: -1 });
+    const posts = await Post.find({ user: req.user.id })
+      .sort({ createdAt: -1 });
     return res.json({ posts });
   } catch (error) {
     console.error("GetAllPosts error:", error);
@@ -89,11 +87,13 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
-// 4) GET SINGLE POST
+// 4) GET SINGLE POST (yours only)
 exports.getPostById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const post = await Post.findById(id);
+    const post = await Post.findOne({
+      _id: req.params.id,
+      user: req.user.id
+    });
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
@@ -104,22 +104,14 @@ exports.getPostById = async (req, res) => {
   }
 };
 
-// 5) UPDATE Post (e.g., from draft to schedule)
+// 5) UPDATE Post (yours only)
 exports.updatePost = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { title, subject, preheader, content, status, scheduledAt } =
-      req.body;
-    const updated = await Post.findByIdAndUpdate(
-      id,
-      {
-        title,
-        subject,
-        preheader,
-        content,
-        status,
-        scheduledAt,
-      },
+    const { title, subject, preheader, content, status, scheduledAt } = req.body;
+
+    const updated = await Post.findOneAndUpdate(
+      { _id: req.params.id, user: req.user.id },
+      { title, subject, preheader, content, status, scheduledAt },
       { new: true }
     );
     if (!updated) {

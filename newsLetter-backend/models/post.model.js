@@ -15,6 +15,9 @@ const postSchema = new mongoose.Schema(
 
     // When the newsletter was actually sent
     sentAt: { type: Date, default: null },
+
+    // **Associate with user**
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
 );

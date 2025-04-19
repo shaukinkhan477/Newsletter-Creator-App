@@ -1,3 +1,5 @@
+# schema.graphql
+scalar Date
 
 type Post {
   id: ID!
@@ -6,10 +8,11 @@ type Post {
   preheader: String
   content: String
   status: String
-  scheduledAt: String
-  sentAt: String
-  createdAt: String
-  updatedAt: String
+  scheduledAt: Date
+  sentAt: Date
+  createdAt: Date
+  updatedAt: Date
+  user: ID!
 }
 
 type Subscriber {
@@ -17,8 +20,9 @@ type Subscriber {
   email: String!
   name: String
   status: String
-  createdAt: String
-  updatedAt: String
+  createdAt: Date
+  updatedAt: Date
+  user: ID!
 }
 
 type User {
@@ -27,22 +31,44 @@ type User {
   email: String!
   oauthProvider: String
   oauthId: String
-  createdAt: String
-  updatedAt: String
+  createdAt: Date
+  updatedAt: Date
 }
 
 type Query {
-  posts: [Post]
-  subscribers: [Subscriber]
-  users: [User]
+  posts: [Post!]!
+  subscribers: [Subscriber!]!
+  me: User!
 
   post(id: ID!): Post
   subscriber(id: ID!): Subscriber
-  user(id: ID!): User
 }
 
 type Mutation {
-  createPost(title: String!, subject: String!, preheader: String, content: String): Post
-  createSubscriber(email: String!, name: String, status: String): Subscriber
-  createUser(name: String, email: String!, password: String!): User
+  createPost(
+    title: String!
+    subject: String!
+    preheader: String
+    content: String
+    status: String
+    scheduledAt: Date
+  ): Post!
+
+  updatePost(
+    id: ID!
+    title: String
+    subject: String
+    preheader: String
+    content: String
+    status: String
+    scheduledAt: Date
+  ): Post!
+
+  deletePost(id: ID!): Boolean!
+
+  createSubscriber(email: String!, name: String, status: String): Subscriber!
+  deleteSubscriber(id: ID!): Boolean!
+
+  signup(name: String!, email: String!, password: String!): String!  # returns JWT
+  login(email: String!, password: String!): String!              # returns JWT
 }

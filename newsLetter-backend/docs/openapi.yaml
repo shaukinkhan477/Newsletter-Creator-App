@@ -1,114 +1,17 @@
 openapi: 3.0.0
 info:
   title: Newsletter API
-  version: 1.0.0
+  version: 1.1.0
 servers:
   - url: http://localhost:3000
-paths:
-  /api/posts:
-    get:
-      summary: Get all posts
-      responses:
-        '200':
-          description: Successful retrieval of posts
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Post'
-    post:
-      summary: Create a new post
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Post'
-      responses:
-        '201':
-          description: Post created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
-  /api/posts/{id}:
-    get:
-      summary: Get a post by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful retrieval of a post
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
-    put:
-      summary: Update a post by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Post'
-      responses:
-        '200':
-          description: Post updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
-    delete:
-      summary: Delete a post by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Post deleted successfully
-  /api/subscribers:
-    get:
-      summary: Get all subscribers
-      responses:
-        '200':
-          description: Successful retrieval of subscribers
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Subscriber'
-  /api/subscribers/{id}:
-    get:
-      summary: Get a subscriber by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful retrieval of a subscriber
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Subscriber'
+
 components:
+  securitySchemes:
+    bearerAuth:            # Bearer JWT auth
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
     Post:
       type: object
@@ -147,6 +50,7 @@ components:
           type: string
           format: date-time
           example: "2025-03-16T12:10:00Z"
+
     Subscriber:
       type: object
       properties:
@@ -170,3 +74,285 @@ components:
           type: string
           format: date-time
           example: "2025-03-16T12:10:00Z"
+
+    AuthCredentials:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "user@example.com"
+        password:
+          type: string
+          example: "superSecret123"
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI..."
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "67877a05c6fa67cd8257bb23"
+            email:
+              type: string
+              example: "user@example.com"
+            name:
+              type: string
+              example: "Jane Doe"
+
+security:
+  - bearerAuth: []    # apply to all paths unless overridden
+
+paths:
+  /api/auth/signup:
+    post:
+      summary: Create a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Jane Doe"
+                email:
+                  type: string
+                  example: "user@example.com"
+                password:
+                  type: string
+                  example: "superSecret123"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+
+  /api/auth/login:
+    post:
+      summary: Log in with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Successful login, returns JWT and user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+
+  /api/auth/logout:
+    post:
+      summary: Log out the current user (clears cookie or token)
+      responses:
+        '200':
+          description: Logged out successfully
+
+  /api/auth/forgot-password:
+    post:
+      summary: Request a password reset email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "user@example.com"
+      responses:
+        '200':
+          description: Password reset link sent
+
+  /api/auth/reset-password:
+    post:
+      summary: Reset password using token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resetToken:
+                  type: string
+                  example: "23c180131874fdaa84a73af59d03f66be03c9132"
+                newPassword:
+                  type: string
+                  example: "myNewSecret123"
+      responses:
+        '200':
+          description: Password successfully reset
+
+  /api/auth/google:
+    get:
+      summary: Redirect to Google for OAuth login
+      responses:
+        '302':
+          description: Redirects to Google's OAuth consent screen
+
+  /api/auth/google/callback:
+    get:
+      summary: OAuth callback endpoint for Google
+      responses:
+        '302':
+          description: Redirects back to front‑end with JWT in query or cookie
+
+  /api/posts:
+    get:
+      summary: Get all posts (requires JWT)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+
+    post:
+      summary: Create a new post (draft/scheduled)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+
+  /api/posts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      summary: Get a post by ID
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of a post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+
+    put:
+      summary: Update a post by ID
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+
+    delete:
+      summary: Delete a post by ID
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Post deleted successfully
+
+  /api/subscribers:
+    get:
+      summary: Get all subscribers (requires JWT)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of subscribers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscriber'
+
+    post:
+      summary: Add a new subscriber
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Subscriber added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscriber'
+
+  /api/subscribers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      summary: Get a subscriber by ID
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of a subscriber
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscriber'
+
+    delete:
+      summary: Delete a subscriber by ID
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Subscriber deleted successfully

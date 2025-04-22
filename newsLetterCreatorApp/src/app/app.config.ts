@@ -7,7 +7,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
 // Import TranslateModule and TranslateLoader
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -22,6 +22,8 @@ import { postsReducer } from './store/posts/posts.reducer';
 import { PostsEffects } from './store/posts/posts.effects';
 import { postReducer } from './store/newsletter/post.reducer';
 import { PostEffects } from './store/newsletter/post.effects';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 
 // AoT requires an exported function for the TranslateLoader
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,7 +34,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideCharts(withDefaultRegisterables()),
     provideStore({
       post: postReducer,
@@ -42,6 +44,11 @@ export const appConfig: ApplicationConfig = {
     provideEffects([SubscribersEffects, PostsEffects, PostEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
 
+        {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     // Add TranslateModule configuration
     importProvidersFrom(
       TranslateModule.forRoot({

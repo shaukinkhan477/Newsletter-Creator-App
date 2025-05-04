@@ -1,66 +1,118 @@
 import { Routes } from '@angular/router';
-import { AnalyticsComponent } from './components/analytics/analytics.component';
-import { MainContentComponent } from './components/main-content/main-content.component';
-import { SubscribersComponent } from './components/subscribers/subscribers.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthGuard } from './AuthGuards/auth.guard';
-import { PostsComponent } from './components/posts/posts.component';
-import { TemplatesComponent } from './components/templates/templates.component';
-import { HomeComponent } from './components/home/home.component';
-import { ResumeComponent } from './components/resume/resume.component';
-import { OAuthCallbackComponent } from './auth/oauth-callback.component';
-import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
+
 
 
 export const routes: Routes = [
   { path: '', redirectTo: '/homePage', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'oauth-callback', component: OAuthCallbackComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./auth/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'oauth-callback',
+    loadComponent: () =>
+      import('./auth/oauth-callback.component').then(
+        (m) => m.OAuthCallbackComponent
+      ),
+  },
+  {
+    path: 'signup',
+    loadComponent: () =>
+      import('./auth/signup/signup.component').then((m) => m.SignupComponent),
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./auth/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
+    canActivate: [AuthGuard],
+  },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent,
+    loadComponent: () =>
+      import('./auth/forgot-password/forgot-password.component').then(
+        (m) => m.ForgotPasswordComponent
+      ),
     canActivate: [AuthGuard],
   },
   {
     path: 'reset-password/:token',
-    component: ResetPasswordComponent,
+    loadComponent: () =>
+      import('./auth/reset-password/reset-password.component').then(
+        (m) => m.ResetPasswordComponent
+      ),
     canActivate: [AuthGuard],
   },
-  { path: 'homePage', component: HomeComponent },
-  { path: 'home', component: MainContentComponent, canActivate: [AuthGuard] },
-  { path: 'resume', component: ResumeComponent, canActivate: [AuthGuard] },
+  {
+    path: 'homePage',
+    loadComponent: () =>
+      import('./components/home/home.component').then((m) => m.HomeComponent),
+  },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./components/main-content/main-content.component').then(
+        (m) => m.MainContentComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'resume',
+    loadComponent: () =>
+      import('./components/resume/resume.component').then(
+        (m) => m.ResumeComponent
+      ),
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dragAndDrop',
-    component: DragAndDropComponent,
+    loadComponent: () =>
+      import('./components/drag-and-drop/drag-and-drop.component').then(
+        (m) => m.DragAndDropComponent
+      ),
     canActivate: [AuthGuard],
   },
-  { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'posts',
+    loadComponent: () =>
+      import('./components/posts/posts.component').then(
+        (m) => m.PostsComponent
+      ),
+    canActivate: [AuthGuard],
+  },
   {
     path: 'edit-post/:id',
-    component: MainContentComponent,
+    loadComponent: () =>
+      import('./components/main-content/main-content.component').then(
+        (m) => m.MainContentComponent
+      ),
     canActivate: [AuthGuard],
   },
   {
     path: 'analytics',
-    component: AnalyticsComponent,
+    loadComponent: () =>
+      import('./components/analytics/analytics.component').then(
+        (m) => m.AnalyticsComponent
+      ),
     canActivate: [AuthGuard],
   },
-
   {
     path: 'subscribers',
-    component: SubscribersComponent,
+    loadComponent: () =>
+      import('./components/subscribers/subscribers.component').then(
+        (m) => m.SubscribersComponent
+      ),
     canActivate: [AuthGuard],
   },
-
   {
     path: 'templates',
-    component: TemplatesComponent,
+    loadComponent: () =>
+      import('./components/templates/templates.component').then(
+        (m) => m.TemplatesComponent
+      ),
     canActivate: [AuthGuard],
   },
 

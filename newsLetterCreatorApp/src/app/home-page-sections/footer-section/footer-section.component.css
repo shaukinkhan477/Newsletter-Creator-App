@@ -18,9 +18,12 @@
 }
 
 .footer-brand h3 {
+  background: linear-gradient(90deg, var(--accent-color, #3b82f6) 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
+  margin-bottom: 1rem;
 }
 
 .footer-brand p {

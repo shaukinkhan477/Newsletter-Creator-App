@@ -1,25 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "bootstrap-icons/font/bootstrap-icons.min.css";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  background-color: #f3f4f6;
+  background: var(--bg-color);
   color: #1f2937;
   line-height: 1.5;
 }
 
 /* Light theme variables (default) */
 :root {
-  --bg-color: #ffffff;
+    /* --bg-color: linear-gradient(135deg, #e0f7fa, #ffffff);
+  --card-bg: linear-gradient(135deg, #e0f7fa, #ffffff); */
+   /* --bg-color: linear-gradient(135deg, #e0f7fa, #ffffff);
+  --card-bg: linear-gradient(135deg, #ffffff, #f9fafb); */
+  --bg-color: rgb(243, 243, 243);
+  --card-bg: rgba(255, 255, 255);
   --text-color: #111827;
-  --card-bg: #f3f4f6;
-  --card-bg: rgba(243, 244, 246, 0.5);
   --accent-color: #3b82f6;
   --accent-color-hover: #2563eb;
   --link-color: blue;
@@ -32,20 +35,20 @@ body {
   --promo-bg: rgba(141, 131, 131, 0.1);
   --error-bg: #f87171;
   --success-bg: #34d399;
-   /* Dropdown variables */
-  --nav-hover-bg: #f3f4f6; 
+  /* Dropdown variables */
+  --nav-hover-bg: #f3f4f6;
   --dropdown-bg: #f8f4ff;
   --dropdown-border: #c0a7ff;
   --dropdown-text: #5f00d0;
   --dropdown-hover-bg: #f0e8ff;
   /* post */
-  --draft-color: #6366f1;        
-  --scheduled-color: #f59e0b;    
-  --sent-color: #10b981;         
-  --sent-color-hover: #059669;    
+  --draft-color: #6366f1;
+  --scheduled-color: #f59e0b;
+  --sent-color: #10b981;
+  --sent-color-hover: #059669;
   /* Templates */
-  --apply-bg: #7e92a6;             
-  --apply-bg-hover: #0056b3;        
+  --apply-bg: #7e92a6;
+  --apply-bg-hover: #0056b3;
   /* Subscribers */
   --table-border: #eee;
   --table-header-bg: #f9fafb;
@@ -53,11 +56,11 @@ body {
   --danger-hover: #dc2626;
   --no-subscribers-color: #6b7280;
   /* Analytics */
-  --btn-track-bg: #2563eb;              
-  --btn-track-bg-hover: #1d4ed8;         
-  --table-header-bg: #f3f4f6;             
-  --promo-bg: #f9fafb;               
-  --hover-bg: #e5e7eb;  
+  --btn-track-bg: #2563eb;
+  --btn-track-bg-hover: #1d4ed8;
+  --table-header-bg: #f3f4f6;
+  --promo-bg: #f9fafb;
+  --hover-bg: #e5e7eb;
 }
 
 /* Dark theme overrides */
@@ -78,7 +81,7 @@ body {
   --error-bg: #f87171;
   --success-bg: #34d399;
   /* Dropdown overrides if desired */
-  --nav-hover-bg: #374151; 
+  --nav-hover-bg: #374151;
   --dropdown-bg: #1f2937;
   --dropdown-border: #898484;
   --dropdown-text: #ffffff;
@@ -89,16 +92,16 @@ body {
   --sent-color: #34d399;
   --sent-color-hover: #34d399;
   /* Templates */
-  --apply-bg: #7e92a6;     
+  --apply-bg: #7e92a6;
   --apply-bg-hover: #0056b3;
   /* Subscribers */
   --table-border: #444;
   --table-header-bg: #374151;
-  --danger-color: #ef4444; 
+  --danger-color: #ef4444;
   --danger-hover: #dc2626;
   --no-subscribers-color: #a3a3a3;
   /* Analytics */
-  --btn-track-bg: #2563eb;        
+  --btn-track-bg: #2563eb;
   --btn-track-bg-hover: #1d4ed8;
   --table-header-bg: #374151;
   --promo-bg: #111827;
@@ -108,7 +111,6 @@ body {
 /* .light-theme {
  
 } */
-
 
 .form-control {
   width: 100%;
@@ -136,4 +138,3 @@ body {
   direction: rtl;
   text-align: right;
 }
-

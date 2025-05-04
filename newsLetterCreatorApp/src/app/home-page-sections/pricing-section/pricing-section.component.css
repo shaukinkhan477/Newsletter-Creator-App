@@ -5,10 +5,30 @@
   text-align: center;
 }
 
-.pricing-section .section-title {
-  margin-bottom: 2rem;
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.5rem;
   color: var(--text-color);
-  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--text-color) 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
 .pricing-cards {

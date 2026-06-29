@@ -1,19 +1,7 @@
 const cron = require("node-cron");
-const nodemailer = require("nodemailer");
 const Post = require("./models/post.model");
 const Subscriber = require("./models/subscriber.model");
-require("dotenv").config();
-
-// Create a Nodemailer transporter (update credentials as needed)
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // true if using 465
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const { sendMail } = require("./utils/mailer");
 
 const startCronJob = () => {
   // Run every minute: checks for posts with status = "scheduled" whose time has passed
@@ -33,13 +21,10 @@ const startCronJob = () => {
       for (const post of postsToSend) {
         console.log(`[CRON] Sending scheduled post: ${post.title}`);
 
-        // 2) Fetch all active subscribers (adjust your query logic if needed)
-        const subscribers = await Subscriber.find({ status: "active" });
+        const subscribers = await Subscriber.find({ user: post.user, status: "active" });
 
-        // 3) Send email to each subscriber
         for (const sub of subscribers) {
-          await transporter.sendMail({
-            from: `"Newsletter App" <${process.env.EMAIL_USER}>`,
+          await sendMail({
             to: sub.email,
             subject: post.subject,
             text: `${post.preheader}\n\n${post.content}`,

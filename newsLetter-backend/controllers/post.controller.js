@@ -1,23 +1,15 @@
 const Post = require("../models/post.model");
 const Subscriber = require("../models/subscriber.model");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
-
-// configure your transporter (SMTP etc.)
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const { sendMail } = require("../utils/mailer");
 
 // 1) CREATE Post (DRAFT or SCHEDULE)
 exports.createPost = async (req, res) => {
   try {
     const { title, subject, preheader, content, status, scheduledAt } = req.body;
+
+    if (!title || !subject) {
+      return res.status(400).json({ message: "Title and subject are required" });
+    }
 
     const newPost = await Post.create({
       title,
@@ -55,8 +47,7 @@ exports.sendNow = async (req, res) => {
 
     // send
     for (const sub of subscribers) {
-      await transporter.sendMail({
-        from: `"Newsletter App" <${process.env.EMAIL_USER}>`,
+      await sendMail({
         to: sub.email,
         subject: post.subject,
         text: `${post.preheader}\n\n${post.content}`,
@@ -112,7 +103,7 @@ exports.updatePost = async (req, res) => {
     const updated = await Post.findOneAndUpdate(
       { _id: req.params.id, user: req.user.id },
       { title, subject, preheader, content, status, scheduledAt },
-      { new: true }
+      { new: true, runValidators: true }
     );
     if (!updated) {
       return res.status(404).json({ message: "Post not found" });

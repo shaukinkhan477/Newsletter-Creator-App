@@ -1,32 +1,33 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const validator = require('validator');
 const User = require('../models/user.model');
-require('dotenv').config();
-
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // or true if using 465
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+const env = require('../config/env');
+const { sendMail } = require('../utils/mailer');
 
 // Helper function to generate a signed JWT
 function generateToken(userId) {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '1d'
+  return jwt.sign({ userId }, env.jwtSecret, {
+    expiresIn: env.jwtExpiresIn
   });
 }
 
 exports.signup = async (req, res) => {
   try {
     const { email, password, name } = req.body;
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+
+    if (!validator.isEmail(normalizedEmail)) {
+      return res.status(400).json({ message: 'A valid email is required' });
+    }
+
+    if (!validator.isLength(String(password || ''), { min: 8 })) {
+      return res.status(400).json({ message: 'Password must be at least 8 characters' });
+    }
+
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
@@ -37,9 +38,9 @@ exports.signup = async (req, res) => {
 
     // Create user
     const newUser = await User.create({
-      email,
+      email: normalizedEmail,
       password: hashedPassword,
-      name
+      name: String(name || '').trim()
     });
 
     // Optional: auto-login after sign-up
@@ -64,8 +65,14 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+
+    if (!validator.isEmail(normalizedEmail) || !password) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
     // Check user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -103,26 +110,26 @@ exports.logout = (req, res) => {
 exports.forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({ email });
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+
+    if (!validator.isEmail(normalizedEmail)) {
+      return res.status(200).json({ message: 'If that email exists, a reset link has been sent' });
+    }
+
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
-      return res.status(400).json({ message: 'No user found with that email' });
+      return res.status(200).json({ message: 'If that email exists, a reset link has been sent' });
     }
 
     // Create a reset token
     const resetToken = crypto.randomBytes(20).toString('hex');
-    user.passwordResetToken = resetToken;
-    user.passwordResetExpires =
-      Date.now() + Date.now() + +process.env.RESET_TOKEN_EXPIRES;  // default 1 hour
+    user.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    user.passwordResetExpires = Date.now() + env.resetTokenExpiresMs;
     await user.save();
 
-    // Construct reset URL or route
-    // const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
-    const resetUrl = `http://localhost:4200/reset-password/${resetToken}`;
+    const resetUrl = `${env.clientUrl}/reset-password/${resetToken}`;
 
-
-    // Send email
-    await transporter.sendMail({
-      from: `"Newsletter App" <${process.env.EMAIL_USER}>`,
+    await sendMail({
       to: user.email,
       subject: 'Password Reset Request',
       html: `
@@ -131,7 +138,7 @@ exports.forgotPassword = async (req, res) => {
       `
     });
 
-    return res.status(200).json({ message: 'Password reset link sent to email' });
+    return res.status(200).json({ message: 'If that email exists, a reset link has been sent' });
   } catch (error) {
     console.error('Forgot password error:', error);
     return res.status(500).json({ message: 'Internal server error' });
@@ -141,9 +148,18 @@ exports.forgotPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
   try {
     const { resetToken, newPassword } = req.body;
+    const hashedResetToken = crypto
+      .createHash('sha256')
+      .update(String(resetToken || ''))
+      .digest('hex');
+
+    if (!validator.isLength(String(newPassword || ''), { min: 8 })) {
+      return res.status(400).json({ message: 'Password must be at least 8 characters' });
+    }
+
     // Find user by token and check expiration
     const user = await User.findOne({
-      passwordResetToken: resetToken,
+      passwordResetToken: hashedResetToken,
       passwordResetExpires: { $gt: Date.now() }
     });
 
@@ -171,11 +187,7 @@ exports.resetPassword = async (req, res) => {
 
 exports.googleCallback = (req, res) => {
   // req.user is populated by the Passport strategy
-  const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const token = generateToken(req.user._id);
 
-  // Redirect to the frontend OAuth callback route with the token.
-  // Make sure to define CLIENT_URL in your .env file (e.g., http://localhost:4200)
-  res.redirect(`${process.env.CLIENT_URL}/oauth-callback?token=${token}`);
+  res.redirect(`${env.clientUrl}/oauth-callback?token=${token}`);
 };

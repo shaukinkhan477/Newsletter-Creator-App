@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+const env = require("../config/env");
 
 exports.protect = (req, res, next) => {
   let token = null;
@@ -15,9 +15,8 @@ exports.protect = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // decoded: { userId: "...", iat, exp }
-    req.user = { id: decoded.userId };
+    const decoded = jwt.verify(token, env.jwtSecret);
+    req.user = { id: decoded.userId || decoded.id };
     next();
   } catch (err) {
     return res.status(401).json({ message: "Token verification failed" });

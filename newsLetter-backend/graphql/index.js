@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const { ApolloServer, AuthenticationError } = require('apollo-server-express');
+const env = require('../config/env');
 
 const typeDefs = fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8');
 const resolvers = require('./resolvers');
@@ -12,9 +13,8 @@ module.exports = async function applyGraphQL(app) {
     typeDefs,
     resolvers,
 
-    // enable introspection & Playground
-    introspection: true,
-    playground: true,
+    introspection: env.enableGraphqlIntrospection,
+    playground: !env.isProduction,
 
     context: ({ req }) => {
       // 1) If this is an introspection request, skip auth entirely
@@ -32,13 +32,13 @@ module.exports = async function applyGraphQL(app) {
       const token = auth.slice(7);
       let payload;
       try {
-        payload = jwt.verify(token, process.env.JWT_SECRET);
+        payload = jwt.verify(token, env.jwtSecret);
       } catch {
         throw new AuthenticationError('Invalid or expired token');
       }
 
       // 3) attach userId to context for your resolvers
-      return { userId: payload.userId };
+      return { userId: payload.userId || payload.id };
     },
   });
 

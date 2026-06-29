@@ -1,4 +1,5 @@
 const Subscriber = require("../models/subscriber.model");
+const validator = require("validator");
 
 // GET all your subscribers
 exports.getAllSubscribers = async (req, res) => {
@@ -16,11 +17,16 @@ exports.getAllSubscribers = async (req, res) => {
 exports.addSubscriber = async (req, res) => {
   try {
     const { email, name } = req.body;
+    const normalizedEmail = String(email || "").trim().toLowerCase();
+
+    if (!validator.isEmail(normalizedEmail)) {
+      return res.status(400).json({ message: "A valid email is required" });
+    }
 
     // check uniqueness per user
     const existing = await Subscriber.findOne({
       user: req.user.id,
-      email
+      email: normalizedEmail
     });
     if (existing) {
       return res
@@ -29,8 +35,8 @@ exports.addSubscriber = async (req, res) => {
     }
 
     const newSub = await Subscriber.create({
-      email,
-      name,
+      email: normalizedEmail,
+      name: String(name || "").trim(),
       user: req.user.id
     });
     return res
